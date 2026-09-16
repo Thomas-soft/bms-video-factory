@@ -1,0 +1,50 @@
+# Poids de modèles et caches (jamais versionnés — voir outils/MODELES.md)
+models/
+
+# Espace de travail : runs, bibliothèque d'assets, logs
+workspace/
+
+# Secrets
+secrets/
+.env
+
+# Environnements et dépendances
+# uv.lock EST versionné (étape 7) : c'est lui qui rend `uv sync` reproductible.
+.venv/
+node_modules/
+render/node_modules/
+.pytest_cache/
+
+# Journaux et caches
+*.log
+__pycache__/
+.DS_Store
+
+# Données lourdes du registre (miniatures, transcriptions)
+registre/data/**/thumbs/
+registre/data/**/transcripts/
+
+# Artefacts de sous-agents (navigateur MCP)
+.playwright-mcp/
+
+# Exception : journal de collecte du registre (livrable de l'étape 2, sans secret)
+!registre/collecte.log
+!registre/transcriptions-4g.log
+benchmarks/samples/
+
+# Binaire Rhubarb Lip Sync (160 Mo, x86_64 sous Rosetta 2 — voir outils/MODELES.md)
+outils/rhubarb/
+
+# Embeddings intermédiaires de la preuve vidéo IA (le MP4 et l'image, eux, sont versionnés)
+benchmarks/videoproof/*.pt
+
+# Preuve motion design : les 3 MP4 finaux et les sources sont versionnés ; pas les
+# intermédiaires, ni les copies de `workspace/` (voix, fonds de bibliothèque) —
+# `benchmarks/preuve_motion/README.md` donne les deux commandes qui les refont.
+benchmarks/preuve_motion/revideo/output/
+benchmarks/preuve_motion/data/*.wav
+benchmarks/preuve_motion/revideo/src/fonds/
+benchmarks/preuve_motion/revideo/src/fonts/
+
+# Cache de donnees de l API YouTube : non publiable (Developer Policies III.E.4).
+registre/data/

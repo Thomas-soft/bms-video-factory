@@ -1,0 +1,13 @@
+schema_version: "1.0"
+# Avatar 2D en calques + Rhubarb Lip Sync (MIT, visèmes). Rhubarb 1.14.0 tourne sous
+# Rosetta 2 (étape 5.2) : dépendance à tracer sur toute machine de production.
+# LivePortrait est écarté (InsightFace non commercial).
+id: avatar2d
+engine: avatar2d
+backend: revideo
+statut: planifie                # livré par l'étape 29
+templates: []
+params:
+  lipsync: { tool: rhubarb, version: "1.14.0", rosetta2_requis: true }
+  layers: { bouche: 9, yeux: 3, sourcils: 3 }
+  person_review: true           # un avatar est un personnage : relecture humaine

@@ -1,0 +1,41 @@
+schema_version: "1.0"
+code: en
+name: "English"
+# Voix : `note_ecoute` reste null tant que personne n'a écouté la voix (étape 7, SUIVI § 1).
+# Les voix kokoro sont déclarées d'après le catalogue publié du moteur ; le moteur n'est pas
+# installé et l'arbitrage de licence (chaîne GPL de misaki/espeak-ng) n'est pas rendu.
+voices:
+  - { id: serena_en, engine: qwen3_tts, gender: f, native: false, note_ecoute: null }
+  - { id: kokoro_af_heart, engine: kokoro, gender: f, native: true, note_ecoute: null }
+  - { id: kokoro_am_michael, engine: kokoro, gender: m, native: true, note_ecoute: null }
+typographie:
+  espace_avant_double_ponctuation: false
+  guillemets: ["“", "”"]
+  majuscules_titre: title_case
+nombres:
+  decimal: "."
+  milliers: ","
+  pourcent: "18%"
+  date: "September 18, 2026"
+  unites: imperial_first
+disclosure:
+  # Phrase contractuelle d'Amazon Partenaires : reprise mot pour mot, jamais traduite ici.
+  amazon: "As an Amazon Associate I earn from qualifying purchases."
+  impact: ["#ad", "#sponsored"]          # liste fermée du réseau
+  awin: ["#Ad", "#PaidAd"]               # liste fermée du réseau
+  overlay_generic: "Paid promotion"
+  virtual_images: "AI-generated imagery"
+tts:
+  # Qwen3-TTS n'expose aucun paramètre de vitesse : `speed` est appliquée après synthèse par
+  # `atempo` (ffmpeg), qui ne touche pas à la hauteur. 1,0 = débit natif du modèle.
+  speed: 1.0
+  # Respirations de la charte, en millisecondes.
+  pauses_ms: { entre_segments_ms: 350, apres_hook_ms: 600, avant_sponsor_ms: 250 }
+  # Sous 15 s, le WER de re-transcription décroche (étape 7) : `voice` fusionne avant de synthétiser.
+  min_segment_s: 15.0
+  silence_threshold_db: -45.0
+asr:
+  primary: parakeet
+  fallback: whisper
+  # Seuils fonction du nombre de mots du segment (mesures de l'étape 7).
+  wer_thresholds: { "5": 0.20, "20": 0.15, "999": 0.08 }

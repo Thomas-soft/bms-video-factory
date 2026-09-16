@@ -1,0 +1,16 @@
+schema_version: "1.0"
+# Style interne de mise au point : cartes de texte sur fond de charte, aucune image générée.
+# Jamais publié tel quel — il sert à mesurer le montage sans payer 137 s par plan.
+id: cartes
+engine: cartes                  # clé du registre STYLE_ENGINES
+backend: ffmpeg
+statut: retenu_v1               # livré par l'étape 12.1, mesuré le 16/09/2026
+templates: [carte-plein, carte-bandeau, carte-centrale]   # les 3 gabarits du moteur
+params:
+  card: { fond: charte.palette.bg, marge_px: 96, taille_titre_px: 88, taille_corps_px: 56 }
+  motion:
+    default: static
+    ken_burns_supersample: 4    # sans effet ici : un dégradé n'a aucun détail à faire trembler
+    # `parallax` est refusé par `shotlist` : il exige une carte de profondeur (étape 12.2).
+    alternance: [zoom_in, static, zoom_out, pan]
+  person_review: false

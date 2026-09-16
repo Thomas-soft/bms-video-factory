@@ -1,0 +1,12 @@
+schema_version: "1.0"
+# Montage d'archives et de banques libres : aucune génération d'image, attribution obligatoire.
+id: documentaire
+engine: documentaire
+backend: ffmpeg
+statut: planifie                # livré par l'étape 17
+templates: [hist-a, hist-b, hist-c]
+params:
+  stock: { providers: [wikimedia, nasa, internet_archive, pexels, openverse],
+           licence_filter: commercial, min_resolution: "1920x1080" }
+  motion: { default: pan, ken_burns_supersample: 4 }
+  person_review: true

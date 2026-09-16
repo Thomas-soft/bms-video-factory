@@ -1,0 +1,17 @@
+schema_version: "1.0"
+# Les poids couvrent TOUS les contrôles notés ; les contrôles binaires bloquants sont hors barème.
+poids: { cut_rhythm: 15, duration: 8, loudness: 10, true_peak: 5, subtitle_coverage: 12,
+         hook_form: 12, text_legibility: 8, visual_variety: 8, silence: 4,
+         speech_rate: 6, density_facts_per_min: 6, interrupt_cadence: 3, open_loops: 3 }
+hors_bareme: [magenta_holes, c2pa]      # binaires : bloquant et avertissement
+seuils:
+  cut_rhythm: { tolerance: 0.15, verdict_fail: regenerate }
+  duration:   { tolerance: 0.15, verdict_fail: warn }
+  loudness:   { cible: -14.0, tolerance: 0.5, verdict_fail: regenerate }
+  true_peak:  { cible: -1.0,  tolerance: 0.2, verdict_fail: regenerate }
+  subtitle_coverage: { cible: 1.0, min: 0.98, verdict_fail: regenerate }
+  speech_rate: { source: "niche.mots_par_minute.mediane", tolerance: 0.15, verdict_fail: warn }
+  density_facts_per_min: { min: 0.8, verdict_fail: warn }
+  magenta_holes: { cible: 0, verdict_fail: blocked }   # non-régression de la parallaxe
+  c2pa: { verdict_fail: warn }                         # avertissement, CONFORMITE § 11 contrôle 14
+score_minimal_pour_publier: 70

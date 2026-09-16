@@ -1,0 +1,12 @@
+schema_version: "1.0"
+# Whiteboard animé : vtracer (MIT) pour la vectorisation, animation stroke-dashoffset
+# et main PNG. Aucun équivalent VideoScribe clé en main (veille du 13/09/2026).
+id: whiteboard
+engine: whiteboard
+backend: revideo
+statut: planifie                # livré par l'étape 30.2
+templates: []
+params:
+  trace: { tool: vtracer, mode: spline, filter_speckle: 4 }
+  draw: { vitesse_px_par_s: 900, main: assets/charte/main.png }
+  person_review: false

@@ -1,0 +1,42 @@
+schema_version: "1.0"
+# Cibles reprises de registre/REFERENTIEL.json (généré le 2026-09-15).
+# Le code lit le JSON ; ce fichier porte les surcharges assumées et le motif de chacune.
+id: niche_monetisable_longevite
+rythme_coupe_s:
+  cible: null
+  cible_montage: null
+  min: null
+  max: null
+  facteur_hook: 0.7
+  n: 0
+  a_mesurer: true
+  fallback_provisoire_s: 7.8
+duree_s:
+  cible: 595
+  p25: 166
+  p75: 1876
+  tolerance: 0.15
+  distribution_large: true
+mots_par_minute: { mediane: 172, n: 86 }
+hooks:
+  parts:
+    in_medias_res: 0.204
+    question_contrarienne: 0.185
+    intro_chaine_neutre: 0.148
+    negation_du_sens_commun: 0.111
+    enjeu_personnel: 0.111
+    adresse_directe: 0.102
+    statistique_choc: 0.074
+    autorite_citee: 0.037
+    mystere_ouvert: 0.028
+  boucles_minimum: 2
+  boucle_position_s_repli: 47.9
+titres:
+  longueur_car: { mediane: 55, p90: 82,
+                 plafond_recommande: 82, plafond_youtube: 100 }
+miniatures:
+  mots_texte_median: 1.5
+  part_visage: 0.6
+  contraste_ratio_cible: 4.5     # cible WCAG, décision de production, pas une mesure du registre
+cadence_par_semaine: { mediane: 2.48, cible: 2.85 }
+surcharges: []                   # {champ, valeur, motif, date, qui} — jamais une valeur sans motif

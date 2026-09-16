@@ -1,0 +1,36 @@
+schema_version: "1.0"
+code: it
+name: "Italiano"
+voices:
+  - { id: serena_it, engine: qwen3_tts, gender: f, native: false, note_ecoute: null }
+  - { id: kokoro_if_sara, engine: kokoro, gender: f, native: true, note_ecoute: null }
+  - { id: kokoro_im_nicola, engine: kokoro, gender: m, native: true, note_ecoute: null }
+typographie:
+  espace_avant_double_ponctuation: false
+  guillemets: ["«", "»"]
+  majuscules_titre: phrase_case
+nombres:
+  decimal: ","
+  milliers: "."
+  pourcent: "18%"
+  date: "18 settembre 2026"
+  unites: metric
+disclosure:
+  amazon: "In qualità di Affiliato Amazon io ricevo un guadagno dagli acquisti idonei."
+  impact: ["#ad", "#sponsored"]
+  awin: ["#Ad", "#PaidAd"]
+  overlay_generic: "Pubblicità"
+  virtual_images: "Immagini virtuali"
+tts:
+  # Qwen3-TTS n'expose aucun paramètre de vitesse : `speed` est appliquée après synthèse par
+  # `atempo` (ffmpeg), qui ne touche pas à la hauteur. 1,0 = débit natif du modèle.
+  speed: 1.0
+  # Respirations de la charte, en millisecondes.
+  pauses_ms: { entre_segments_ms: 350, apres_hook_ms: 600, avant_sponsor_ms: 250 }
+  # Sous 15 s, le WER de re-transcription décroche (étape 7) : `voice` fusionne avant de synthétiser.
+  min_segment_s: 15.0
+  silence_threshold_db: -45.0
+asr:
+  primary: parakeet
+  fallback: whisper
+  wer_thresholds: { "5": 0.20, "20": 0.15, "999": 0.08 }

@@ -1,0 +1,8 @@
+schema_version: "1.0"
+topics_queue: { taille_max: 200, score_minimal: 0.45, age_max_jours: 45 }
+# Dédoublonnage par DISTANCE de Hamming, jamais par égalité, et de portée globale
+# (toutes chaînes confondues) — CONFORMITE § 5.
+dedupe: { script_simhash_distance_min: 12, thumbnail_phash_distance_min: 10, portee: globale }
+angles_autorises: [opinion, comparaison_chiffree, test, donnee_proprietaire]
+sources_blanches: [pexels, pixabay, openverse, wikimedia, nasa, internet_archive]
+purge_cache_api_jours: 30       # Developer Policies III.E.4 : purge des données de tiers

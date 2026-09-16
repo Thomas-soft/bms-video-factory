@@ -1,0 +1,12 @@
+schema_version: "1.0"
+# Motion design programmatique. Revideo est épinglé : 0 release publiée, dernier commit
+# le 15/07/2026 (étape 4) ; télémétrie PostHog désactivée par DISABLE_TELEMETRY=true.
+id: motion
+engine: motion_design
+backend: revideo
+statut: planifie                # livré par l'étape 30.1
+templates: []
+params:
+  scene: { fps: 30, resolution: "1920x1080" }
+  revideo: { version: "0.10.1", disable_telemetry: true }
+  person_review: false

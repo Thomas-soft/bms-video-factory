@@ -1,0 +1,40 @@
+schema_version: "1.0"
+# Cibles reprises de registre/REFERENTIEL.json (généré le 2026-09-15).
+# Le code lit le JSON ; ce fichier porte les surcharges assumées et le motif de chacune.
+id: science_pop
+rythme_coupe_s:
+  cible: 6
+  cible_montage: 5.85
+  min: 5.55
+  max: 6.97
+  facteur_hook: 0.7
+  n: 5
+  a_mesurer: false
+  fallback_provisoire_s: null
+duree_s:
+  cible: 648
+  p25: 214
+  p75: 2754
+  tolerance: 0.15
+  distribution_large: true
+mots_par_minute: { mediane: 134.9, n: 38 }
+hooks:
+  parts:
+    in_medias_res: 0.22
+    mise_en_scene_narrative: 0.22
+    adresse_directe: 0.171
+    question_contrarienne: 0.146
+    mystere_ouvert: 0.122
+    statistique_choc: 0.073
+    negation_du_sens_commun: 0.049
+  boucles_minimum: 2
+  boucle_position_s_repli: 47.9
+titres:
+  longueur_car: { mediane: 58, p90: 87,
+                 plafond_recommande: 87, plafond_youtube: 100 }
+miniatures:
+  mots_texte_median: 1.5
+  part_visage: 0.43
+  contraste_ratio_cible: 4.5     # cible WCAG, décision de production, pas une mesure du registre
+cadence_par_semaine: { mediane: 0.96, cible: 1.85 }
+surcharges: []                   # {champ, valeur, motif, date, qui} — jamais une valeur sans motif

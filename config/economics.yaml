@@ -1,0 +1,6 @@
+schema_version: "1.0"
+# Aucune de ces valeurs n'est mesurée : elles portent leur origine ou leur absence de mesure.
+tarif_kwh_eur: { valeur: 0.2516, source: "tarif réglementé FR", date: "2026-09-15" }
+puissance_moyenne_w: { valeur: null, a_mesurer: true,
+                       note: "à mesurer au wattmètre pendant un run complet, étape 27" }
+cout_horaire_relecture_eur: { valeur: null, a_mesurer: true, note: "décision d'Alek" }

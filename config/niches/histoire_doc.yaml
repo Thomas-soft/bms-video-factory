@@ -1,0 +1,37 @@
+schema_version: "1.0"
+# Cibles reprises de registre/REFERENTIEL.json (généré le 2026-09-15).
+# Le code lit le JSON ; ce fichier porte les surcharges assumées et le motif de chacune.
+id: histoire_doc
+rythme_coupe_s:
+  cible: 4.6
+  cible_montage: 4.5
+  min: 4.03
+  max: 7.6
+  facteur_hook: 0.7
+  n: 5
+  a_mesurer: false
+  fallback_provisoire_s: null
+duree_s:
+  cible: 1513
+  p25: 296
+  p75: 2689
+  tolerance: 0.15
+  distribution_large: true
+mots_par_minute: { mediane: 107.8, n: 18 }
+hooks:
+  parts:
+    in_medias_res: 0.762
+    mystere_ouvert: 0.095
+    mise_en_scene_narrative: 0.095
+    intro_chaine_neutre: 0.048
+  boucles_minimum: 2
+  boucle_position_s_repli: 47.9
+titres:
+  longueur_car: { mediane: 62, p90: 86,
+                 plafond_recommande: 86, plafond_youtube: 100 }
+miniatures:
+  mots_texte_median: 3
+  part_visage: 0.65
+  contraste_ratio_cible: 4.5     # cible WCAG, décision de production, pas une mesure du registre
+cadence_par_semaine: { mediane: 0.0, cible: 1.52 }
+surcharges: []                   # {champ, valeur, motif, date, qui} — jamais une valeur sans motif

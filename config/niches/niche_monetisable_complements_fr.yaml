@@ -1,0 +1,40 @@
+schema_version: "1.0"
+# Cibles reprises de registre/REFERENTIEL.json (généré le 2026-09-15).
+# Le code lit le JSON ; ce fichier porte les surcharges assumées et le motif de chacune.
+id: niche_monetisable_complements_fr
+rythme_coupe_s:
+  cible: null
+  cible_montage: null
+  min: null
+  max: null
+  facteur_hook: 0.7
+  n: 0
+  a_mesurer: true
+  fallback_provisoire_s: 7.8
+duree_s:
+  cible: 127
+  p25: 93
+  p75: 178
+  tolerance: 0.15
+  distribution_large: false
+mots_par_minute: { mediane: 231.1, n: 12 }
+hooks:
+  parts:
+    question_contrarienne: 0.188
+    enjeu_personnel: 0.188
+    negation_du_sens_commun: 0.188
+    intro_chaine_neutre: 0.125
+    adresse_directe: 0.125
+    in_medias_res: 0.125
+    liste_annoncee: 0.063
+  boucles_minimum: 2
+  boucle_position_s_repli: 47.9
+titres:
+  longueur_car: { mediane: 58, p90: 85,
+                 plafond_recommande: 85, plafond_youtube: 100 }
+miniatures:
+  mots_texte_median: 0.0
+  part_visage: 0.5
+  contraste_ratio_cible: 4.5     # cible WCAG, décision de production, pas une mesure du registre
+cadence_par_semaine: { mediane: 1.65, cible: 2.12 }
+surcharges: []                   # {champ, valeur, motif, date, qui} — jamais une valeur sans motif

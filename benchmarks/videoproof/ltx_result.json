@@ -1,0 +1,15 @@
+{
+  "outil": "LTX-Video 2B v0.9 Q6_K",
+  "largeur": 512,
+  "hauteur": 288,
+  "frames": 97,
+  "fps": 24,
+  "steps": 25,
+  "chargement_s": 35.1,
+  "generation_s": 438.7,
+  "s_par_seconde_video": 108.5,
+  "pic_rss_go": 6.33,
+  "pic_mps_go": 7.71,
+  "swap_go": 1.52,
+  "mp4": "benchmarks/videoproof/ltx_512x288_4s.mp4"
+}

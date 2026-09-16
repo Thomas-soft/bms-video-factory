@@ -1,0 +1,38 @@
+schema_version: "1.0"
+# Cibles reprises de registre/REFERENTIEL.json (généré le 2026-09-15).
+# Le code lit le JSON ; ce fichier porte les surcharges assumées et le motif de chacune.
+id: true_crime
+rythme_coupe_s:
+  cible: 21.8
+  cible_montage: 15.7
+  min: 8.4
+  max: 41.45
+  facteur_hook: 0.7
+  n: 5
+  a_mesurer: false
+  fallback_provisoire_s: null
+duree_s:
+  cible: 1528
+  p25: 984
+  p75: 4066
+  tolerance: 0.15
+  distribution_large: true
+mots_par_minute: { mediane: 179.5, n: 25 }
+hooks:
+  parts:
+    in_medias_res: 0.64
+    negation_du_sens_commun: 0.16
+    question_contrarienne: 0.12
+    statistique_choc: 0.04
+    intro_chaine_neutre: 0.04
+  boucles_minimum: 2
+  boucle_position_s_repli: 47.9
+titres:
+  longueur_car: { mediane: 60, p90: 95,
+                 plafond_recommande: 95, plafond_youtube: 100 }
+miniatures:
+  mots_texte_median: 0.0
+  part_visage: 0.9
+  contraste_ratio_cible: 4.5     # cible WCAG, décision de production, pas une mesure du registre
+cadence_par_semaine: { mediane: 6.65, cible: 6.65 }
+surcharges: []                   # {champ, valeur, motif, date, qui} — jamais une valeur sans motif

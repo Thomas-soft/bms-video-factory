@@ -1,0 +1,2 @@
+{"brique": "LLM", "outil": "Qwen3.5-9B Q4_K_M", "modele": "bartowski/Qwen_Qwen3.5-9B-GGUF:Q4_K_M", "langue": "fr", "temps_s": 78.5, "tok_s_prompt": 68.5, "tok_s_generation": 14.5, "tokens_generes": null, "returncode": 0, "erreur": null, "mots_generes": 827, "ts": "2026-09-15T10:58:53"}
+{"brique": "LLM", "outil": "Qwen3.5-9B Q4_K_M", "modele": "bartowski/Qwen_Qwen3.5-9B-GGUF:Q4_K_M", "langue": "en", "temps_s": 77.9, "tok_s_prompt": 64.6, "tok_s_generation": 0.8, "tokens_generes": null, "returncode": 0, "erreur": null, "mots_generes": 925, "ts": "2026-09-15T11:21:15"}

@@ -1,0 +1,27 @@
+# Fichier volontairement cassé — sert au test de non-régression du validateur.
+# Cinq défauts : clé mal orthographiée, cadence au-dessus du plafond de CONFORMITE § 6,
+# moins de trois gabarits, voix d'une autre langue, charte absente.
+schema_version: "1.0"
+id: chaine-invalide
+name: "Chaîne invalide"
+langue: fr                      # clé inconnue : le champ s'appelle `lang`
+niche: science_pop
+style: illustre
+templates: [only-a, only-b]     # moins de 3 : rotation de CONFORMITE § 5 impossible
+voice_id: serena_en             # voix anglaise sur une chaîne annoncée française
+cadence:
+  per_week_max: 5               # plafond dur : 2 pendant les 90 premiers jours
+  days: [monday]
+  hours_local: ["25:00"]        # heure impossible
+  jitter_min: 10                # « jamais un horaire fixe au quart d'heure près »
+  timezone: "Europe/Nulle-Part" # fuseau inconnu
+google_account:
+  alias: chaine-invalide
+  brand_account: "Chaîne invalide"
+  owner: BMS
+  gcp_project: bms-factory
+  token_ref: "ya29.valeur-de-jeton-en-clair"   # une valeur, pas une référence secrets/
+  two_fa_enabled: false
+  phone_verified: false
+products: []
+auto_approve: false

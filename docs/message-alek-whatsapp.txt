@@ -1,0 +1,30 @@
+Salut Alek,
+
+On a tranché les 7 styles que tu voulais, mesures à l'appui. Résultat : *6 styles utilisables*, portés par 5 moteurs.
+
+1. Illustration animée (images générées + effet de profondeur)
+2. Motion design
+3. Documentaire (archives, images d'illustration)
+4. Réaliste — vrais plans filmés, banques libres de droits
+5. Whiteboard animé
+6. Avatar 2D qui parle
+
+Deux sont déjà validés sur des rendus que j'ai vus (illustration animée, whiteboard) ; les 4 autres, je les valide sur un rendu complet avant de les mettre en service. L'avatar 2D se pose par-dessus les autres styles, donc ça fait plus de rendus différents que 6 — et la vraie variété vient de la charte de chaque chaîne (palette, typo, rythme de coupe) : deux chaînes dans le même style ne se ressemblent pas.
+
+*Le 7e, les animations poussées, je l'abandonne.* C'est du travail d'animateur à la main, pas une question de puissance : CasiCreativo, ta référence, en fait — et publie 57 vidéos en 5 ans. On ne tiendra pas ce niveau à 2 vidéos par semaine, et aucun serveur n'y change quoi que ce soit.
+
+*Ce qu'on ne fait pas* : la vidéo réaliste générée par IA. Preuve plutôt qu'avis — 4 secondes en très basse résolution ont pris 7 minutes de calcul, avec des traces de filigrane dans l'image. Une minute coûterait 1h49, contre 20 à 33 minutes selon le style en images fixes. Ce n'est pas un réglage qu'on aurait raté, c'est une classe de matériel qu'on n'a pas. Sur le serveur on pourra en insérer des plans de 3-4 secondes en habillage, jamais une vidéo entière. Et regarde tes propres références : aucune n'en a besoin — CasiCreativo c'est du motion design, les 3 bibliothèques de Thoth (398, 324 et 241 vidéos) tournent sur de la voix off, Elias Yoder c'est 358 000 abonnés en 4 mois avec un personnage récurrent.
+
+*Un défaut que je te dis tout de suite* : sur une série de 8 plans, le 8e a changé le personnage. Ça se corrige en grande partie au texte qu'on donne au modèle ; pour le reste, on fait relire à l'œil les seuls plans qui montrent quelqu'un.
+
+*Volume* : tout tourne sur mon MacBook Air M2 16 Go, qui est aussi ma machine de travail. Entre 3 et 7 vidéos par semaine environ selon le format. 10, non.
+
+*Le serveur* : on part sur les ~50 €/mois que tu as validés, mais la machine n'est pas choisie. Je regarde ce que ce budget achète vraiment et je te donne les chiffres avant qu'on engage. Il servira soit à produire plus, soit à faire de plus belles images — pas les deux à fond, c'est le même calcul. En revanche il ne donnera pas une voix française plus naturelle : ça, c'est une question de données d'entraînement, pas de puissance.
+
+*La suite* : prochain objectif, une vidéo de démo complète, de l'idée à la miniature, produite par le système. Puis une démo par style. En parallèle j'ouvre le dossier de publication, c'est le vrai chemin critique : YouTube force en privé tout ce qui sort d'un projet développeur non audité, et l'audit prend des semaines à des mois.
+
+*Il me faut 2 choses de ta part* :
+— raison sociale, SIREN et adresse de BMS
+— les comptes Google sous lesquels les chaînes doivent vivre (ça débloque aussi la banque de musique de YouTube, sans laquelle nos vidéos sortiraient sans musique de fond)
+
+Thomas

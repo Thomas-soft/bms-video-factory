@@ -1,0 +1,43 @@
+schema_version: "1.0"
+# Cibles reprises de registre/REFERENTIEL.json (généré le 2026-09-15).
+# Le code lit le JSON ; ce fichier porte les surcharges assumées et le motif de chacune.
+id: spiritualite
+rythme_coupe_s:
+  cible: 13.2
+  cible_montage: 11.4
+  min: 6.5
+  max: 16.75
+  facteur_hook: 0.7
+  n: 6
+  a_mesurer: false
+  fallback_provisoire_s: null
+duree_s:
+  cible: 1870
+  p25: 909
+  p75: 3181
+  tolerance: 0.15
+  distribution_large: false
+mots_par_minute: { mediane: 149.8, n: 64 }
+hooks:
+  parts:
+    negation_du_sens_commun: 0.318
+    question_contrarienne: 0.288
+    mystere_ouvert: 0.136
+    autorite_citee: 0.121
+    promesse_chiffree: 0.046
+    intro_chaine_neutre: 0.03
+    in_medias_res: 0.015
+    mise_en_scene_narrative: 0.015
+    enjeu_personnel: 0.015
+    adresse_directe: 0.015
+  boucles_minimum: 2
+  boucle_position_s_repli: 47.9
+titres:
+  longueur_car: { mediane: 70, p90: 91,
+                 plafond_recommande: 91, plafond_youtube: 100 }
+miniatures:
+  mots_texte_median: 4
+  part_visage: 0.93
+  contraste_ratio_cible: 4.5     # cible WCAG, décision de production, pas une mesure du registre
+cadence_par_semaine: { mediane: 1.63, cible: 2.04 }
+surcharges: []                   # {champ, valeur, motif, date, qui} — jamais une valeur sans motif

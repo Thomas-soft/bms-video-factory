@@ -1,0 +1,15 @@
+schema_version: "1.0"
+# Exemple de produit d'affiliation. Aucune valeur réelle : le réseau primaire et les niches
+# de départ sont une question ouverte pour Alek et Sofiane (STATE.md).
+# `tracking_id` n'est pas un secret (il figure dans l'URL publique) ; une clé d'API le serait.
+id: exemple-affilie
+name: "Exemple — complément alimentaire"
+network: impact                 # amazon | awin | cj | impact
+tracking_id: "bms-exemple"
+subid_param: SubId1             # clickref (50) | sid (64) | SubId1 (255) — imposé par le réseau
+subid_max_len: 255
+target_url: "https://exemple.tld/produit"
+attribution_par_video: true     # false sur amazon : 100 identifiants max, aucune granularité
+cookie_window_days: 31
+disclosure_override: {}         # sinon hérité de config/languages/<lang>.yaml
+cta_segment: { role: sponsor, position: apres_premier_point, duree_s_max: 45 }
