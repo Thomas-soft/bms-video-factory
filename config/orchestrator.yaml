@@ -1,0 +1,180 @@
+schema_version: "1.0"
+# Orchestrateur (étape 22.1) : ce que le daemon a le droit de faire, quand, et jusqu'où.
+
+# Étapes réputées lourdes — un modèle résident ou ffmpeg à plein régime. Elles ne tournent
+# que dans `fenetre_lourdes`. `plan`, `research`, `script`, `shotlist`, `thumbnail`,
+# `metadata` et `qc` sont hors de cette liste : elles restent brèves (≤ 25 min mesurées).
+etapes_lourdes: [voice, subtitles, render, assemble, export]
+
+# Fenêtre nocturne. Le Mac doit être branché et le capot **ouvert** : aucune option de
+# `caffeinate` n'empêche le sommeil déclenché par la fermeture du capot, et launchd ne
+# garantit aucun état d'alimentation (veille du 20/09/2026, forums développeurs Apple).
+fenetre_lourdes: { debut: "22:00", fin: "07:00" }
+# Collecte et analytique : toute la journée. `debut == fin` signifie « 24 h sur 24 ».
+fenetre_legeres: { debut: "00:00", fin: "00:00" }
+timezone: "Europe/Paris"
+
+# Plafonds de temps par étape, en secondes. Ceux-ci **remplacent** ceux de `factory/run.py`.
+# Ils sont calés sur les mesures des étapes 10 à 21, pas sur des chiffres ronds : le prompt
+# de l'étape 22.1 proposait « script 15 min », or `script` a mesuré 1 511 s (25 min) sur
+# `bms-histoire-en-20260918-pt83` et 1 522 s de LLM. Un plafond à 15 min tuerait un script
+# valide une fois sur deux. `render` n'est pas listé : il se calcule par plan (960 s × n).
+timeouts_s:
+  plan: 120
+  research: 900
+  script: 2700
+  voice: 7200
+  subtitles: 3600
+  shotlist: 300
+  assemble: 3600
+  thumbnail: 1200
+  metadata: 600
+  export: 2700
+  qc: 1800
+
+tentatives:
+  max: 3
+  # Attente avant la 2ᵉ, la 3ᵉ, puis les suivantes. Une panne de disque ou de réseau se
+  # résout en quelques minutes ; au-delà d'une heure, c'est un humain qu'il faut.
+  attentes_min: [5, 15, 60]
+
+gardes:
+  disque_libre_go_min: 8.0    # plancher dur de CLAUDE.md § 3 — ne pas descendre
+  memoire_libre_go_min: 2.0   # pic mesuré de l'image : 11,15 Go sur 16 (ARCHITECTURE § 8)
+  run_disque_mo_max: 6000
+
+journal:
+  taille_max_mo: 10
+  fichiers: 5
+
+sauvegarde:
+  destination: "~/BMS-backups"
+  retention_jours: 30
+
+daemon:
+  pause_boucle_s: 60
+  caffeinate: true
+
+# --- Étape 22.2 -------------------------------------------------------------------------
+# Table des remèdes : quelle mesure du banc (`qc.json → metrics`) fait rejouer quelle étape,
+# et **avec quel levier**. Sans levier, rejouer refait exactement la même chose : c'est la
+# leçon des deux runs de l'étape 22.1, où `respiration` a varié d'un facteur 95 entre deux
+# runs de la même chaîne sans qu'aucun paramètre ait bougé.
+#
+# `depuis` désigne l'étape d'où le run repart — elle et ses suivantes, jamais tout le run
+# (contrainte du prompt de l'étape 22.2). Les coûts mesurés à l'étape 22.1 expliquent l'ordre
+# de préférence quand plusieurs mesures échouent : assemble 198 s · export 25 s · qc 45 s ·
+# shotlist 0,3 s + render 474 s à 11 658 s · script 918 s **et tout l'aval, soit ≈ 4 h**.
+# Le remède le plus tardif dans le DAG gagne : c'est le moins cher.
+regenerations_max: 2
+rejets_max: 2
+
+remedes:
+  # Rythme de coupe hors cible → nouveau découpage, graine suivante.
+  cut_rhythm:      { depuis: shotlist, levier: graine_suivante,
+                     pourquoi: "le découpage est tiré par la graine du run ; même graine, même découpage" }
+  cut_dispersion:  { depuis: shotlist, levier: graine_suivante }
+  cut_long_shots:  { depuis: shotlist, levier: graine_suivante }
+  cut_rhythm_hook: { depuis: shotlist, levier: graine_suivante }
+  cut_rhythm_by_minute: { depuis: shotlist, levier: graine_suivante }
+
+  # Accroche faible → on ne réécrit **que** l'accroche, pas le script entier.
+  hook_length:       { depuis: script, levier: hook_seul,
+                       consigne: "The hook is the only part to rewrite. Keep it within the target length." }
+  hook_type_rules:   { depuis: script, levier: hook_seul,
+                       consigne: "The hook is the only part to rewrite. Follow the rules of its hook type." }
+  hook_pattern_score:    { depuis: script, levier: hook_seul,
+                           consigne: "The hook is the only part to rewrite. Open on a concrete, verifiable claim." }
+  hook_forbidden_wording: { depuis: script, levier: hook_seul,
+                            consigne: "The hook is the only part to rewrite. Drop every banned opening phrase." }
+  hook_visual_change: { depuis: shotlist, levier: graine_suivante,
+                        pourquoi: "les trois premières secondes doivent bouger : c'est un choix de plan, pas de texte" }
+  hook_text_present:  { depuis: shotlist, levier: graine_suivante }
+  hook_first_word:    { depuis: voice,    levier: aucun }
+
+  # Niveau sonore → remontage. Le mixage se refait en 198 s ; la voix, en 30 minutes.
+  loudness:   { depuis: assemble, levier: aucun,
+                pourquoi: "la normalisation EBU R128 se joue au montage, pas à la synthèse" }
+  true_peak:  { depuis: assemble, levier: aucun }
+  music_bed_attenuation: { depuis: assemble, levier: aucun }
+  loudness_range: { depuis: assemble, levier: aucun }
+
+  # Durée hors plage → réécriture du script avec une consigne de longueur explicite.
+  duree_vs_run:   { depuis: script, levier: consigne,
+                    consigne: "Target length is binding: stay within ±10 % of the requested word count. Cut whole segments rather than trimming every sentence." }
+  duree_vs_niche: { depuis: script, levier: consigne,
+                    consigne: "Target length is binding: stay within ±10 % of the requested word count." }
+
+  # Lisibilité → nouveau rendu, gabarit de composition suivant de la chaîne.
+  text_size:     { depuis: render, levier: gabarit_suivant,
+                   pourquoi: "la taille du texte incrusté vient du gabarit, pas du script" }
+  text_contrast: { depuis: render, levier: gabarit_suivant }
+
+  # Variété visuelle faible → nouveau découpage avec des assets forcément différents.
+  visual_variety:        { depuis: shotlist, levier: assets_differents,
+                           pourquoi: "réutiliser la bibliothèque produit deux vidéos jumelles (CONFORMITE § 5)" }
+  visual_redundancy:     { depuis: shotlist, levier: assets_differents }
+  visual_distinct_ratio: { depuis: shotlist, levier: assets_differents }
+  cut_redundancy:        { depuis: shotlist, levier: assets_differents }
+
+  # Sous-titres.
+  subtitle_track:        { depuis: assemble, levier: aucun }
+  subtitle_coverage:     { depuis: subtitles, levier: aucun }
+  subtitle_line_length:  { depuis: subtitles, levier: aucun }
+
+# Canal d'alerte. Telegram si `.env` porte TELEGRAM_BOT_TOKEN **et** TELEGRAM_CHAT_ID,
+# notification macOS sinon. Aucun jeton n'entre ici : `config/` est versionné.
+notifications:
+  canal: auto
+  disque_alerte_go: 10.0   # au-dessus du plancher dur de 8 : alerter avant d'arrêter
+  quota_alerte_part: 0.80
+  digest_heure: 7
+  digest_minute: 30
+
+# --- Étape 23.1 ---------------------------------------------------------------------------
+# Publication et quota. Les plafonds sont à 80 % de la dotation de Google, et les deux
+# compartiments sont comptés séparément : depuis juin 2026, `videos.insert` coûte **1 unité
+# dans le compartiment « Video Uploads » (100/jour)** et non 1 600 sur les 10 000
+# (developers.google.com/youtube/v3/determine_quota_cost, vérifié le 22/09/2026).
+# Conséquence : une publication complète coûte 1 upload + 501 unités, pas 2 050 unités.
+# `CONFORMITE.md` § 2 et l'encadré « 4 publications par jour » de `INTERFACES.md` datent du
+# modèle antérieur — divergence ouverte, à trancher à la révision de ces deux documents.
+publication:
+  gcp_project: bms-factory
+  uploads_max_jour: 80
+  unites_max_jour: 8000
+  tentatives_max: 5
+  attente_initiale_s: 2.0
+  # Vérifiés un par un le 22/09/2026 : les `_a2` du prompt de l'étape n'existent pas.
+  rapports:
+    - channel_reach_basic_a1        # impressions et CTR — aucune autre API ne les donne
+    - channel_basic_a3
+    - channel_traffic_source_a3
+    - channel_demographics_a1
+    - channel_playback_location_a3
+  insert_compte_dans_unites: false
+
+# Calendrier de publication (étape 23.2) — règles du **portefeuille**. La cadence et les
+# créneaux de chaque chaîne sont dans config/channels/<id>.yaml (§ cadence). Les bornes du
+# modèle (CalendrierConfig) sont celles de CONFORMITE § 6 : plus prudent, oui ; moins, jamais.
+calendrier:
+  plafond_semaine_jeune_chaine: 2   # CONFORMITE § 6 : ≤ 2/semaine les 90 premiers jours
+  age_jeune_chaine_jours: 90
+  espacement_chaine_h: 48           # jamais deux vidéos d'une chaîne à moins de 48 h
+  exclusion_portefeuille_min: 60    # jamais deux vidéos BMS dans la même heure
+  ecart_meme_langue_min: 240        # 4 h entre deux chaînes de même langue (même audience)
+  max_par_jour_portefeuille: 2      # sur 24 h glissantes, toutes chaînes confondues
+  variation_duree_min: 0.10         # écart de durée entre vidéos consécutives d'une chaîne
+  facteurs_duree: [0.8, 1.25]       # intervalle du facteur tiré pour target_duration_s (job pas encore scripté)
+  choix_parmi: 3                    # tirage parmi les 3 premiers créneaux admissibles
+  heures_par_job_en_file: 12        # ≈ 2 vidéos neuves par nuit (STATE, étape 22.1)
+  delai_production_h: 72            # ≈ 4 h 15 de machine + relecture humaine (48 h max)
+  delai_exporte_h: 24
+  avance_upload_h: [12, 60]         # upload privé entre 12 et 60 h avant la date, tiré par vidéo
+  ecart_uploads_min: 120            # un upload par tour du daemon, 2 h au moins entre deux
+  upload_auto: true
+  fichier_creneaux_appris: learned/weights.json   # étape 26 ; absent = créneaux de la config
+# Étape 24 — déclinaisons : un job par chaîne dont `derive_from` = chaîne du parent.
+# `export` : dès que le parent est exporté (qc PASS) ; `publication` : après son upload.
+# Le run enfant suit le flux normal (relecture, qc, precheck, calendrier jamais le même jour).
+declinaison: { actif: false, declencheur: export }   # full anglais (Thomas, 23/09/2026) : aucune déclinaison

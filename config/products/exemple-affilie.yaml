@@ -1,0 +1,32 @@
+schema_version: "1.0"
+# Exemple de produit d'affiliation. AUCUNE valeur réelle : le produit, le programme et le
+# tracking_id sont à fournir par Alek (STATE.md, questions ouvertes). Aucune chaîne ne le
+# référence : il ne sert qu'aux tests et au bac à sable de l'étape 27.
+# `tracking_id` n'est pas un secret (il figure dans l'URL publique) ; une clé d'API le serait.
+id: exemple-affilie
+name: "Example supplement"
+program: impact                 # amazon | awin | cj | impact | digistore24 | clickbank
+tracking_id: "bms-exemple"
+base_url: "https://exemple.tld/produit"
+# Nom du paramètre de sous-identifiant, imposé par le programme (models.SUBID_PAR_RESEAU) :
+# awin clickref (50) · cj sid (64) · impact SubId1 (255) · digistore24 campaignkey (127, dans
+# le chemin) · clickbank aff_sub1 (100) · amazon : aucun (ascsubtag sur accord d'Amazon seul).
+tracking_param: SubId1
+subid_max_len: 255
+# `{video_id}` porte déjà la chaîne et la langue ; aucun jeton ne porte de donnée personnelle.
+sub_id_format: "{video_id}"
+attribution_par_video: true     # false sur amazon : suivi par tracking ID, à la chaîne
+cookie_window_days: 31          # non vérifié sur page officielle (veille du 23/09/2026)
+# Mention par langue, AJOUTÉE à la ligne du réseau de config/languages/<lang>.yaml, jamais à
+# sa place. La ligne orale ouvre le segment sponsor mot pour mot.
+disclosure:
+  en:
+    description_line: "#ad — I earn a commission if you buy through this link, at no extra cost to you."
+    overlay_text: "Paid promotion"
+    spoken_line: "This part of the video is a paid promotion: I earn a commission if you buy through my link."
+cta_text:
+  en: "Check the current price of"
+landing_type: product_page      # product_page | sales_page | review | lead_capture
+commission_hint: { valeur: "non renseigné", source: "à relever sur la fiche du programme (Alek)" }
+# `apres_conclusion` : segment d'appel à l'action après la conclusion (étape 27).
+cta_segment: { role: sponsor, position: apres_conclusion, duree_s_max: 45 }

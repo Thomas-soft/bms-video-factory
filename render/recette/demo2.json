@@ -1,0 +1,107 @@
+{
+ "video_id": "demo2",
+ "fps": 30,
+ "width": 1920,
+ "height": 1080,
+ "resolution_scale": 1,
+ "workers": 1,
+ "out_dir": "out/demo2",
+ "charte": {
+  "bg": "#0d1117",
+  "text": "#ffffff",
+  "text_outline": "#101010",
+  "accent": "#1e5fd9",
+  "highlight": "#f2c94c",
+  "font_title": {
+   "family": "BMSInter",
+   "weight": 600
+  },
+  "font_body": {
+   "family": "BMSInter",
+   "weight": 400
+  },
+  "marge_px": 96
+ },
+ "lots": [
+  {
+   "name": "demo2",
+   "shots": [
+    {
+     "id": "e0",
+     "scene": "flux",
+     "duration_s": 7.0,
+     "props": {
+      "seed": 15,
+      "bg_variant": 0,
+      "title": "how light reaches us",
+      "heading": "From the star to your eye",
+      "steps": [
+       "A star burns",
+       "Light crosses space",
+       "We see the past"
+      ]
+     }
+    },
+    {
+     "id": "e1",
+     "scene": "transformation",
+     "duration_s": 6.0,
+     "props": {
+      "seed": 26,
+      "bg_variant": 1,
+      "title": "collapse",
+      "avant": "A cloud of gas",
+      "apres": "A star"
+     }
+    },
+    {
+     "id": "e2",
+     "scene": "quantite",
+     "duration_s": 6.5,
+     "props": {
+      "seed": 37,
+      "bg_variant": 2,
+      "title": "what we can see",
+      "value": 5,
+      "label": "of the universe is ordinary matter"
+     }
+    },
+    {
+     "id": "e3",
+     "scene": "personnage",
+     "duration_s": 7.0,
+     "props": {
+      "seed": 48,
+      "bg_variant": 3,
+      "title": "you are here",
+      "label": "Wait. What?"
+     }
+    },
+    {
+     "id": "e4",
+     "scene": "chronologie",
+     "duration_s": 8.0,
+     "props": {
+      "seed": 59,
+      "bg_variant": 0,
+      "title": "timeline",
+      "events": [
+       {
+        "when": "13.8 bn years ago",
+        "label": "The first light"
+       },
+       {
+        "when": "9 bn years ago",
+        "label": "The Sun forms"
+       },
+       {
+        "when": "Today",
+        "label": "You look up"
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

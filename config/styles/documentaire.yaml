@@ -1,0 +1,39 @@
+schema_version: "1.0"
+# Montage de vidéos et d'images réelles issues de banques libres : aucune génération d'image tant
+# qu'une banque répond, attribution obligatoire, licence par fichier (CONFORMITE § 8).
+id: documentaire
+engine: documentaire
+backend: ffmpeg
+statut: retenu_v1               # livré par l'étape 17 (18/09/2026)
+templates: [hist-a, hist-b, hist-c]
+params:
+  # Ordre d'interrogation. Pexels et Pixabay sont les seules banques à catalogue **vidéo**
+  # utilisable au montage ; Openverse n'indexe que des images, Archive et NASA ferment la marche
+  # parce qu'elles ne décrivent pas leurs fichiers (résolution et durée mesurées après coup).
+  stock:
+    providers: [pexels, pixabay, openverse, internet_archive, nasa]
+    licence_filter: commercial
+    min_resolution: "1920x1080"
+  motion:
+    default: pan
+    ken_burns_supersample: 4
+    # Course du panoramique, en part de la largeur **finale**. Le moteur la reporte lui-même
+    # dans le repère suréchantillonné : sans cela elle vaut le quart de ce qu'elle annonce
+    # (mesuré à l'étape 16 sur `illustre.py`).
+    course_ratio: 0.06
+    zoom: 1.10
+  # Étalonnage discret : c'est lui qui fait tenir ensemble des sources de cinq fournisseurs.
+  # `lut` a la priorité si le fichier existe — un `.cube` libre déposé dans `config/luts/`.
+  grade:
+    lut: null
+    rouge: -0.015
+    vert: 0.0
+    bleu: 0.030
+    contraste: 1.05
+    saturation: 0.94
+  # Repli des plans qu'aucune banque ne sert : image générée localement, puis Ken Burns.
+  image:
+    model: "mlx-community/FLUX.2-Klein-4B-4bit"
+    resolution: "1280x720"
+    steps: 4
+  person_review: true           # barrière humaine : le filtre lexical ne voit pas un visage

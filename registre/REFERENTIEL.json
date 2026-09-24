@@ -1,0 +1,4589 @@
+{
+ "schema_version": "1.0",
+ "genere_le": "2026-09-15",
+ "source": "registre P9 (ROADMAP.md 3.3) + collecte etape 2 (API YouTube Data v3, 14/09/2026)",
+ "perimetre": {
+  "n_chaines": 74,
+  "n_videos": 21919,
+  "n_chaines_tronquees_500": 29,
+  "definition_short": "duree <= 70 s",
+  "definition_breakout": "vues > 3x la mediane de sa propre chaine",
+  "seuil_n_faible": 20
+ },
+ "niches": {
+  "histoire_doc": {
+   "chaines_source": [
+    "@abdocumentary3590",
+    "@khachakirner20",
+    "@ourhistory",
+    "@thehistorychannel9720",
+    "@tolga_ornek"
+   ],
+   "n_chaines": 5,
+   "n_chaines_tronquees_500": 1,
+   "n_videos_analysees": 877,
+   "n_videos_toutes_durees": 1077,
+   "part_shorts": 0.186,
+   "n_faible": false,
+   "n_chaines_faible": true,
+   "rythme_coupe_s": {
+    "cible": 4.6,
+    "min": 4.03,
+    "max": 7.6,
+    "n_mesures": 5,
+    "source": "tableau P9 (ROADMAP.md 3.3), median des chaines de la niche",
+    "min_observe": 3.9,
+    "max_observe": 18.5,
+    "valeurs": [
+     {
+      "chaine": "Khachakirner20",
+      "s_par_plan": 3.9
+     },
+     {
+      "chaine": "Our History",
+      "s_par_plan": 4.4
+     },
+     {
+      "chaine": "Tolga Ornek",
+      "s_par_plan": 4.6
+     },
+     {
+      "chaine": "AB Documentary",
+      "s_par_plan": 8.6
+     },
+     {
+      "chaine": "The History Channel",
+      "s_par_plan": 18.5
+     }
+    ],
+    "facteur_hook": 0.7,
+    "commentaire_min_max": "min/max = p25/p75 des chaines retenues apres elagage (n>=4), sinon extremes de cet ensemble",
+    "cible_montage": 4.5,
+    "cible_montage_robustesse": {
+     "ecart_max_retrait_une_chaine_s": 0.1,
+     "n_apres_elagage": 4,
+     "sensible_a_une_chaine": false
+    },
+    "n_faible": false,
+    "cible_montage_methode": "mediane apres retrait des valeurs > 3x la mediane de la niche (plans tres longs = plateau, interview ou image fixe, non pertinents pour une video montee)",
+    "cible_montage_valeurs_ecartees": [
+     {
+      "chaine": "The History Channel",
+      "s_par_plan": 18.5
+     }
+    ],
+    "a_mesurer": false
+   },
+   "duree_s": {
+    "mediane": 1513.0,
+    "p25": 296.0,
+    "p75": 2689.0,
+    "cible": 1513.0,
+    "tolerance": 0.15,
+    "perimetre": "videos > 70 s (Shorts exclus)",
+    "n": 877,
+    "dispersion_p75_p25": 9.1,
+    "distribution_large": true,
+    "note_distribution_large": "p75/p25 > 4 : la niche melange des formats de duree tres differentes. La mediane n'est pas un mode : l'etape 10 doit fixer la duree par chaine (format court ou long) et non viser la mediane de niche."
+   },
+   "ruptures_s": {
+    "cible": null,
+    "observee_s": 40.5,
+    "p25_s": 14.0,
+    "p75_s": 90.0,
+    "n": 12,
+    "a_mesurer": false,
+    "mesure_par": "etape_16",
+    "origine": "etape_16, sous-agent A : secondes entre deux ruptures de sujet sur les transcriptions EN (fenetre 15 s, chevauchement lexical < 8 %, ou question au spectateur, ou chiffre). La cadence APPLIQUEE reste 4 x rythme_coupe_s.cible_montage bornee a [20, 45] s.",
+    "n_faible": true
+   },
+   "densite_faits_par_minute": {
+    "cible": 11.5,
+    "plancher": 6.9,
+    "mediane_observee": 3.23,
+    "n_meilleures": 6,
+    "n_medianes": 6,
+    "n_faible": true,
+    "a_mesurer": false,
+    "mesure_par": "etape_16",
+    "origine": "etape_16, sous-agent B (methode) et density.py (mesure) : mediane de la moitie la plus vue des transcriptions EN de la niche, arrondie a 0,5. NON VALIDEE comme predicteur de vues (Spearman +0,057 sur 263 transcriptions, non significatif dans 9 niches sur 10).",
+    "valide_comme_predicteur": false
+   },
+   "cadence_par_semaine": {
+    "mediane": 0.0,
+    "p75": 0.77,
+    "n_chaines": 5,
+    "n_chaines_actives_6_mois": 2,
+    "mediane_chaines_actives": 1.52,
+    "fenetre": "182 derniers jours au 15/09/2026, videos > 70 s",
+    "cible": 1.52,
+    "cible_origine": "mediane des seules chaines ayant publie sur la fenetre ; la mediane brute vaut 0 des qu'une majorite de chaines est inactive"
+   },
+   "creneaux": {
+    "jours": [
+     "samedi",
+     "jeudi",
+     "mardi"
+    ],
+    "jours_parts": {
+     "samedi": 0.319,
+     "jeudi": 0.316,
+     "mardi": 0.165
+    },
+    "heures_utc": [
+     16,
+     17,
+     15
+    ],
+    "heures_parts": {
+     "16": 0.53,
+     "17": 0.372,
+     "15": 0.081
+    },
+    "n": 285,
+    "n_faible": false,
+    "fenetre": "24 derniers mois"
+   },
+   "titres": {
+    "longueur_car": {
+     "mediane": 62,
+     "p90": 86.0,
+     "plafond_recommande": 86.0,
+     "plafond_youtube": 100
+    },
+    "longueur_mots_mediane": 10,
+    "patrons": [
+     {
+      "id": "nom_propre_en_tete",
+      "template": "{Nom Propre} {verbe} {sujet}",
+      "part": 0.353,
+      "n_matches": 310,
+      "exemple": "Kaybedenler Kulübü I Full HD",
+      "part_parmi_breakouts": 0.36
+     },
+     {
+      "id": "deux_points",
+      "template": "{Sujet} : {promesse}",
+      "part": 0.213,
+      "n_matches": 187,
+      "exemple": "Death Of The Hollywood Heartthrob: What Killed Patrick Swayze? | Our History",
+      "part_parmi_breakouts": 0.306
+     },
+     {
+      "id": "question_en_tete",
+      "template": "{Mot interrogatif} {sujet} ... ?",
+      "part": 0.124,
+      "n_matches": 109,
+      "exemple": "How The FBI Took Down New York's Most Notorious Mafia Bosses | Our History",
+      "part_parmi_breakouts": 0.132
+     },
+     {
+      "id": "verite_choc",
+      "template": "The {adjectif} truth about {sujet}",
+      "part": 0.095,
+      "n_matches": 83,
+      "exemple": "The Untold Story Of The Spanish Armada: The Truth Behind England's Heroic Victory | Our History",
+      "part_parmi_breakouts": 0.128
+     },
+     {
+      "id": "superlatif",
+      "template": "The {adjectif superlatif} {sujet}",
+      "part": 0.054,
+      "n_matches": 47,
+      "exemple": "The Fragile Empires Of The Worlds Most Infamous Drug Lords | Our History",
+      "part_parmi_breakouts": 0.066
+     },
+     {
+      "id": "serie_numerotee",
+      "template": "{Sujet} Part {n} / Episode {n}",
+      "part": 0.033,
+      "n_matches": 29,
+      "exemple": "Who Built Stonehenge? Understanding The Truth (Part 2) | Our History",
+      "part_parmi_breakouts": 0.031
+     },
+     {
+      "id": "mise_en_garde",
+      "template": "Never/Stop {action} before {consequence}",
+      "part": 0.008,
+      "n_matches": 7,
+      "exemple": "Dutch Schultz: The Rogue Gangster Who Was Too Dangerous for the Mafia | Our History",
+      "part_parmi_breakouts": 0.012
+     },
+     {
+      "id": "how_to",
+      "template": "How to {action}",
+      "part": 0.001,
+      "n_matches": 1,
+      "exemple": "How to Steal a Country: The Dictator's Handbook",
+      "part_parmi_breakouts": 0.004
+     },
+     {
+      "id": "nombre_en_tete",
+      "template": "{Nombre} {choses} that/qui {promesse}",
+      "part": 0.0,
+      "n_matches": 0,
+      "exemple": null,
+      "part_parmi_breakouts": 0.0
+     },
+     {
+      "id": "this_is_why",
+      "template": "This is why {sujet} {consequence}",
+      "part": 0.0,
+      "n_matches": 0,
+      "exemple": null,
+      "part_parmi_breakouts": 0.0
+     }
+    ]
+   },
+   "miniatures": {
+    "texte_mots": {
+     "mediane": 3.0,
+     "max": 6
+    },
+    "personnage": 0.65,
+    "palette": [
+     "#1a1a1a",
+     "#ffffff",
+     "#808080"
+    ],
+    "contraste": "moyen",
+    "contraste_parts": {
+     "moyen": 0.5,
+     "eleve": 0.5
+    },
+    "composition": "sujet_centre",
+    "composition_parts": {
+     "sujet_centre": 0.7,
+     "sujet_droite": 0.25,
+     "sujet_gauche": 0.05
+    },
+    "marqueur": 0.1,
+    "styles": {
+     "photo": 0.95,
+     "mixte": 0.05
+    },
+    "motifs_gagnants": [
+     "Composition type affiche de film : sujet centre, titre court en haut ou en bas",
+     "Visage(s) historique(s) ou acteurs en gros plan environ une fois sur deux",
+     "Palette sombre et desaturee (noir, gris, sepia) pour un ton documentaire",
+     "Contraste modere, aucun effet racoleur ni fleche",
+     "Photo ou rendu realiste uniquement, jamais d'illustration cartoon"
+    ],
+    "n_miniatures": 20,
+    "n_chaines": 2,
+    "chaines": [
+     "our-history",
+     "tolga-ornek"
+    ],
+    "n_faible": false,
+    "methode_palette": "estimation visuelle par familles de couleurs sur planches-contacts, pas de mesure pixel",
+    "precision_palette": "famille de couleur a une nuance pres : utiliser comme intention chromatique, jamais comme valeur de charte",
+    "contraste_ratio_cible": 4.5,
+    "contraste_ratio_origine": "WCAG AA, decision de production pour l'etape 21 ; le champ contraste ci-dessus est un jugement visuel categoriel",
+    "n_chaines_faible": true
+   },
+   "hooks": {
+    "parts": {
+     "in_medias_res": 0.762,
+     "mystere_ouvert": 0.095,
+     "mise_en_scene_narrative": 0.095,
+     "intro_chaine_neutre": 0.048
+    },
+    "part_indeterminee": 0.0,
+    "longueur_mots": {
+     "mediane": 18,
+     "p25": 6.0,
+     "p75": 32.0,
+     "n": 15,
+     "n_sans_parole_avant_15s": 6,
+     "n_faible": true
+    },
+    "boucle_ouverte": {
+     "part": 0.0,
+     "position_s_mediane": null,
+     "position_s_moyenne": null,
+     "n": 0,
+     "fenetre": "90 premieres secondes",
+     "position_s_repli": 47.9,
+     "origine_repli": "mediane inter-niches des 28 boucles ouvertes reperees dans le corpus",
+     "n_faible": true
+    },
+    "boucles_minimum": 2,
+    "boucles_minimum_origine": "decision de production (etape 10), au-dela de l'usage observe",
+    "n_transcriptions": 21,
+    "n_faible": false,
+    "perimetre": "5 videos les plus vues par chaine, 15 premieres secondes"
+   },
+   "mots_par_minute": {
+    "mediane": 107.8,
+    "p25": 72.8,
+    "p75": 116.2,
+    "n": 18,
+    "n_faible": true,
+    "perimetre": "transcription entiere : mots hors tags non verbaux / duree parlee",
+    "methode": "mots (hors tags non verbaux) / duree entre le debut du premier snippet et la fin du dernier ; transcriptions de moins de 60 s ou de moins de 50 mots ecartees",
+    "debut_60s": {
+     "mediane_corrigee": 84,
+     "mediane_brute": 73.0,
+     "n": 13,
+     "n_ecartees_sous_60_mots_min": 7,
+     "usage": "caracterise l'ouverture (generique et musique compris), ne pas s'en servir pour dimensionner un script"
+    }
+   },
+   "densite_breakouts": 0.293,
+   "densite_breakouts_definition": "mediane, sur les chaines de la niche, de la part de leurs videos a plus de 3x leur propre mediane de vues. Valeur a viser pour UNE chaine.",
+   "densite_breakouts_agregee": 0.294,
+   "densite_breakouts_agregee_definition": "part de breakouts sur toutes les videos de la niche mises en commun ; dominee par les chaines les plus prolifiques, a ne pas utiliser comme cible de chaine.",
+   "ratio_top1_median": 178.4,
+   "sujets_porteurs": [
+    {
+     "sujet": "Byzantium The Lost Empire full documentary by John Romer",
+     "titre_source": "Byzantium The Lost Empire full documentary by John Romer",
+     "vues": 1274304,
+     "chaine": "@khachakirner20",
+     "video_id": "ASGvE_A3wB0",
+     "ratio_vs_mediane": 704.4,
+     "vues_medianes_chaine": 1809,
+     "date": "2014-09-17"
+    },
+    {
+     "sujet": "The Fragile Empires Of The Worlds Most Infamous Drug Lords",
+     "titre_source": "The Fragile Empires Of The Worlds Most Infamous Drug Lords | Our History",
+     "vues": 5041922,
+     "chaine": "@ourhistory",
+     "video_id": "kdYMLjkSWiA",
+     "ratio_vs_mediane": 175.1,
+     "vues_medianes_chaine": 28796.0,
+     "date": "2023-11-28"
+    },
+    {
+     "sujet": "DARK FOREST IN THE MOUNTAINS1993-94 Nagorno Karabakh War Documentary By Roger Kupelian",
+     "titre_source": "DARK FOREST IN THE MOUNTAINS1993-94 Nagorno Karabakh War Documentary By Roger Kupelian",
+     "vues": 268955,
+     "chaine": "@khachakirner20",
+     "video_id": "ItoK9OSanRw",
+     "ratio_vs_mediane": 148.7,
+     "vues_medianes_chaine": 1809,
+     "date": "2013-08-22"
+    },
+    {
+     "sujet": "The Downfall Of America's Most Notorious Mobsters",
+     "titre_source": "The Downfall Of America's Most Notorious Mobsters | Our History",
+     "vues": 4041727,
+     "chaine": "@ourhistory",
+     "video_id": "DUtPro2YxXE",
+     "ratio_vs_mediane": 140.4,
+     "vues_medianes_chaine": 28796.0,
+     "date": "2023-12-07"
+    },
+    {
+     "sujet": "How The FBI Took Down New York's Most Notorious Mafia Bosses",
+     "titre_source": "How The FBI Took Down New York's Most Notorious Mafia Bosses | Our History",
+     "vues": 3425473,
+     "chaine": "@ourhistory",
+     "video_id": "hZF8L5G9hW4",
+     "ratio_vs_mediane": 119.0,
+     "vues_medianes_chaine": 28796.0,
+     "date": "2023-11-21"
+    },
+    {
+     "sujet": "The Untold Story Of America's Defeat In Vietnam",
+     "titre_source": "The Untold Story Of America's Defeat In Vietnam | Our History",
+     "vues": 3263917,
+     "chaine": "@ourhistory",
+     "video_id": "LQN09dzXWEY",
+     "ratio_vs_mediane": 113.3,
+     "vues_medianes_chaine": 28796.0,
+     "date": "2024-07-09"
+    },
+    {
+     "sujet": "Alexander the Great World Conqueror Discovery History Channel Documentary Full Documentary",
+     "titre_source": "Alexander the Great World Conqueror Discovery History Channel Documentary Full Documentary",
+     "vues": 105085,
+     "chaine": "@thehistorychannel9720",
+     "video_id": "4axMAaEFEZE",
+     "ratio_vs_mediane": 97.7,
+     "vues_medianes_chaine": 1076.0,
+     "date": "2016-02-27"
+    },
+    {
+     "sujet": "How Did Maurice Gibb Turn From Healthy To Dead In Just 4 Days?",
+     "titre_source": "How Did Maurice Gibb Turn From Healthy To Dead In Just 4 Days? | Our History",
+     "vues": 2158756,
+     "chaine": "@ourhistory",
+     "video_id": "RGBDujwoljY",
+     "ratio_vs_mediane": 75.0,
+     "vues_medianes_chaine": 28796.0,
+     "date": "2023-05-18"
+    },
+    {
+     "sujet": "Unbelievable £2 Million Restoration of Scotland's Fairburn Tower",
+     "titre_source": "Unbelievable £2 Million Restoration of Scotland's Fairburn Tower | Our History",
+     "vues": 1972125,
+     "chaine": "@ourhistory",
+     "video_id": "qIBHJ6QHb9c",
+     "ratio_vs_mediane": 68.5,
+     "vues_medianes_chaine": 28796.0,
+     "date": "2025-10-09"
+    },
+    {
+     "sujet": "Death Of The Hollywood Heartthrob: What Killed Patrick Swayze?",
+     "titre_source": "Death Of The Hollywood Heartthrob: What Killed Patrick Swayze? | Our History",
+     "vues": 1916364,
+     "chaine": "@ourhistory",
+     "video_id": "39Q80im9mTU",
+     "ratio_vs_mediane": 66.5,
+     "vues_medianes_chaine": 28796.0,
+     "date": "2024-11-19"
+    },
+    {
+     "sujet": "The History Of Daily Life In Ancient Egypt",
+     "titre_source": "The History Of Daily Life In Ancient Egypt | Our History",
+     "vues": 1753052,
+     "chaine": "@ourhistory",
+     "video_id": "XslP4H179SA",
+     "ratio_vs_mediane": 60.9,
+     "vues_medianes_chaine": 28796.0,
+     "date": "2023-07-15"
+    },
+    {
+     "sujet": "Catching The Drug Barons Of Colombia: Griselda Blanco And Carlos Lehder",
+     "titre_source": "Catching The Drug Barons Of Colombia: Griselda Blanco And Carlos Lehder | Our History",
+     "vues": 1668903,
+     "chaine": "@ourhistory",
+     "video_id": "nJyrI6XKsek",
+     "ratio_vs_mediane": 58.0,
+     "vues_medianes_chaine": 28796.0,
+     "date": "2023-12-19"
+    },
+    {
+     "sujet": "Rare Colour Footage Of Queen Elizabeth II's Coronation",
+     "titre_source": "Rare Colour Footage Of Queen Elizabeth II's Coronation | Our History",
+     "vues": 1647017,
+     "chaine": "@ourhistory",
+     "video_id": "pVEIPrvLO9s",
+     "ratio_vs_mediane": 57.2,
+     "vues_medianes_chaine": 28796.0,
+     "date": "2024-05-06"
+    },
+    {
+     "sujet": "Forgotten Empires The Mongolian Empire Full Documentary",
+     "titre_source": "Forgotten Empires The Mongolian Empire Full Documentary",
+     "vues": 59206,
+     "chaine": "@thehistorychannel9720",
+     "video_id": "u_t5KFsmaGM",
+     "ratio_vs_mediane": 55.0,
+     "vues_medianes_chaine": 1076.0,
+     "date": "2016-02-27"
+    },
+    {
+     "sujet": "How The Longbow Defeated The French At Agincourt",
+     "titre_source": "How The Longbow Defeated The French At Agincourt | Our History",
+     "vues": 1396794,
+     "chaine": "@ourhistory",
+     "video_id": "LHdzoPUIJhc",
+     "ratio_vs_mediane": 48.5,
+     "vues_medianes_chaine": 28796.0,
+     "date": "2024-02-29"
+    }
+   ]
+  },
+  "spiritualite": {
+   "chaines_source": [
+    "@_affinityarc",
+    "@bibliotecadithoth",
+    "@bibliothequedethot",
+    "@bibliothequegnostique",
+    "@brucehliptonphd",
+    "@danielmorenoyt",
+    "@enochdiscoveries",
+    "@gnosticlibraryyt",
+    "@hermetictalk",
+    "@labibliotecagnostica",
+    "@libraryofthoth",
+    "@sk369xpress",
+    "@spiritualdive",
+    "@wellnessandwisdom"
+   ],
+   "n_chaines": 14,
+   "n_chaines_tronquees_500": 1,
+   "n_videos_analysees": 2374,
+   "n_videos_toutes_durees": 2778,
+   "part_shorts": 0.145,
+   "n_faible": false,
+   "n_chaines_faible": false,
+   "rythme_coupe_s": {
+    "cible": 13.2,
+    "min": 6.5,
+    "max": 16.75,
+    "n_mesures": 6,
+    "source": "tableau P9 (ROADMAP.md 3.3), median des chaines de la niche",
+    "min_observe": 5.2,
+    "max_observe": 240.0,
+    "valeurs": [
+     {
+      "chaine": "InsightInfinite",
+      "s_par_plan": 5.2
+     },
+     {
+      "chaine": "Wellness + Wisdom Podcast",
+      "s_par_plan": 7.8
+     },
+     {
+      "chaine": "Daniel Moreno",
+      "s_par_plan": 11.4
+     },
+     {
+      "chaine": "Affinity Arc",
+      "s_par_plan": 15.0
+     },
+     {
+      "chaine": "Bruce H. Lipton, Ph.D.",
+      "s_par_plan": 18.5
+     },
+     {
+      "chaine": "Spiritual Dive",
+      "s_par_plan": 240.0
+     }
+    ],
+    "facteur_hook": 0.7,
+    "commentaire_min_max": "min/max = p25/p75 des chaines retenues apres elagage (n>=4), sinon extremes de cet ensemble",
+    "cible_montage": 11.4,
+    "cible_montage_robustesse": {
+     "ecart_max_retrait_une_chaine_s": 1.8,
+     "n_apres_elagage": 5,
+     "sensible_a_une_chaine": false
+    },
+    "n_faible": false,
+    "cible_montage_methode": "mediane apres retrait des valeurs > 3x la mediane de la niche (plans tres longs = plateau, interview ou image fixe, non pertinents pour une video montee)",
+    "cible_montage_valeurs_ecartees": [
+     {
+      "chaine": "Spiritual Dive",
+      "s_par_plan": 240.0
+     }
+    ],
+    "a_mesurer": false
+   },
+   "duree_s": {
+    "mediane": 1870.0,
+    "p25": 909.0,
+    "p75": 3181.0,
+    "cible": 1870.0,
+    "tolerance": 0.15,
+    "perimetre": "videos > 70 s (Shorts exclus)",
+    "n": 2374,
+    "dispersion_p75_p25": 3.5,
+    "distribution_large": false,
+    "note_distribution_large": "p75/p25 > 4 : la niche melange des formats de duree tres differentes. La mediane n'est pas un mode : l'etape 10 doit fixer la duree par chaine (format court ou long) et non viser la mediane de niche."
+   },
+   "ruptures_s": {
+    "cible": null,
+    "observee_s": 27.0,
+    "p25_s": 8.0,
+    "p75_s": 67.0,
+    "n": 34,
+    "a_mesurer": false,
+    "mesure_par": "etape_16",
+    "origine": "etape_16, sous-agent A : secondes entre deux ruptures de sujet sur les transcriptions EN (fenetre 15 s, chevauchement lexical < 8 %, ou question au spectateur, ou chiffre). La cadence APPLIQUEE reste 4 x rythme_coupe_s.cible_montage bornee a [20, 45] s.",
+    "n_faible": false
+   },
+   "densite_faits_par_minute": {
+    "cible": 3.5,
+    "plancher": 2.1,
+    "mediane_observee": 5.66,
+    "n_meilleures": 20,
+    "n_medianes": 21,
+    "n_faible": false,
+    "a_mesurer": false,
+    "mesure_par": "etape_16",
+    "origine": "etape_16, sous-agent B (methode) et density.py (mesure) : mediane de la moitie la plus vue des transcriptions EN de la niche, arrondie a 0,5. NON VALIDEE comme predicteur de vues (Spearman +0,057 sur 263 transcriptions, non significatif dans 9 niches sur 10).",
+    "valide_comme_predicteur": false
+   },
+   "cadence_par_semaine": {
+    "mediane": 1.63,
+    "p75": 2.33,
+    "n_chaines": 14,
+    "n_chaines_actives_6_mois": 9,
+    "mediane_chaines_actives": 2.04,
+    "fenetre": "182 derniers jours au 15/09/2026, videos > 70 s",
+    "cible": 2.04,
+    "cible_origine": "mediane des seules chaines ayant publie sur la fenetre ; la mediane brute vaut 0 des qu'une majorite de chaines est inactive"
+   },
+   "creneaux": {
+    "jours": [
+     "mardi",
+     "vendredi",
+     "jeudi"
+    ],
+    "jours_parts": {
+     "mardi": 0.19,
+     "vendredi": 0.144,
+     "jeudi": 0.137
+    },
+    "heures_utc": [
+     18,
+     16,
+     17
+    ],
+    "heures_parts": {
+     "18": 0.411,
+     "16": 0.123,
+     "17": 0.107
+    },
+    "n": 1852,
+    "n_faible": false,
+    "fenetre": "24 derniers mois"
+   },
+   "titres": {
+    "longueur_car": {
+     "mediane": 70.0,
+     "p90": 91.0,
+     "plafond_recommande": 91.0,
+     "plafond_youtube": 100
+    },
+    "longueur_mots_mediane": 12.0,
+    "patrons": [
+     {
+      "id": "nom_propre_en_tete",
+      "template": "{Nom Propre} {verbe} {sujet}",
+      "part": 0.315,
+      "n_matches": 747,
+      "exemple": "Signs That A Parallel Version Of You Is Trying To Send You A Message",
+      "part_parmi_breakouts": 0.299
+     },
+     {
+      "id": "deux_points",
+      "template": "{Sujet} : {promesse}",
+      "part": 0.186,
+      "n_matches": 442,
+      "exemple": "Le Livre d’Hénoch : Le Livre Interdit Qui Explique TOUT ? (Sans BS)",
+      "part_parmi_breakouts": 0.194
+     },
+     {
+      "id": "verite_choc",
+      "template": "The {adjectif} truth about {sujet}",
+      "part": 0.104,
+      "n_matches": 246,
+      "exemple": "This Is What Happens To Your Pineal Gland EVERY NIGHT (Secret Knowledge)",
+      "part_parmi_breakouts": 0.096
+     },
+     {
+      "id": "question_en_tete",
+      "template": "{Mot interrogatif} {sujet} ... ?",
+      "part": 0.101,
+      "n_matches": 240,
+      "exemple": "How The Universe TESTS YOU Before Your Reality Changes",
+      "part_parmi_breakouts": 0.12
+     },
+     {
+      "id": "mise_en_garde",
+      "template": "Never/Stop {action} before {consequence}",
+      "part": 0.083,
+      "n_matches": 196,
+      "exemple": "The Mirror Principle | If You Don't Change This, Reality Will Never Change",
+      "part_parmi_breakouts": 0.087
+     },
+     {
+      "id": "superlatif",
+      "template": "The {adjectif superlatif} {sujet}",
+      "part": 0.04,
+      "n_matches": 96,
+      "exemple": "The Most Dangerous Book Ever Written About The Human Magnetic Mind",
+      "part_parmi_breakouts": 0.039
+     },
+     {
+      "id": "nombre_en_tete",
+      "template": "{Nombre} {choses} that/qui {promesse}",
+      "part": 0.037,
+      "n_matches": 87,
+      "exemple": "5 Ways to TALK to the UNIVERSE & Actually get An Answer - no bs",
+      "part_parmi_breakouts": 0.024
+     },
+     {
+      "id": "how_to",
+      "template": "How to {action}",
+      "part": 0.032,
+      "n_matches": 75,
+      "exemple": "How To Manipulate Your Energy To Create Quantum Events In Your Reality",
+      "part_parmi_breakouts": 0.039
+     },
+     {
+      "id": "serie_numerotee",
+      "template": "{Sujet} Part {n} / Episode {n}",
+      "part": 0.005,
+      "n_matches": 12,
+      "exemple": "Uplifting The Field with Dr. Bruce Lipton - Part 1",
+      "part_parmi_breakouts": 0.0
+     },
+     {
+      "id": "this_is_why",
+      "template": "This is why {sujet} {consequence}",
+      "part": 0.004,
+      "n_matches": 9,
+      "exemple": "I've Stopped Calling Him Jesus, And This IS WHY (His TRUE Name Revealed)",
+      "part_parmi_breakouts": 0.002
+     }
+    ]
+   },
+   "miniatures": {
+    "texte_mots": {
+     "mediane": 4.0,
+     "max": 7
+    },
+    "personnage": 0.93,
+    "palette": [
+     "#1a1a1a",
+     "#d6221f",
+     "#c9a227"
+    ],
+    "contraste": "eleve",
+    "contraste_parts": {
+     "eleve": 0.83,
+     "moyen": 0.17
+    },
+    "composition": "sujet_droite",
+    "composition_parts": {
+     "sujet_droite": 0.53,
+     "sujet_gauche": 0.23,
+     "sujet_centre": 0.23
+    },
+    "marqueur": 0.37,
+    "styles": {
+     "illustration": 0.63,
+     "photo": 0.33,
+     "mixte": 0.03
+    },
+    "motifs_gagnants": [
+     "Fleche rouge pointant un detail cle (symbole, objet, mot) - motif transversal illustration et avatar",
+     "Sujet cadre a droite en priorite, texte cale a gauche",
+     "3 a 7 mots choc en majuscules, fort contraste noir/rouge/or",
+     "Palette noir / rouge / or / sepia recurrente, ton mystique",
+     "Visage ou figure quasi systematique (esoterique illustree ou humaine reelle)"
+    ],
+    "n_miniatures": 30,
+    "n_chaines": 3,
+    "chaines": [
+     "daniel-moreno",
+     "library-of-thoth",
+     "spiritual-dive"
+    ],
+    "n_faible": false,
+    "methode_palette": "estimation visuelle par familles de couleurs sur planches-contacts, pas de mesure pixel",
+    "precision_palette": "famille de couleur a une nuance pres : utiliser comme intention chromatique, jamais comme valeur de charte",
+    "contraste_ratio_cible": 4.5,
+    "contraste_ratio_origine": "WCAG AA, decision de production pour l'etape 21 ; le champ contraste ci-dessus est un jugement visuel categoriel",
+    "n_chaines_faible": false
+   },
+   "hooks": {
+    "parts": {
+     "negation_du_sens_commun": 0.318,
+     "question_contrarienne": 0.288,
+     "mystere_ouvert": 0.136,
+     "autorite_citee": 0.121,
+     "promesse_chiffree": 0.046,
+     "intro_chaine_neutre": 0.03,
+     "in_medias_res": 0.015,
+     "mise_en_scene_narrative": 0.015,
+     "enjeu_personnel": 0.015,
+     "adresse_directe": 0.015
+    },
+    "part_indeterminee": 0.015,
+    "longueur_mots": {
+     "mediane": 40.0,
+     "p25": 29.8,
+     "p75": 44.0,
+     "n": 66,
+     "n_sans_parole_avant_15s": 1,
+     "n_faible": false
+    },
+    "boucle_ouverte": {
+     "part": 0.104,
+     "position_s_mediane": 53.9,
+     "position_s_moyenne": 50.5,
+     "n": 7,
+     "fenetre": "90 premieres secondes",
+     "position_s_repli": 47.9,
+     "origine_repli": "mediane inter-niches des 28 boucles ouvertes reperees dans le corpus",
+     "n_faible": true
+    },
+    "boucles_minimum": 2,
+    "boucles_minimum_origine": "decision de production (etape 10), au-dela de l'usage observe",
+    "n_transcriptions": 67,
+    "n_faible": false,
+    "perimetre": "5 videos les plus vues par chaine, 15 premieres secondes"
+   },
+   "mots_par_minute": {
+    "mediane": 149.8,
+    "p25": 138.5,
+    "p75": 160.3,
+    "n": 64,
+    "n_faible": false,
+    "perimetre": "transcription entiere : mots hors tags non verbaux / duree parlee",
+    "methode": "mots (hors tags non verbaux) / duree entre le debut du premier snippet et la fin du dernier ; transcriptions de moins de 60 s ou de moins de 50 mots ecartees",
+    "debut_60s": {
+     "mediane_corrigee": 148.5,
+     "mediane_brute": 148,
+     "n": 66,
+     "n_ecartees_sous_60_mots_min": 1,
+     "usage": "caracterise l'ouverture (generique et musique compris), ne pas s'en servir pour dimensionner un script"
+    }
+   },
+   "densite_breakouts": 0.197,
+   "densite_breakouts_definition": "mediane, sur les chaines de la niche, de la part de leurs videos a plus de 3x leur propre mediane de vues. Valeur a viser pour UNE chaine.",
+   "densite_breakouts_agregee": 0.193,
+   "densite_breakouts_agregee_definition": "part de breakouts sur toutes les videos de la niche mises en commun ; dominee par les chaines les plus prolifiques, a ne pas utiliser comme cible de chaine.",
+   "ratio_top1_median": 60.0,
+   "sujets_porteurs": [
+    {
+     "sujet": "Weight Loss Expert: Losing Weight Is a Spiritual Process (Disguised as Fitness)",
+     "titre_source": "Weight Loss Expert: Losing Weight Is a Spiritual Process (Disguised as Fitness)",
+     "vues": 633976,
+     "chaine": "@wellnessandwisdom",
+     "video_id": "chHeOFby-AA",
+     "ratio_vs_mediane": 594.2,
+     "vues_medianes_chaine": 1067,
+     "date": "2025-11-04"
+    },
+    {
+     "sujet": "Hermetic Expert: How To Use Your Thoughts to Change Reality Beyond Limitations (Dr. Steven Young)",
+     "titre_source": "Hermetic Expert: How To Use Your Thoughts to Change Reality Beyond Limitations (Dr. Steven Young)",
+     "vues": 460833,
+     "chaine": "@wellnessandwisdom",
+     "video_id": "2NTv2XGi42A",
+     "ratio_vs_mediane": 431.9,
+     "vues_medianes_chaine": 1067,
+     "date": "2025-07-01"
+    },
+    {
+     "sujet": "The Mirror Principle | If You Don't Change This, Reality Will Never Change",
+     "titre_source": "The Mirror Principle | If You Don't Change This, Reality Will Never Change",
+     "vues": 2993085,
+     "chaine": "@spiritualdive",
+     "video_id": "Ic6e1zCfUC4",
+     "ratio_vs_mediane": 274.9,
+     "vues_medianes_chaine": 10889,
+     "date": "2023-10-14"
+    },
+    {
+     "sujet": "Signs That A Parallel Version Of You Is Trying To Send You A Message",
+     "titre_source": "Signs That A Parallel Version Of You Is Trying To Send You A Message",
+     "vues": 2844140,
+     "chaine": "@spiritualdive",
+     "video_id": "4LtG6oXyVOs",
+     "ratio_vs_mediane": 261.2,
+     "vues_medianes_chaine": 10889,
+     "date": "2024-08-26"
+    },
+    {
+     "sujet": "Your Pain Has a Pattern… And Astrology Reveals It All (Don’t Ignore This Sign)",
+     "titre_source": "Your Pain Has a Pattern… And Astrology Reveals It All (Don’t Ignore This Sign)",
+     "vues": 259669,
+     "chaine": "@wellnessandwisdom",
+     "video_id": "VQg84Ipm-sc",
+     "ratio_vs_mediane": 243.4,
+     "vues_medianes_chaine": 1067,
+     "date": "2025-05-27"
+    },
+    {
+     "sujet": "How The Universe TESTS YOU Before Your Reality Changes",
+     "titre_source": "How The Universe TESTS YOU Before Your Reality Changes",
+     "vues": 2006439,
+     "chaine": "@spiritualdive",
+     "video_id": "Xg6j4Z_WE04",
+     "ratio_vs_mediane": 184.3,
+     "vues_medianes_chaine": 10889,
+     "date": "2023-09-03"
+    },
+    {
+     "sujet": "This Is The Last Video You'll Ever Need About Synchronicities - no bs",
+     "titre_source": "This Is The Last Video You'll Ever Need About Synchronicities - no bs",
+     "vues": 2422142,
+     "chaine": "@libraryofthoth",
+     "video_id": "zS99rHbvbIY",
+     "ratio_vs_mediane": 165.6,
+     "vues_medianes_chaine": 14622.5,
+     "date": "2025-02-19"
+    },
+    {
+     "sujet": "What Women Have Never Known About Men (Until Now): Best Relationship Advice from Alison Armstrong",
+     "titre_source": "What Women Have Never Known About Men (Until Now): Best Relationship Advice from Alison Armstrong",
+     "vues": 169483,
+     "chaine": "@wellnessandwisdom",
+     "video_id": "rMDomNCVAjI",
+     "ratio_vs_mediane": 158.8,
+     "vues_medianes_chaine": 1067,
+     "date": "2025-07-08"
+    },
+    {
+     "sujet": "Hermetic Expert: How To Use Your Imagination To Change Reality (Dr. Steven Young)",
+     "titre_source": "Hermetic Expert: How To Use Your Imagination To Change Reality (Dr. Steven Young)",
+     "vues": 127945,
+     "chaine": "@wellnessandwisdom",
+     "video_id": "WnXCbcOt2F8",
+     "ratio_vs_mediane": 119.9,
+     "vues_medianes_chaine": 1067,
+     "date": "2026-05-26"
+    },
+    {
+     "sujet": "SIGNS That Your HIGHER SELF Is Trying To Get Your Attention",
+     "titre_source": "SIGNS That Your HIGHER SELF Is Trying To Get Your Attention",
+     "vues": 1267702,
+     "chaine": "@spiritualdive",
+     "video_id": "3f2LSjK1DzM",
+     "ratio_vs_mediane": 116.4,
+     "vues_medianes_chaine": 10889,
+     "date": "2023-09-16"
+    },
+    {
+     "sujet": "Le Livre d’Hénoch : Le Livre Interdit Qui Explique TOUT ? (Sans BS)",
+     "titre_source": "Le Livre d’Hénoch : Le Livre Interdit Qui Explique TOUT ? (Sans BS)",
+     "vues": 669538,
+     "chaine": "@bibliothequedethot",
+     "video_id": "qhDAkakXG00",
+     "ratio_vs_mediane": 110.5,
+     "vues_medianes_chaine": 6060.5,
+     "date": "2025-06-11"
+    },
+    {
+     "sujet": "Using 100% of Your Brain - Dr. Bruce H. Lipton",
+     "titre_source": "Using 100% of Your Brain - Dr. Bruce H. Lipton",
+     "vues": 2857473,
+     "chaine": "@brucehliptonphd",
+     "video_id": "4ZNi68xVDWU",
+     "ratio_vs_mediane": 84.2,
+     "vues_medianes_chaine": 33924.5,
+     "date": "2015-05-08"
+    },
+    {
+     "sujet": "Methylene Blue: The Most Misunderstood Molecule in Medicine?",
+     "titre_source": "Methylene Blue: The Most Misunderstood Molecule in Medicine?",
+     "vues": 89031,
+     "chaine": "@wellnessandwisdom",
+     "video_id": "TR-jyx6CFss",
+     "ratio_vs_mediane": 83.4,
+     "vues_medianes_chaine": 1067,
+     "date": "2025-08-26"
+    },
+    {
+     "sujet": "48-Hour Wealth Manifestation: Neville Goddard's VIP Technique Unveiled",
+     "titre_source": "48-Hour Wealth Manifestation: Neville Goddard's VIP Technique Unveiled",
+     "vues": 174703,
+     "chaine": "@sk369xpress",
+     "video_id": "jrQql6BkwVc",
+     "ratio_vs_mediane": 65.5,
+     "vues_medianes_chaine": 2666.0,
+     "date": "2023-09-11"
+    },
+    {
+     "sujet": "Bruce Lipton - Money and Energy",
+     "titre_source": "Bruce Lipton - Money and Energy",
+     "vues": 2039503,
+     "chaine": "@brucehliptonphd",
+     "video_id": "0quDjlkVvPM",
+     "ratio_vs_mediane": 60.1,
+     "vues_medianes_chaine": 33924.5,
+     "date": "2011-09-03"
+    }
+   ]
+  },
+  "niche_monetisable_longevite": {
+   "chaines_source": [
+    "@afterskool",
+    "@aspeninstitute",
+    "@bigthink",
+    "@bryanjohnson",
+    "@doctoryoun",
+    "@dra-online",
+    "@drafroese",
+    "@dralexwibberley",
+    "@drberg",
+    "@foundmyfitnessclips",
+    "@hubermanlab",
+    "@jayshettypodcast.",
+    "@melrobbins",
+    "@nbcnews",
+    "@rachaelrayshow",
+    "@romy2wolf",
+    "@scrippsresearch",
+    "@seanhashmimd",
+    "@siimland",
+    "@thediaryofaceo",
+    "@veritasium",
+    "@willtennyson"
+   ],
+   "n_chaines": 22,
+   "n_chaines_tronquees_500": 18,
+   "n_videos_analysees": 6654,
+   "n_videos_toutes_durees": 9704,
+   "part_shorts": 0.314,
+   "n_faible": false,
+   "n_chaines_faible": false,
+   "rythme_coupe_s": {
+    "cible": null,
+    "min": null,
+    "max": null,
+    "n_mesures": 0,
+    "source": "tableau P9 (ROADMAP.md 3.3), median des chaines de la niche",
+    "min_observe": null,
+    "max_observe": null,
+    "valeurs": [],
+    "facteur_hook": 0.7,
+    "commentaire_min_max": "min/max = p25/p75 des chaines mesurees (n>=4), sinon valeurs extremes observees",
+    "a_mesurer": true,
+    "fallback_provisoire_s": 7.8,
+    "fallback_methode": "mediane robuste des 30 chaines mesurees du tableau P9 (valeurs > 3x la mediane globale ecartees). Valeur de secours pour que le code tourne, JAMAIS une cible : a mesurer au banc de l'etape 15.",
+    "note": "aucune chaine de cette niche n'est dans le tableau P9"
+   },
+   "duree_s": {
+    "mediane": 595.0,
+    "p25": 166.0,
+    "p75": 1876.0,
+    "cible": 595.0,
+    "tolerance": 0.15,
+    "perimetre": "videos > 70 s (Shorts exclus)",
+    "n": 6654,
+    "dispersion_p75_p25": 11.3,
+    "distribution_large": true,
+    "note_distribution_large": "p75/p25 > 4 : la niche melange des formats de duree tres differentes. La mediane n'est pas un mode : l'etape 10 doit fixer la duree par chaine (format court ou long) et non viser la mediane de niche."
+   },
+   "ruptures_s": {
+    "cible": null,
+    "observee_s": 17.0,
+    "p25_s": 5.0,
+    "p75_s": 52.0,
+    "n": 64,
+    "a_mesurer": false,
+    "mesure_par": "etape_16",
+    "origine": "etape_16, sous-agent A : secondes entre deux ruptures de sujet sur les transcriptions EN (fenetre 15 s, chevauchement lexical < 8 %, ou question au spectateur, ou chiffre). La cadence APPLIQUEE reste 4 x rythme_coupe_s.cible_montage bornee a [20, 45] s.",
+    "n_faible": false
+   },
+   "densite_faits_par_minute": {
+    "cible": 5.0,
+    "plancher": 3.0,
+    "mediane_observee": 5.67,
+    "n_meilleures": 37,
+    "n_medianes": 38,
+    "n_faible": false,
+    "a_mesurer": false,
+    "mesure_par": "etape_16",
+    "origine": "etape_16, sous-agent B (methode) et density.py (mesure) : mediane de la moitie la plus vue des transcriptions EN de la niche, arrondie a 0,5. NON VALIDEE comme predicteur de vues (Spearman +0,057 sur 263 transcriptions, non significatif dans 9 niches sur 10).",
+    "valide_comme_predicteur": false
+   },
+   "cadence_par_semaine": {
+    "mediane": 2.48,
+    "p75": 5.84,
+    "n_chaines": 22,
+    "n_chaines_actives_6_mois": 21,
+    "mediane_chaines_actives": 2.85,
+    "fenetre": "182 derniers jours au 15/09/2026, videos > 70 s",
+    "cible": 2.85,
+    "cible_origine": "mediane des seules chaines ayant publie sur la fenetre ; la mediane brute vaut 0 des qu'une majorite de chaines est inactive"
+   },
+   "creneaux": {
+    "jours": [
+     "jeudi",
+     "vendredi",
+     "lundi"
+    ],
+    "jours_parts": {
+     "jeudi": 0.195,
+     "vendredi": 0.163,
+     "lundi": 0.162
+    },
+    "heures_utc": [
+     13,
+     14,
+     15
+    ],
+    "heures_parts": {
+     "13": 0.145,
+     "14": 0.094,
+     "15": 0.087
+    },
+    "n": 4747,
+    "n_faible": false,
+    "fenetre": "24 derniers mois"
+   },
+   "titres": {
+    "longueur_car": {
+     "mediane": 55.0,
+     "p90": 82.0,
+     "plafond_recommande": 82.0,
+     "plafond_youtube": 100
+    },
+    "longueur_mots_mediane": 9.0,
+    "patrons": [
+     {
+      "id": "nom_propre_en_tete",
+      "template": "{Nom Propre} {verbe} {sujet}",
+      "part": 0.299,
+      "n_matches": 1992,
+      "exemple": "World's Lightest Solid!",
+      "part_parmi_breakouts": 0.34
+     },
+     {
+      "id": "question_en_tete",
+      "template": "{Mot interrogatif} {sujet} ... ?",
+      "part": 0.212,
+      "n_matches": 1408,
+      "exemple": "Why Are 96,000,000 Black Balls on This Reservoir?",
+      "part_parmi_breakouts": 0.192
+     },
+     {
+      "id": "deux_points",
+      "template": "{Sujet} : {promesse}",
+      "part": 0.188,
+      "n_matches": 1250,
+      "exemple": "The AI Safety Expert: These Are The Only 5 Jobs That Will Remain In 2030! - Dr. Roman Yampolskiy",
+      "part_parmi_breakouts": 0.286
+     },
+     {
+      "id": "superlatif",
+      "template": "The {adjectif superlatif} {sujet}",
+      "part": 0.117,
+      "n_matches": 781,
+      "exemple": "Why It Was Almost Impossible to Make the Blue LED",
+      "part_parmi_breakouts": 0.134
+     },
+     {
+      "id": "mise_en_garde",
+      "template": "Never/Stop {action} before {consequence}",
+      "part": 0.077,
+      "n_matches": 515,
+      "exemple": "This Unstoppable Robot Could Save Your Life",
+      "part_parmi_breakouts": 0.085
+     },
+     {
+      "id": "how_to",
+      "template": "How to {action}",
+      "part": 0.046,
+      "n_matches": 308,
+      "exemple": "How to Build Immense Inner Strength | David Goggins",
+      "part_parmi_breakouts": 0.054
+     },
+     {
+      "id": "nombre_en_tete",
+      "template": "{Nombre} {choses} that/qui {promesse}",
+      "part": 0.044,
+      "n_matches": 294,
+      "exemple": "3 Perplexing Physics Problems",
+      "part_parmi_breakouts": 0.052
+     },
+     {
+      "id": "verite_choc",
+      "template": "The {adjectif} truth about {sujet}",
+      "part": 0.032,
+      "n_matches": 210,
+      "exemple": "How One Company Secretly Poisoned The Planet",
+      "part_parmi_breakouts": 0.042
+     },
+     {
+      "id": "serie_numerotee",
+      "template": "{Sujet} Part {n} / Episode {n}",
+      "part": 0.028,
+      "n_matches": 185,
+      "exemple": "The #1 MOST Dangerous Carbohydrate in the World!",
+      "part_parmi_breakouts": 0.033
+     },
+     {
+      "id": "this_is_why",
+      "template": "This is why {sujet} {consequence}",
+      "part": 0.001,
+      "n_matches": 9,
+      "exemple": "This is why we can't have nice things",
+      "part_parmi_breakouts": 0.001
+     }
+    ]
+   },
+   "miniatures": {
+    "texte_mots": {
+     "mediane": 1.5,
+     "max": 8
+    },
+    "personnage": 0.6,
+    "palette": [
+     "#1a1a1a",
+     "#d6221f",
+     "#ffffff"
+    ],
+    "contraste": "eleve",
+    "contraste_parts": {
+     "moyen": 0.17,
+     "eleve": 0.7,
+     "faible": 0.13
+    },
+    "composition": "sujet_centre",
+    "composition_parts": {
+     "sujet_gauche": 0.17,
+     "sujet_centre": 0.8,
+     "sujet_droite": 0.03
+    },
+    "marqueur": 0.1,
+    "styles": {
+     "photo": 0.8,
+     "mixte": 0.13,
+     "illustration": 0.07
+    },
+    "motifs_gagnants": [
+     "Gabarit interview : deux visages (invite + hote) de part et d'autre, fond sombre",
+     "Bandeau de marque et badge type 'TOP 10' en coin superieur",
+     "4 a 8 mots en gras blanc, mot-cle surligne en rouge",
+     "Palette noir/blanc/rouge a tres fort contraste",
+     "Cadrage serre sur le visage, sujet centre, jamais de plan large"
+    ],
+    "n_miniatures": 30,
+    "n_chaines": 3,
+    "chaines": [
+     "the-diary-of-a-ceo",
+     "veritasium",
+     "will-tennyson"
+    ],
+    "n_faible": false,
+    "methode_palette": "estimation visuelle par familles de couleurs sur planches-contacts, pas de mesure pixel",
+    "precision_palette": "famille de couleur a une nuance pres : utiliser comme intention chromatique, jamais comme valeur de charte",
+    "contraste_ratio_cible": 4.5,
+    "contraste_ratio_origine": "WCAG AA, decision de production pour l'etape 21 ; le champ contraste ci-dessus est un jugement visuel categoriel",
+    "n_chaines_faible": false
+   },
+   "hooks": {
+    "parts": {
+     "in_medias_res": 0.204,
+     "question_contrarienne": 0.185,
+     "intro_chaine_neutre": 0.148,
+     "negation_du_sens_commun": 0.111,
+     "enjeu_personnel": 0.111,
+     "adresse_directe": 0.102,
+     "statistique_choc": 0.074,
+     "autorite_citee": 0.037,
+     "mystere_ouvert": 0.028
+    },
+    "part_indeterminee": 0.009,
+    "longueur_mots": {
+     "mediane": 46.0,
+     "p25": 39.2,
+     "p75": 52.0,
+     "n": 108,
+     "n_sans_parole_avant_15s": 1,
+     "n_faible": false
+    },
+    "boucle_ouverte": {
+     "part": 0.073,
+     "position_s_mediane": 45.45,
+     "position_s_moyenne": 44.1,
+     "n": 8,
+     "fenetre": "90 premieres secondes",
+     "position_s_repli": 47.9,
+     "origine_repli": "mediane inter-niches des 28 boucles ouvertes reperees dans le corpus",
+     "n_faible": true
+    },
+    "boucles_minimum": 2,
+    "boucles_minimum_origine": "decision de production (etape 10), au-dela de l'usage observe",
+    "n_transcriptions": 109,
+    "n_faible": false,
+    "perimetre": "5 videos les plus vues par chaine, 15 premieres secondes"
+   },
+   "mots_par_minute": {
+    "mediane": 172.0,
+    "p25": 154.9,
+    "p75": 189.6,
+    "n": 86,
+    "n_faible": false,
+    "perimetre": "transcription entiere : mots hors tags non verbaux / duree parlee",
+    "methode": "mots (hors tags non verbaux) / duree entre le debut du premier snippet et la fin du dernier ; transcriptions de moins de 60 s ou de moins de 50 mots ecartees",
+    "debut_60s": {
+     "mediane_corrigee": 166.0,
+     "mediane_brute": 165.0,
+     "n": 104,
+     "n_ecartees_sous_60_mots_min": 4,
+     "usage": "caracterise l'ouverture (generique et musique compris), ne pas s'en servir pour dimensionner un script"
+    }
+   },
+   "densite_breakouts": 0.193,
+   "densite_breakouts_definition": "mediane, sur les chaines de la niche, de la part de leurs videos a plus de 3x leur propre mediane de vues. Valeur a viser pour UNE chaine.",
+   "densite_breakouts_agregee": 0.208,
+   "densite_breakouts_agregee_definition": "part de breakouts sur toutes les videos de la niche mises en commun ; dominee par les chaines les plus prolifiques, a ne pas utiliser comme cible de chaine.",
+   "ratio_top1_median": 47.2,
+   "sujets_porteurs": [
+    {
+     "sujet": "How vaccines work against COVID-19: Science, Simplified",
+     "titre_source": "How vaccines work against COVID-19: Science, Simplified",
+     "vues": 1124790,
+     "chaine": "@scrippsresearch",
+     "video_id": "uWGTciX795o",
+     "ratio_vs_mediane": 956.5,
+     "vues_medianes_chaine": 1176.0,
+     "date": "2020-12-18"
+    },
+    {
+     "sujet": "Stacy London’s Tips For Cleaning Out Your Closet",
+     "titre_source": "Stacy London’s Tips For Cleaning Out Your Closet",
+     "vues": 752378,
+     "chaine": "@rachaelrayshow",
+     "video_id": "PsMIGFSxPpc",
+     "ratio_vs_mediane": 355.4,
+     "vues_medianes_chaine": 2117,
+     "date": "2023-03-29"
+    },
+    {
+     "sujet": "Coronavirus Anatomy Explained: Science, Simplified",
+     "titre_source": "Coronavirus Anatomy Explained: Science, Simplified",
+     "vues": 312519,
+     "chaine": "@scrippsresearch",
+     "video_id": "8hgc2iZflTI",
+     "ratio_vs_mediane": 265.7,
+     "vues_medianes_chaine": 1176.0,
+     "date": "2020-05-13"
+    },
+    {
+     "sujet": "HIV vaccine approach succeeds in first clinical trial",
+     "titre_source": "HIV vaccine approach succeeds in first clinical trial",
+     "vues": 307762,
+     "chaine": "@scrippsresearch",
+     "video_id": "BrmXpMmvHWw",
+     "ratio_vs_mediane": 261.7,
+     "vues_medianes_chaine": 1176.0,
+     "date": "2021-02-03"
+    },
+    {
+     "sujet": "How the Novel Coronavirus Infects a Cell: Science, Simplified",
+     "titre_source": "How the Novel Coronavirus Infects a Cell: Science, Simplified",
+     "vues": 226855,
+     "chaine": "@scrippsresearch",
+     "video_id": "dA70ZdYhhCg",
+     "ratio_vs_mediane": 192.9,
+     "vues_medianes_chaine": 1176.0,
+     "date": "2020-07-13"
+    },
+    {
+     "sujet": "Your Creatinine Doesn't Have to Keep Climbing",
+     "titre_source": "Your Creatinine Doesn't Have to Keep Climbing",
+     "vues": 831828,
+     "chaine": "@seanhashmimd",
+     "video_id": "yySg1bcKSrI",
+     "ratio_vs_mediane": 166.2,
+     "vues_medianes_chaine": 5006,
+     "date": "2025-05-16"
+    },
+    {
+     "sujet": "The Science of Healthy Aging: Six Keys to a Long, Healthy Life",
+     "titre_source": "The Science of Healthy Aging: Six Keys to a Long, Healthy Life",
+     "vues": 187019,
+     "chaine": "@scrippsresearch",
+     "video_id": "qSt8aKtpDCA",
+     "ratio_vs_mediane": 159.0,
+     "vues_medianes_chaine": 1176.0,
+     "date": "2021-07-19"
+    },
+    {
+     "sujet": "Do Your Coffee Genes Affect Prostate Cancer Survival?",
+     "titre_source": "Do Your Coffee Genes Affect Prostate Cancer Survival?",
+     "vues": 649038,
+     "chaine": "@seanhashmimd",
+     "video_id": "o7YY7zD5M0Q",
+     "ratio_vs_mediane": 129.7,
+     "vues_medianes_chaine": 5006,
+     "date": "2022-10-14"
+    },
+    {
+     "sujet": "Coffee and Kidneys: New Facts That Will Surprise You",
+     "titre_source": "Coffee and Kidneys: New Facts That Will Surprise You",
+     "vues": 532011,
+     "chaine": "@seanhashmimd",
+     "video_id": "i32BwLDboEw",
+     "ratio_vs_mediane": 106.3,
+     "vues_medianes_chaine": 5006,
+     "date": "2025-12-10"
+    },
+    {
+     "sujet": "96-Year-Old Fitness Legend Still Exercises Every Day",
+     "titre_source": "96-Year-Old Fitness Legend Still Exercises Every Day",
+     "vues": 165790,
+     "chaine": "@rachaelrayshow",
+     "video_id": "UQgsQVtTv9E",
+     "ratio_vs_mediane": 78.3,
+     "vues_medianes_chaine": 2117,
+     "date": "2023-01-26"
+    },
+    {
+     "sujet": "How antibodies neutralize the novel coronavirus: Science, Simplified",
+     "titre_source": "How antibodies neutralize the novel coronavirus: Science, Simplified",
+     "vues": 83214,
+     "chaine": "@scrippsresearch",
+     "video_id": "3pFQpiawX80",
+     "ratio_vs_mediane": 70.8,
+     "vues_medianes_chaine": 1176.0,
+     "date": "2020-09-23"
+    },
+    {
+     "sujet": "Stacy London Shares Style Tips to Cover Up Menopausal Weight Gain",
+     "titre_source": "Stacy London Shares Style Tips to Cover Up Menopausal Weight Gain",
+     "vues": 139125,
+     "chaine": "@rachaelrayshow",
+     "video_id": "pyYjRlXMK7s",
+     "ratio_vs_mediane": 65.7,
+     "vues_medianes_chaine": 2117,
+     "date": "2023-05-01"
+    },
+    {
+     "sujet": "HAYDEN PANETTIERE Tells Her Truth For The First Time Ever (Custody, Addiction, Fame, Hollywood)",
+     "titre_source": "HAYDEN PANETTIERE Tells Her Truth For The First Time Ever (Custody, Addiction, Fame, Hollywood)",
+     "vues": 5726058,
+     "chaine": "@jayshettypodcast.",
+     "video_id": "vs6x8VUGXCw",
+     "ratio_vs_mediane": 57.9,
+     "vues_medianes_chaine": 98979,
+     "date": "2026-05-11"
+    },
+    {
+     "sujet": "Brian Cox: Why black holes could hold the secret to time and space",
+     "titre_source": "Brian Cox: Why black holes could hold the secret to time and space | Full Interview",
+     "vues": 5039093,
+     "chaine": "@bigthink",
+     "video_id": "KZX_c6zfJ2w",
+     "ratio_vs_mediane": 57.2,
+     "vues_medianes_chaine": 88088,
+     "date": "2025-07-11"
+    },
+    {
+     "sujet": "Fish Oil, Creatine, Ketoanalogues: Which Supplements Actually Protect Kidneys?",
+     "titre_source": "Fish Oil, Creatine, Ketoanalogues: Which Supplements Actually Protect Kidneys?",
+     "vues": 282376,
+     "chaine": "@seanhashmimd",
+     "video_id": "MdPu2hhmrCE",
+     "ratio_vs_mediane": 56.4,
+     "vues_medianes_chaine": 5006,
+     "date": "2025-05-21"
+    }
+   ]
+  },
+  "science_pop": {
+   "chaines_source": [
+    "@bbcearthscience",
+    "@casicreativo",
+    "@casicreativoenglish",
+    "@healthsnippet",
+    "@lifeaccordingtoscience",
+    "@now_next",
+    "@sciencechannel",
+    "@spacemattersdoc",
+    "@sparkdocs"
+   ],
+   "n_chaines": 9,
+   "n_chaines_tronquees_500": 3,
+   "n_videos_analysees": 2202,
+   "n_videos_toutes_durees": 2562,
+   "part_shorts": 0.141,
+   "n_faible": false,
+   "n_chaines_faible": false,
+   "rythme_coupe_s": {
+    "cible": 6.0,
+    "min": 5.55,
+    "max": 6.97,
+    "n_mesures": 5,
+    "source": "tableau P9 (ROADMAP.md 3.3), median des chaines de la niche",
+    "min_observe": 5.5,
+    "max_observe": 18.5,
+    "valeurs": [
+     {
+      "chaine": "BBC Earth Science",
+      "s_par_plan": 5.5
+     },
+     {
+      "chaine": "Science Channel",
+      "s_par_plan": 5.7
+     },
+     {
+      "chaine": "Spark",
+      "s_par_plan": 6.0
+     },
+     {
+      "chaine": "Space Matters",
+      "s_par_plan": 7.3
+     },
+     {
+      "chaine": "Now Next",
+      "s_par_plan": 18.5
+     }
+    ],
+    "facteur_hook": 0.7,
+    "commentaire_min_max": "min/max = p25/p75 des chaines retenues apres elagage (n>=4), sinon extremes de cet ensemble",
+    "cible_montage": 5.85,
+    "cible_montage_robustesse": {
+     "ecart_max_retrait_une_chaine_s": 0.15,
+     "n_apres_elagage": 4,
+     "sensible_a_une_chaine": false
+    },
+    "n_faible": false,
+    "cible_montage_methode": "mediane apres retrait des valeurs > 3x la mediane de la niche (plans tres longs = plateau, interview ou image fixe, non pertinents pour une video montee)",
+    "cible_montage_valeurs_ecartees": [
+     {
+      "chaine": "Now Next",
+      "s_par_plan": 18.5
+     }
+    ],
+    "a_mesurer": false
+   },
+   "duree_s": {
+    "mediane": 648.0,
+    "p25": 214.0,
+    "p75": 2754.0,
+    "cible": 648.0,
+    "tolerance": 0.15,
+    "perimetre": "videos > 70 s (Shorts exclus)",
+    "n": 2202,
+    "dispersion_p75_p25": 12.9,
+    "distribution_large": true,
+    "note_distribution_large": "p75/p25 > 4 : la niche melange des formats de duree tres differentes. La mediane n'est pas un mode : l'etape 10 doit fixer la duree par chaine (format court ou long) et non viser la mediane de niche."
+   },
+   "ruptures_s": {
+    "cible": null,
+    "observee_s": 23.0,
+    "p25_s": 8.0,
+    "p75_s": 59.0,
+    "n": 26,
+    "a_mesurer": false,
+    "mesure_par": "etape_16",
+    "origine": "etape_16, sous-agent A : secondes entre deux ruptures de sujet sur les transcriptions EN (fenetre 15 s, chevauchement lexical < 8 %, ou question au spectateur, ou chiffre). La cadence APPLIQUEE reste 4 x rythme_coupe_s.cible_montage bornee a [20, 45] s.",
+    "n_faible": false
+   },
+   "densite_faits_par_minute": {
+    "cible": 5.0,
+    "plancher": 3.0,
+    "mediane_observee": 5.52,
+    "n_meilleures": 18,
+    "n_medianes": 19,
+    "n_faible": false,
+    "a_mesurer": false,
+    "mesure_par": "etape_16",
+    "origine": "etape_16, sous-agent B (methode) et density.py (mesure) : mediane de la moitie la plus vue des transcriptions EN de la niche, arrondie a 0,5. NON VALIDEE comme predicteur de vues (Spearman +0,057 sur 263 transcriptions, non significatif dans 9 niches sur 10).",
+    "valide_comme_predicteur": false
+   },
+   "cadence_par_semaine": {
+    "mediane": 0.96,
+    "p75": 2.42,
+    "n_chaines": 9,
+    "n_chaines_actives_6_mois": 7,
+    "mediane_chaines_actives": 1.85,
+    "fenetre": "182 derniers jours au 15/09/2026, videos > 70 s",
+    "cible": 1.85,
+    "cible_origine": "mediane des seules chaines ayant publie sur la fenetre ; la mediane brute vaut 0 des qu'une majorite de chaines est inactive"
+   },
+   "creneaux": {
+    "jours": [
+     "mardi",
+     "samedi",
+     "vendredi"
+    ],
+    "jours_parts": {
+     "mardi": 0.175,
+     "samedi": 0.173,
+     "vendredi": 0.16
+    },
+    "heures_utc": [
+     21,
+     16,
+     15
+    ],
+    "heures_parts": {
+     "21": 0.207,
+     "16": 0.178,
+     "15": 0.153
+    },
+    "n": 1414,
+    "n_faible": false,
+    "fenetre": "24 derniers mois"
+   },
+   "titres": {
+    "longueur_car": {
+     "mediane": 58.0,
+     "p90": 87.0,
+     "plafond_recommande": 87.0,
+     "plafond_youtube": 100
+    },
+    "longueur_mots_mediane": 10.0,
+    "patrons": [
+     {
+      "id": "nom_propre_en_tete",
+      "template": "{Nom Propre} {verbe} {sujet}",
+      "part": 0.306,
+      "n_matches": 674,
+      "exemple": "Tus Órganos Cuando Ligas | Casi Creativo",
+      "part_parmi_breakouts": 0.323
+     },
+     {
+      "id": "question_en_tete",
+      "template": "{Mot interrogatif} {sujet} ... ?",
+      "part": 0.252,
+      "n_matches": 556,
+      "exemple": "What Is Beyond Edge Of The Universe?",
+      "part_parmi_breakouts": 0.239
+     },
+     {
+      "id": "deux_points",
+      "template": "{Sujet} : {promesse}",
+      "part": 0.127,
+      "n_matches": 279,
+      "exemple": "From Takeoff To Landing: The Fascinating World Of Aviation | BBC Earth Science",
+      "part_parmi_breakouts": 0.165
+     },
+     {
+      "id": "superlatif",
+      "template": "The {adjectif superlatif} {sujet}",
+      "part": 0.104,
+      "n_matches": 228,
+      "exemple": "The Most Horrifying Planets Ever Discovered",
+      "part_parmi_breakouts": 0.137
+     },
+     {
+      "id": "verite_choc",
+      "template": "The {adjectif} truth about {sujet}",
+      "part": 0.048,
+      "n_matches": 105,
+      "exemple": "Uncovering the Secrets of the Last Day of Dinosaurs! | Documentary",
+      "part_parmi_breakouts": 0.035
+     },
+     {
+      "id": "mise_en_garde",
+      "template": "Never/Stop {action} before {consequence}",
+      "part": 0.032,
+      "n_matches": 71,
+      "exemple": "Things You've (Maybe) Never Heard Of | How It's Made | Science Channel",
+      "part_parmi_breakouts": 0.037
+     },
+     {
+      "id": "nombre_en_tete",
+      "template": "{Nombre} {choses} that/qui {promesse}",
+      "part": 0.017,
+      "n_matches": 37,
+      "exemple": "Five Wonders of our Universe | Universe | BBC Earth Science",
+      "part_parmi_breakouts": 0.03
+     },
+     {
+      "id": "how_to",
+      "template": "How to {action}",
+      "part": 0.006,
+      "n_matches": 14,
+      "exemple": "How to Make Even More Delicious Foods! | How It's Made | Science Channel",
+      "part_parmi_breakouts": 0.002
+     },
+     {
+      "id": "serie_numerotee",
+      "template": "{Sujet} Part {n} / Episode {n}",
+      "part": 0.003,
+      "n_matches": 6,
+      "exemple": "How Even More Delicious Foods are Made PART 3 | How It's Made | Science Channel",
+      "part_parmi_breakouts": 0.002
+     },
+     {
+      "id": "this_is_why",
+      "template": "This is why {sujet} {consequence}",
+      "part": 0.001,
+      "n_matches": 2,
+      "exemple": "This Is Why Saturn's Rings Are Disappearing | Solar System | BBC Earth Science",
+      "part_parmi_breakouts": 0.0
+     }
+    ]
+   },
+   "miniatures": {
+    "texte_mots": {
+     "mediane": 1.5,
+     "max": 9
+    },
+    "personnage": 0.43,
+    "palette": [
+     "#1a1a1a",
+     "#ffffff",
+     "#6b4423"
+    ],
+    "contraste": "eleve",
+    "contraste_parts": {
+     "moyen": 0.4,
+     "eleve": 0.57,
+     "faible": 0.03
+    },
+    "composition": "sujet_centre",
+    "composition_parts": {
+     "sujet_centre": 0.57,
+     "sujet_gauche": 0.2,
+     "sujet_droite": 0.23
+    },
+    "marqueur": 0.0,
+    "styles": {
+     "photo": 0.4,
+     "illustration": 0.33,
+     "3d": 0.23,
+     "mixte": 0.03
+    },
+    "motifs_gagnants": [
+     "Peu ou pas de visage humain : mettre en avant l'objet, l'animal ou le rendu 3D",
+     "Titre court de 0 a 4 mots, logo de chaine systematique en coin",
+     "Aucun marqueur graphique (fleche/cercle), la curiosite visuelle suffit",
+     "Rendu 3D ou macro-photo a fort contraste pour les sujets espace/nature",
+     "Personnage illustre/mascotte pour les formats de vulgarisation grand public"
+    ],
+    "n_miniatures": 30,
+    "n_chaines": 3,
+    "chaines": [
+     "bbc-earth-science",
+     "casicreativo-parent-es",
+     "science-channel"
+    ],
+    "n_faible": false,
+    "methode_palette": "estimation visuelle par familles de couleurs sur planches-contacts, pas de mesure pixel",
+    "precision_palette": "famille de couleur a une nuance pres : utiliser comme intention chromatique, jamais comme valeur de charte",
+    "contraste_ratio_cible": 4.5,
+    "contraste_ratio_origine": "WCAG AA, decision de production pour l'etape 21 ; le champ contraste ci-dessus est un jugement visuel categoriel",
+    "n_chaines_faible": false
+   },
+   "hooks": {
+    "parts": {
+     "in_medias_res": 0.22,
+     "mise_en_scene_narrative": 0.22,
+     "adresse_directe": 0.171,
+     "question_contrarienne": 0.146,
+     "mystere_ouvert": 0.122,
+     "statistique_choc": 0.073,
+     "negation_du_sens_commun": 0.049
+    },
+    "part_indeterminee": 0.0,
+    "longueur_mots": {
+     "mediane": 36.0,
+     "p25": 22.2,
+     "p75": 43.0,
+     "n": 40,
+     "n_sans_parole_avant_15s": 1,
+     "n_faible": false
+    },
+    "boucle_ouverte": {
+     "part": 0.024,
+     "position_s_mediane": 67.4,
+     "position_s_moyenne": 67.4,
+     "n": 1,
+     "fenetre": "90 premieres secondes",
+     "position_s_repli": 47.9,
+     "origine_repli": "mediane inter-niches des 28 boucles ouvertes reperees dans le corpus",
+     "n_faible": true
+    },
+    "boucles_minimum": 2,
+    "boucles_minimum_origine": "decision de production (etape 10), au-dela de l'usage observe",
+    "n_transcriptions": 41,
+    "n_faible": false,
+    "perimetre": "5 videos les plus vues par chaine, 15 premieres secondes"
+   },
+   "mots_par_minute": {
+    "mediane": 134.9,
+    "p25": 118.3,
+    "p75": 158.9,
+    "n": 38,
+    "n_faible": false,
+    "perimetre": "transcription entiere : mots hors tags non verbaux / duree parlee",
+    "methode": "mots (hors tags non verbaux) / duree entre le debut du premier snippet et la fin du dernier ; transcriptions de moins de 60 s ou de moins de 50 mots ecartees",
+    "debut_60s": {
+     "mediane_corrigee": 136.5,
+     "mediane_brute": 129,
+     "n": 38,
+     "n_ecartees_sous_60_mots_min": 3,
+     "usage": "caracterise l'ouverture (generique et musique compris), ne pas s'en servir pour dimensionner un script"
+    }
+   },
+   "densite_breakouts": 0.28,
+   "densite_breakouts_definition": "mediane, sur les chaines de la niche, de la part de leurs videos a plus de 3x leur propre mediane de vues. Valeur a viser pour UNE chaine.",
+   "densite_breakouts_agregee": 0.259,
+   "densite_breakouts_agregee_definition": "part de breakouts sur toutes les videos de la niche mises en commun ; dominee par les chaines les plus prolifiques, a ne pas utiliser comme cible de chaine.",
+   "ratio_top1_median": 178.5,
+   "sujets_porteurs": [
+    {
+     "sujet": "What Happens Every Day When You Quit Sugar For 30 Days",
+     "titre_source": "What Happens Every Day When You Quit Sugar For 30 Days",
+     "vues": 6672913,
+     "chaine": "@healthsnippet",
+     "video_id": "U7GyEyFO35Y",
+     "ratio_vs_mediane": 2070.4,
+     "vues_medianes_chaine": 3223.0,
+     "date": "2023-02-28"
+    },
+    {
+     "sujet": "This Happens When You Do 25 Squats Twice Daily",
+     "titre_source": "This Happens When You Do 25 Squats Twice Daily",
+     "vues": 2884762,
+     "chaine": "@healthsnippet",
+     "video_id": "XuccBEHtwTY",
+     "ratio_vs_mediane": 895.1,
+     "vues_medianes_chaine": 3223.0,
+     "date": "2021-04-27"
+    },
+    {
+     "sujet": "Mysteries of the Universe",
+     "titre_source": "Mysteries of the Universe | Space Documentary 2023",
+     "vues": 2446373,
+     "chaine": "@now_next",
+     "video_id": "egDIqKLt2L4",
+     "ratio_vs_mediane": 605.8,
+     "vues_medianes_chaine": 4038,
+     "date": "2023-06-24"
+    },
+    {
+     "sujet": "Taking Fish Oil Every Day Does This To You",
+     "titre_source": "Taking Fish Oil Every Day Does This To You",
+     "vues": 1760648,
+     "chaine": "@healthsnippet",
+     "video_id": "8PvsE8Yfq6M",
+     "ratio_vs_mediane": 546.3,
+     "vues_medianes_chaine": 3223.0,
+     "date": "2023-03-21"
+    },
+    {
+     "sujet": "This Happens When You Eat Peanuts Every Day",
+     "titre_source": "This Happens When You Eat Peanuts Every Day",
+     "vues": 1679459,
+     "chaine": "@healthsnippet",
+     "video_id": "zQ5MTrpM6fw",
+     "ratio_vs_mediane": 521.1,
+     "vues_medianes_chaine": 3223.0,
+     "date": "2023-02-21"
+    },
+    {
+     "sujet": "What Happens To Your Body When You Eat Pumpkin Seeds Every Day",
+     "titre_source": "What Happens To Your Body When You Eat Pumpkin Seeds Every Day",
+     "vues": 1394385,
+     "chaine": "@healthsnippet",
+     "video_id": "df9V8Hl3AB4",
+     "ratio_vs_mediane": 432.6,
+     "vues_medianes_chaine": 3223.0,
+     "date": "2023-02-14"
+    },
+    {
+     "sujet": "What Happens to Your Kidneys If You Quit Sugar for 30 Days? (Science Explained)",
+     "titre_source": "What Happens to Your Kidneys If You Quit Sugar for 30 Days? (Science Explained)",
+     "vues": 1386243,
+     "chaine": "@lifeaccordingtoscience",
+     "video_id": "fzU43NkE8-k",
+     "ratio_vs_mediane": 391.8,
+     "vues_medianes_chaine": 3538.5,
+     "date": "2025-09-18"
+    },
+    {
+     "sujet": "Eating BlueBerries Every Day Does This to Your Body",
+     "titre_source": "Eating BlueBerries Every Day Does This to Your Body",
+     "vues": 1156812,
+     "chaine": "@healthsnippet",
+     "video_id": "1bXLs2zs3yw",
+     "ratio_vs_mediane": 358.9,
+     "vues_medianes_chaine": 3223.0,
+     "date": "2023-03-07"
+    },
+    {
+     "sujet": "What Happens to Your Organs If You Fast for 24 Hours? (Science Explained)",
+     "titre_source": "What Happens to Your Organs If You Fast for 24 Hours? (Science Explained)",
+     "vues": 1224450,
+     "chaine": "@lifeaccordingtoscience",
+     "video_id": "qrPHEF5dHiA",
+     "ratio_vs_mediane": 346.0,
+     "vues_medianes_chaine": 3538.5,
+     "date": "2025-10-10"
+    },
+    {
+     "sujet": "Benefits Of Olive Oil For Mens Health",
+     "titre_source": "Benefits Of Olive Oil For Mens Health | Extra Virgin Olive Oil",
+     "vues": 1071909,
+     "chaine": "@healthsnippet",
+     "video_id": "FggnBdtaemA",
+     "ratio_vs_mediane": 332.6,
+     "vues_medianes_chaine": 3223.0,
+     "date": "2021-07-27"
+    },
+    {
+     "sujet": "This is How Humans Have Changed the World | Generation Earth",
+     "titre_source": "This is How Humans Have Changed the World | Generation Earth | BBC Earth Science",
+     "vues": 7696129,
+     "chaine": "@bbcearthscience",
+     "video_id": "dyxrwVzrdW4",
+     "ratio_vs_mediane": 227.2,
+     "vues_medianes_chaine": 33868,
+     "date": "2024-05-18"
+    },
+    {
+     "sujet": "How Much Of America Would Survive A Super Eruption At Yellowstone?",
+     "titre_source": "How Much Of America Would Survive A Super Eruption At Yellowstone?",
+     "vues": 2339957,
+     "chaine": "@sparkdocs",
+     "video_id": "smzbwHLqPhc",
+     "ratio_vs_mediane": 178.5,
+     "vues_medianes_chaine": 13105.5,
+     "date": "2026-01-10"
+    },
+    {
+     "sujet": "How Cod Liver Oil Affects Your Body If You Take It Every Day",
+     "titre_source": "How Cod Liver Oil Affects Your Body If You Take It Every Day",
+     "vues": 362592,
+     "chaine": "@healthsnippet",
+     "video_id": "ihVw1N1Sgq8",
+     "ratio_vs_mediane": 112.5,
+     "vues_medianes_chaine": 3223.0,
+     "date": "2023-04-11"
+    },
+    {
+     "sujet": "What Happens to Your Body If You Take Creatine Daily? (Science Explained)",
+     "titre_source": "What Happens to Your Body If You Take Creatine Daily? (Science Explained)",
+     "vues": 373577,
+     "chaine": "@lifeaccordingtoscience",
+     "video_id": "EnDQ3LtNaI0",
+     "ratio_vs_mediane": 105.6,
+     "vues_medianes_chaine": 3538.5,
+     "date": "2025-12-18"
+    },
+    {
+     "sujet": "Project Gemini: The Most Dangerous Space Program",
+     "titre_source": "Project Gemini: The Most Dangerous Space Program",
+     "vues": 1363979,
+     "chaine": "@sparkdocs",
+     "video_id": "BI1r7PTbxeA",
+     "ratio_vs_mediane": 104.1,
+     "vues_medianes_chaine": 13105.5,
+     "date": "2025-07-02"
+    }
+   ]
+  },
+  "niche_monetisable_paris_sportifs": {
+   "chaines_source": [
+    "@choicookspov",
+    "@clarkknowsball",
+    "@juicedbets",
+    "@pickfinder",
+    "@shanehuang88"
+   ],
+   "n_chaines": 5,
+   "n_chaines_tronquees_500": 0,
+   "n_videos_analysees": 409,
+   "n_videos_toutes_durees": 696,
+   "part_shorts": 0.412,
+   "n_faible": false,
+   "n_chaines_faible": true,
+   "rythme_coupe_s": {
+    "cible": null,
+    "min": null,
+    "max": null,
+    "n_mesures": 0,
+    "source": "tableau P9 (ROADMAP.md 3.3), median des chaines de la niche",
+    "min_observe": null,
+    "max_observe": null,
+    "valeurs": [],
+    "facteur_hook": 0.7,
+    "commentaire_min_max": "min/max = p25/p75 des chaines mesurees (n>=4), sinon valeurs extremes observees",
+    "a_mesurer": true,
+    "fallback_provisoire_s": 7.8,
+    "fallback_methode": "mediane robuste des 30 chaines mesurees du tableau P9 (valeurs > 3x la mediane globale ecartees). Valeur de secours pour que le code tourne, JAMAIS une cible : a mesurer au banc de l'etape 15.",
+    "note": "aucune chaine de cette niche n'est dans le tableau P9"
+   },
+   "duree_s": {
+    "mediane": 538.0,
+    "p25": 389.0,
+    "p75": 751.0,
+    "cible": 538.0,
+    "tolerance": 0.15,
+    "perimetre": "videos > 70 s (Shorts exclus)",
+    "n": 409,
+    "dispersion_p75_p25": 1.9,
+    "distribution_large": false,
+    "note_distribution_large": "p75/p25 > 4 : la niche melange des formats de duree tres differentes. La mediane n'est pas un mode : l'etape 10 doit fixer la duree par chaine (format court ou long) et non viser la mediane de niche."
+   },
+   "ruptures_s": {
+    "cible": null,
+    "observee_s": 6.0,
+    "p25_s": 3.0,
+    "p75_s": 18.0,
+    "n": 23,
+    "a_mesurer": false,
+    "mesure_par": "etape_16",
+    "origine": "etape_16, sous-agent A : secondes entre deux ruptures de sujet sur les transcriptions EN (fenetre 15 s, chevauchement lexical < 8 %, ou question au spectateur, ou chiffre). La cadence APPLIQUEE reste 4 x rythme_coupe_s.cible_montage bornee a [20, 45] s.",
+    "n_faible": false
+   },
+   "densite_faits_par_minute": {
+    "cible": 12.5,
+    "plancher": 7.5,
+    "mediane_observee": 9.55,
+    "n_meilleures": 11,
+    "n_medianes": 12,
+    "n_faible": false,
+    "a_mesurer": false,
+    "mesure_par": "etape_16",
+    "origine": "etape_16, sous-agent B (methode) et density.py (mesure) : mediane de la moitie la plus vue des transcriptions EN de la niche, arrondie a 0,5. NON VALIDEE comme predicteur de vues (Spearman +0,057 sur 263 transcriptions, non significatif dans 9 niches sur 10).",
+    "valide_comme_predicteur": false
+   },
+   "cadence_par_semaine": {
+    "mediane": 0.31,
+    "p75": 0.46,
+    "n_chaines": 5,
+    "n_chaines_actives_6_mois": 4,
+    "mediane_chaines_actives": 0.38,
+    "fenetre": "182 derniers jours au 15/09/2026, videos > 70 s",
+    "cible": 0.38,
+    "cible_origine": "mediane des seules chaines ayant publie sur la fenetre ; la mediane brute vaut 0 des qu'une majorite de chaines est inactive"
+   },
+   "creneaux": {
+    "jours": [
+     "mercredi",
+     "lundi",
+     "jeudi"
+    ],
+    "jours_parts": {
+     "mercredi": 0.222,
+     "lundi": 0.201,
+     "jeudi": 0.188
+    },
+    "heures_utc": [
+     20,
+     21,
+     19
+    ],
+    "heures_parts": {
+     "20": 0.181,
+     "21": 0.174,
+     "19": 0.139
+    },
+    "n": 144,
+    "n_faible": false,
+    "fenetre": "24 derniers mois"
+   },
+   "titres": {
+    "longueur_car": {
+     "mediane": 63,
+     "p90": 81.0,
+     "plafond_recommande": 81.0,
+     "plafond_youtube": 100
+    },
+    "longueur_mots_mediane": 11,
+    "patrons": [
+     {
+      "id": "question_en_tete",
+      "template": "{Mot interrogatif} {sujet} ... ?",
+      "part": 0.325,
+      "n_matches": 133,
+      "exemple": "How I got banned from sports betting (Using Maths) | Arbitrage Betting Explained",
+      "part_parmi_breakouts": 0.434
+     },
+     {
+      "id": "superlatif",
+      "template": "The {adjectif superlatif} {sujet}",
+      "part": 0.24,
+      "n_matches": 98,
+      "exemple": "Best Tennis Sports Betting Strategy 🎾 | Courtsiding Explained",
+      "part_parmi_breakouts": 0.111
+     },
+     {
+      "id": "how_to",
+      "template": "How to {action}",
+      "part": 0.139,
+      "n_matches": 57,
+      "exemple": "How to get FREE textbooks! | Online PDF and Hardcopy (2023)",
+      "part_parmi_breakouts": 0.192
+     },
+     {
+      "id": "nom_propre_en_tete",
+      "template": "{Nom Propre} {verbe} {sujet}",
+      "part": 0.132,
+      "n_matches": 54,
+      "exemple": "Betting Odds Explained | Sports Betting 101",
+      "part_parmi_breakouts": 0.081
+     },
+     {
+      "id": "nombre_en_tete",
+      "template": "{Nombre} {choses} that/qui {promesse}",
+      "part": 0.061,
+      "n_matches": 25,
+      "exemple": "5 Tips for Studying Maths | How to study for Maths Exams!",
+      "part_parmi_breakouts": 0.061
+     },
+     {
+      "id": "mise_en_garde",
+      "template": "Never/Stop {action} before {consequence}",
+      "part": 0.049,
+      "n_matches": 20,
+      "exemple": "How to AVOID Being Banned from Sports Betting",
+      "part_parmi_breakouts": 0.04
+     },
+     {
+      "id": "deux_points",
+      "template": "{Sujet} : {promesse}",
+      "part": 0.037,
+      "n_matches": 15,
+      "exemple": "Day in the Life: Professional Sports Bettor | (Matched/ Mathematical Arbitrage Betting)",
+      "part_parmi_breakouts": 0.03
+     },
+     {
+      "id": "verite_choc",
+      "template": "The {adjectif} truth about {sujet}",
+      "part": 0.024,
+      "n_matches": 10,
+      "exemple": "Secrets of Sports Betting Sites Exposed | Interview with Ex Bet365 Trader",
+      "part_parmi_breakouts": 0.03
+     },
+     {
+      "id": "serie_numerotee",
+      "template": "{Sujet} Part {n} / Episode {n}",
+      "part": 0.022,
+      "n_matches": 9,
+      "exemple": "How I barely Study and still get Good Grades | Study Smart Episode 1",
+      "part_parmi_breakouts": 0.0
+     },
+     {
+      "id": "this_is_why",
+      "template": "This is why {sujet} {consequence}",
+      "part": 0.002,
+      "n_matches": 1,
+      "exemple": "This is why you're LOSING MONEY sports betting...",
+      "part_parmi_breakouts": 0.0
+     }
+    ]
+   },
+   "miniatures": {
+    "texte_mots": {
+     "mediane": 3.5,
+     "max": 7
+    },
+    "personnage": 0.9,
+    "palette": [
+     "#f2c94c",
+     "#1a1a1a",
+     "#16213e"
+    ],
+    "contraste": "eleve",
+    "contraste_parts": {
+     "eleve": 0.9,
+     "moyen": 0.05,
+     "faible": 0.05
+    },
+    "composition": "sujet_droite",
+    "composition_parts": {
+     "sujet_gauche": 0.45,
+     "sujet_droite": 0.55
+    },
+    "marqueur": 0.6,
+    "styles": {
+     "photo": 0.7,
+     "mixte": 0.3
+    },
+    "motifs_gagnants": [
+     "Visage du createur quasi systematique, expression surprise ou enthousiaste",
+     "Bandeau texte jaune sur fond bleu marine, 3 a 5 mots",
+     "Fleche ou croix rouge pointant le gain ou la preuve chiffree a l'ecran",
+     "Capture d'ecran de gains/cotes integree a cote du visage",
+     "Palette jaune/marine/rouge recurrente a contraste eleve"
+    ],
+    "n_miniatures": 20,
+    "n_chaines": 2,
+    "chaines": [
+     "juiced-bets",
+     "shane-huang"
+    ],
+    "n_faible": false,
+    "methode_palette": "estimation visuelle par familles de couleurs sur planches-contacts, pas de mesure pixel",
+    "precision_palette": "famille de couleur a une nuance pres : utiliser comme intention chromatique, jamais comme valeur de charte",
+    "contraste_ratio_cible": 4.5,
+    "contraste_ratio_origine": "WCAG AA, decision de production pour l'etape 21 ; le champ contraste ci-dessus est un jugement visuel categoriel",
+    "n_chaines_faible": true
+   },
+   "hooks": {
+    "parts": {
+     "promesse_chiffree": 0.25,
+     "enjeu_personnel": 0.208,
+     "adresse_directe": 0.167,
+     "negation_du_sens_commun": 0.125,
+     "intro_chaine_neutre": 0.125,
+     "liste_annoncee": 0.083,
+     "autorite_citee": 0.042
+    },
+    "part_indeterminee": 0.0,
+    "longueur_mots": {
+     "mediane": 57.0,
+     "p25": 48.2,
+     "p75": 68.0,
+     "n": 24,
+     "n_sans_parole_avant_15s": 0,
+     "n_faible": false
+    },
+    "boucle_ouverte": {
+     "part": 0.125,
+     "position_s_mediane": 24.3,
+     "position_s_moyenne": 31.9,
+     "n": 3,
+     "fenetre": "90 premieres secondes",
+     "position_s_repli": 47.9,
+     "origine_repli": "mediane inter-niches des 28 boucles ouvertes reperees dans le corpus",
+     "n_faible": true
+    },
+    "boucles_minimum": 2,
+    "boucles_minimum_origine": "decision de production (etape 10), au-dela de l'usage observe",
+    "n_transcriptions": 24,
+    "n_faible": false,
+    "perimetre": "5 videos les plus vues par chaine, 15 premieres secondes"
+   },
+   "mots_par_minute": {
+    "mediane": 219.0,
+    "p25": 192.5,
+    "p75": 239.4,
+    "n": 23,
+    "n_faible": false,
+    "perimetre": "transcription entiere : mots hors tags non verbaux / duree parlee",
+    "methode": "mots (hors tags non verbaux) / duree entre le debut du premier snippet et la fin du dernier ; transcriptions de moins de 60 s ou de moins de 50 mots ecartees",
+    "debut_60s": {
+     "mediane_corrigee": 208.0,
+     "mediane_brute": 208.0,
+     "n": 24,
+     "n_ecartees_sous_60_mots_min": 0,
+     "usage": "caracterise l'ouverture (generique et musique compris), ne pas s'en servir pour dimensionner un script"
+    }
+   },
+   "densite_breakouts": 0.242,
+   "densite_breakouts_definition": "mediane, sur les chaines de la niche, de la part de leurs videos a plus de 3x leur propre mediane de vues. Valeur a viser pour UNE chaine.",
+   "densite_breakouts_agregee": 0.242,
+   "densite_breakouts_agregee_definition": "part de breakouts sur toutes les videos de la niche mises en commun ; dominee par les chaines les plus prolifiques, a ne pas utiliser comme cible de chaine.",
+   "ratio_top1_median": 53.7,
+   "sujets_porteurs": [
+    {
+     "sujet": "How I got banned from sports betting (Using Maths)",
+     "titre_source": "How I got banned from sports betting (Using Maths) | Arbitrage Betting Explained",
+     "vues": 8196894,
+     "chaine": "@shanehuang88",
+     "video_id": "2kDTwP6SBx4",
+     "ratio_vs_mediane": 226.1,
+     "vues_medianes_chaine": 36260.0,
+     "date": "2021-07-08"
+    },
+    {
+     "sujet": "How the Martingale Strategy works in Roulette",
+     "titre_source": "How the Martingale Strategy works in Roulette",
+     "vues": 2129440,
+     "chaine": "@shanehuang88",
+     "video_id": "dENf7PpbHno",
+     "ratio_vs_mediane": 58.7,
+     "vues_medianes_chaine": 36260.0,
+     "date": "2022-05-17"
+    },
+    {
+     "sujet": "5 Tips for Studying Maths",
+     "titre_source": "5 Tips for Studying Maths | How to study for Maths Exams!",
+     "vues": 990460,
+     "chaine": "@shanehuang88",
+     "video_id": "iMM9YUtg2Q4",
+     "ratio_vs_mediane": 27.3,
+     "vues_medianes_chaine": 36260.0,
+     "date": "2018-11-28"
+    },
+    {
+     "sujet": "How I get 100% in Maths Exams",
+     "titre_source": "How I get 100% in Maths Exams | How to Study for Maths",
+     "vues": 902491,
+     "chaine": "@shanehuang88",
+     "video_id": "KPJfWZwDCO4",
+     "ratio_vs_mediane": 24.9,
+     "vues_medianes_chaine": 36260.0,
+     "date": "2021-05-24"
+    },
+    {
+     "sujet": "What is Positive EV Sports Betting? (Better than Arbitrage!) (using OddsJam)",
+     "titre_source": "What is Positive EV Sports Betting? (Better than Arbitrage!) (using OddsJam)",
+     "vues": 788752,
+     "chaine": "@shanehuang88",
+     "video_id": "s6R9xB1RdZU",
+     "ratio_vs_mediane": 21.8,
+     "vues_medianes_chaine": 36260.0,
+     "date": "2022-01-03"
+    },
+    {
+     "sujet": "How to get FREE textbooks!",
+     "titre_source": "How to get FREE textbooks! | Online PDF and Hardcopy (2023)",
+     "vues": 579269,
+     "chaine": "@shanehuang88",
+     "video_id": "EtDiIvhq2c0",
+     "ratio_vs_mediane": 16.0,
+     "vues_medianes_chaine": 36260.0,
+     "date": "2020-09-26"
+    },
+    {
+     "sujet": "How a Kindle changed my Life | Why you should get a Kindle (Kindle Paperwhite)",
+     "titre_source": "How a Kindle changed my Life | Why you should get a Kindle (Kindle Paperwhite)",
+     "vues": 546292,
+     "chaine": "@shanehuang88",
+     "video_id": "pMGLezSYbro",
+     "ratio_vs_mediane": 15.1,
+     "vues_medianes_chaine": 36260.0,
+     "date": "2020-11-26"
+    },
+    {
+     "sujet": "What is Parlay Betting?",
+     "titre_source": "What is Parlay Betting? | Profitable Betting Strategy!",
+     "vues": 529713,
+     "chaine": "@shanehuang88",
+     "video_id": "Hlc9RPAFaLg",
+     "ratio_vs_mediane": 14.6,
+     "vues_medianes_chaine": 36260.0,
+     "date": "2023-05-01"
+    },
+    {
+     "sujet": "Betting Odds Explained",
+     "titre_source": "Betting Odds Explained | Sports Betting 101",
+     "vues": 527959,
+     "chaine": "@shanehuang88",
+     "video_id": "BDa8VS_Gw5k",
+     "ratio_vs_mediane": 14.6,
+     "vues_medianes_chaine": 36260.0,
+     "date": "2023-06-20"
+    },
+    {
+     "sujet": "Write 2x FASTER with these Two Methods!!",
+     "titre_source": "Write 2x FASTER with these Two Methods!!",
+     "vues": 494583,
+     "chaine": "@shanehuang88",
+     "video_id": "2FBGn4ywTLg",
+     "ratio_vs_mediane": 13.6,
+     "vues_medianes_chaine": 36260.0,
+     "date": "2018-11-15"
+    },
+    {
+     "sujet": "Day in the Life: Professional Sports Bettor | (Matched/ Mathematical Arbitrage Betting)",
+     "titre_source": "Day in the Life: Professional Sports Bettor | (Matched/ Mathematical Arbitrage Betting)",
+     "vues": 293296,
+     "chaine": "@shanehuang88",
+     "video_id": "DW7BfUWoRGE",
+     "ratio_vs_mediane": 8.1,
+     "vues_medianes_chaine": 36260.0,
+     "date": "2021-10-03"
+    },
+    {
+     "sujet": "How To Find Arbitrage Bet Opportunities - 3 Unique Methods!",
+     "titre_source": "How To Find Arbitrage Bet Opportunities - 3 Unique Methods!",
+     "vues": 291336,
+     "chaine": "@shanehuang88",
+     "video_id": "2xm5fizsUh8",
+     "ratio_vs_mediane": 8.0,
+     "vues_medianes_chaine": 36260.0,
+     "date": "2023-05-18"
+    },
+    {
+     "sujet": "How To AVOID Limits & Bans Arbitrage Sports Betting (UPDATED TUTORIAL)",
+     "titre_source": "How To AVOID Limits & Bans Arbitrage Sports Betting (UPDATED TUTORIAL)",
+     "vues": 11434,
+     "chaine": "@choicookspov",
+     "video_id": "OvX9ff1dK6Y",
+     "ratio_vs_mediane": 8.0,
+     "vues_medianes_chaine": 1422,
+     "date": "2025-05-20"
+    },
+    {
+     "sujet": "Secrets of Sports Betting Sites Exposed",
+     "titre_source": "Secrets of Sports Betting Sites Exposed | Interview with Ex Bet365 Trader",
+     "vues": 257001,
+     "chaine": "@shanehuang88",
+     "video_id": "b-PymUCJk2g",
+     "ratio_vs_mediane": 7.1,
+     "vues_medianes_chaine": 36260.0,
+     "date": "2022-05-30"
+    },
+    {
+     "sujet": "Using Advanced ChatGPT Prompts to Predict MLB Moneylines",
+     "titre_source": "Using Advanced ChatGPT Prompts to Predict MLB Moneylines",
+     "vues": 9848,
+     "chaine": "@choicookspov",
+     "video_id": "Rarfkv3zW0g",
+     "ratio_vs_mediane": 6.9,
+     "vues_medianes_chaine": 1422,
+     "date": "2025-07-03"
+    }
+   ]
+  },
+  "true_crime": {
+   "chaines_source": [
+    "@crimeisfunpodcast",
+    "@foxnews",
+    "@lawandcrime",
+    "@survivingthesurvivor",
+    "@tynotts"
+   ],
+   "n_chaines": 5,
+   "n_chaines_tronquees_500": 3,
+   "n_videos_analysees": 1608,
+   "n_videos_toutes_durees": 1916,
+   "part_shorts": 0.161,
+   "n_faible": false,
+   "n_chaines_faible": true,
+   "rythme_coupe_s": {
+    "cible": 21.8,
+    "min": 8.4,
+    "max": 41.45,
+    "n_mesures": 5,
+    "source": "tableau P9 (ROADMAP.md 3.3), median des chaines de la niche",
+    "min_observe": 8.0,
+    "max_observe": 80.0,
+    "valeurs": [
+     {
+      "chaine": "Ty Notts",
+      "s_par_plan": 8.0
+     },
+     {
+      "chaine": "Crime Is Fun",
+      "s_par_plan": 9.6
+     },
+     {
+      "chaine": "Law&Crime Network",
+      "s_par_plan": 21.8
+     },
+     {
+      "chaine": "Fox News",
+      "s_par_plan": 48.0
+     },
+     {
+      "chaine": "Surviving The Survivor: #BestGuests in True Crime",
+      "s_par_plan": 80.0
+     }
+    ],
+    "facteur_hook": 0.7,
+    "commentaire_min_max": "min/max = p25/p75 des chaines retenues apres elagage (n>=4), sinon extremes de cet ensemble",
+    "cible_montage": 15.7,
+    "cible_montage_robustesse": {
+     "ecart_max_retrait_une_chaine_s": 6.1,
+     "n_apres_elagage": 4,
+     "sensible_a_une_chaine": true
+    },
+    "n_faible": false,
+    "cible_montage_methode": "mediane apres retrait des valeurs > 3x la mediane de la niche (plans tres longs = plateau, interview ou image fixe, non pertinents pour une video montee)",
+    "cible_montage_valeurs_ecartees": [
+     {
+      "chaine": "Surviving The Survivor: #BestGuests in True Crime",
+      "s_par_plan": 80.0
+     }
+    ],
+    "a_mesurer": false
+   },
+   "duree_s": {
+    "mediane": 1528.0,
+    "p25": 984.0,
+    "p75": 4066.0,
+    "cible": 1528.0,
+    "tolerance": 0.15,
+    "perimetre": "videos > 70 s (Shorts exclus)",
+    "n": 1608,
+    "dispersion_p75_p25": 4.1,
+    "distribution_large": true,
+    "note_distribution_large": "p75/p25 > 4 : la niche melange des formats de duree tres differentes. La mediane n'est pas un mode : l'etape 10 doit fixer la duree par chaine (format court ou long) et non viser la mediane de niche."
+   },
+   "ruptures_s": {
+    "cible": null,
+    "observee_s": 25.0,
+    "p25_s": 8.0,
+    "p75_s": 63.0,
+    "n": 24,
+    "a_mesurer": false,
+    "mesure_par": "etape_16",
+    "origine": "etape_16, sous-agent A : secondes entre deux ruptures de sujet sur les transcriptions EN (fenetre 15 s, chevauchement lexical < 8 %, ou question au spectateur, ou chiffre). La cadence APPLIQUEE reste 4 x rythme_coupe_s.cible_montage bornee a [20, 45] s.",
+    "n_faible": false
+   },
+   "densite_faits_par_minute": {
+    "cible": 11.0,
+    "plancher": 6.6,
+    "mediane_observee": 11.25,
+    "n_meilleures": 12,
+    "n_medianes": 13,
+    "n_faible": false,
+    "a_mesurer": false,
+    "mesure_par": "etape_16",
+    "origine": "etape_16, sous-agent B (methode) et density.py (mesure) : mediane de la moitie la plus vue des transcriptions EN de la niche, arrondie a 0,5. NON VALIDEE comme predicteur de vues (Spearman +0,057 sur 263 transcriptions, non significatif dans 9 niches sur 10).",
+    "valide_comme_predicteur": false
+   },
+   "cadence_par_semaine": {
+    "mediane": 6.65,
+    "p75": 13.46,
+    "n_chaines": 5,
+    "n_chaines_actives_6_mois": 5,
+    "mediane_chaines_actives": 6.65,
+    "fenetre": "182 derniers jours au 15/09/2026, videos > 70 s",
+    "cible": 6.65,
+    "cible_origine": "mediane des seules chaines ayant publie sur la fenetre ; la mediane brute vaut 0 des qu'une majorite de chaines est inactive"
+   },
+   "creneaux": {
+    "jours": [
+     "vendredi",
+     "mercredi",
+     "lundi"
+    ],
+    "jours_parts": {
+     "vendredi": 0.208,
+     "mercredi": 0.179,
+     "lundi": 0.165
+    },
+    "heures_utc": [
+     21,
+     22,
+     0
+    ],
+    "heures_parts": {
+     "21": 0.179,
+     "22": 0.127,
+     "0": 0.111
+    },
+    "n": 1507,
+    "n_faible": false,
+    "fenetre": "24 derniers mois"
+   },
+   "titres": {
+    "longueur_car": {
+     "mediane": 60.0,
+     "p90": 95.0,
+     "plafond_recommande": 95.0,
+     "plafond_youtube": 100
+    },
+    "longueur_mots_mediane": 10.0,
+    "patrons": [
+     {
+      "id": "nom_propre_en_tete",
+      "template": "{Nom Propre} {verbe} {sujet}",
+      "part": 0.488,
+      "n_matches": 785,
+      "exemple": "Truth About Pastor’s Wife: Mica Miller Case Reignites",
+      "part_parmi_breakouts": 0.397
+     },
+     {
+      "id": "deux_points",
+      "template": "{Sujet} : {promesse}",
+      "part": 0.394,
+      "n_matches": 634,
+      "exemple": "Truth About Pastor’s Wife: Mica Miller Case Reignites",
+      "part_parmi_breakouts": 0.438
+     },
+     {
+      "id": "nombre_en_tete",
+      "template": "{Nombre} {choses} that/qui {promesse}",
+      "part": 0.054,
+      "n_matches": 87,
+      "exemple": "6 Conspiracies Swirling in Lindsay Clancy Case",
+      "part_parmi_breakouts": 0.085
+     },
+     {
+      "id": "verite_choc",
+      "template": "The {adjectif} truth about {sujet}",
+      "part": 0.052,
+      "n_matches": 83,
+      "exemple": "Truth About Pastor’s Wife: Mica Miller Case Reignites",
+      "part_parmi_breakouts": 0.054
+     },
+     {
+      "id": "superlatif",
+      "template": "The {adjectif superlatif} {sujet}",
+      "part": 0.05,
+      "n_matches": 80,
+      "exemple": "The Most Horrific Murder Wisconsin Has Ever Seen",
+      "part_parmi_breakouts": 0.094
+     },
+     {
+      "id": "question_en_tete",
+      "template": "{Mot interrogatif} {sujet} ... ?",
+      "part": 0.047,
+      "n_matches": 75,
+      "exemple": "Lindsay Clancy Case: Husband's Timeline INCONSISTENT?",
+      "part_parmi_breakouts": 0.022
+     },
+     {
+      "id": "mise_en_garde",
+      "template": "Never/Stop {action} before {consequence}",
+      "part": 0.035,
+      "n_matches": 57,
+      "exemple": "Israel issues OMINOUS warning to Iranian regime: The 'end is near'",
+      "part_parmi_breakouts": 0.018
+     },
+     {
+      "id": "serie_numerotee",
+      "template": "{Sujet} Part {n} / Episode {n}",
+      "part": 0.011,
+      "n_matches": 18,
+      "exemple": "Juror #6: The Testimony and Pivotal Moment That Sealed Donna Adelson’s Fate with Guilty Verdict",
+      "part_parmi_breakouts": 0.045
+     },
+     {
+      "id": "this_is_why",
+      "template": "This is why {sujet} {consequence}",
+      "part": 0.001,
+      "n_matches": 2,
+      "exemple": "This Is Why You Never Ride With Strangers…",
+      "part_parmi_breakouts": 0.0
+     },
+     {
+      "id": "how_to",
+      "template": "How to {action}",
+      "part": 0.0,
+      "n_matches": 0,
+      "exemple": null,
+      "part_parmi_breakouts": 0.0
+     }
+    ]
+   },
+   "miniatures": {
+    "texte_mots": {
+     "mediane": 0.0,
+     "max": 4
+    },
+    "personnage": 0.9,
+    "palette": [
+     "#1a1a1a",
+     "#1e5fd9",
+     "#808080"
+    ],
+    "contraste": "moyen",
+    "contraste_parts": {
+     "moyen": 0.65,
+     "eleve": 0.25,
+     "faible": 0.1
+    },
+    "composition": "sujet_centre",
+    "composition_parts": {
+     "sujet_centre": 0.55,
+     "sujet_gauche": 0.15,
+     "sujet_droite": 0.3
+    },
+    "marqueur": 0.05,
+    "styles": {
+     "photo": 0.95,
+     "mixte": 0.05
+    },
+    "motifs_gagnants": [
+     "Aucun texte incruste : capture brute (bodycam, mugshot, plateau JT)",
+     "Visage systematique : suspect, victime ou presentateur en gros plan",
+     "Logo de chaine fixe en coin, aucun autre habillage graphique",
+     "Contraste modere, image non retouchee pour un effet de preuve",
+     "Cercle rouge ponctuel pour designer une personne sur une image de videosurveillance"
+    ],
+    "n_miniatures": 20,
+    "n_chaines": 2,
+    "chaines": [
+     "fox-news",
+     "law-crime-network"
+    ],
+    "n_faible": false,
+    "methode_palette": "estimation visuelle par familles de couleurs sur planches-contacts, pas de mesure pixel",
+    "precision_palette": "famille de couleur a une nuance pres : utiliser comme intention chromatique, jamais comme valeur de charte",
+    "contraste_ratio_cible": 4.5,
+    "contraste_ratio_origine": "WCAG AA, decision de production pour l'etape 21 ; le champ contraste ci-dessus est un jugement visuel categoriel",
+    "n_chaines_faible": true
+   },
+   "hooks": {
+    "parts": {
+     "in_medias_res": 0.64,
+     "negation_du_sens_commun": 0.16,
+     "question_contrarienne": 0.12,
+     "statistique_choc": 0.04,
+     "intro_chaine_neutre": 0.04
+    },
+    "part_indeterminee": 0.0,
+    "longueur_mots": {
+     "mediane": 35.5,
+     "p25": 26.8,
+     "p75": 44.0,
+     "n": 24,
+     "n_sans_parole_avant_15s": 1,
+     "n_faible": false
+    },
+    "boucle_ouverte": {
+     "part": 0.08,
+     "position_s_mediane": 47.8,
+     "position_s_moyenne": 47.8,
+     "n": 2,
+     "fenetre": "90 premieres secondes",
+     "position_s_repli": 47.9,
+     "origine_repli": "mediane inter-niches des 28 boucles ouvertes reperees dans le corpus",
+     "n_faible": true
+    },
+    "boucles_minimum": 2,
+    "boucles_minimum_origine": "decision de production (etape 10), au-dela de l'usage observe",
+    "n_transcriptions": 25,
+    "n_faible": false,
+    "perimetre": "5 videos les plus vues par chaine, 15 premieres secondes"
+   },
+   "mots_par_minute": {
+    "mediane": 179.5,
+    "p25": 161.9,
+    "p75": 185.2,
+    "n": 25,
+    "n_faible": false,
+    "perimetre": "transcription entiere : mots hors tags non verbaux / duree parlee",
+    "methode": "mots (hors tags non verbaux) / duree entre le debut du premier snippet et la fin du dernier ; transcriptions de moins de 60 s ou de moins de 50 mots ecartees",
+    "debut_60s": {
+     "mediane_corrigee": 136,
+     "mediane_brute": 136,
+     "n": 25,
+     "n_ecartees_sous_60_mots_min": 0,
+     "usage": "caracterise l'ouverture (generique et musique compris), ne pas s'en servir pour dimensionner un script"
+    }
+   },
+   "densite_breakouts": 0.121,
+   "densite_breakouts_definition": "mediane, sur les chaines de la niche, de la part de leurs videos a plus de 3x leur propre mediane de vues. Valeur a viser pour UNE chaine.",
+   "densite_breakouts_agregee": 0.139,
+   "densite_breakouts_agregee_definition": "part de breakouts sur toutes les videos de la niche mises en commun ; dominee par les chaines les plus prolifiques, a ne pas utiliser comme cible de chaine.",
+   "ratio_top1_median": 12.6,
+   "sujets_porteurs": [
+    {
+     "sujet": "5 True Crime Cases Too Dark for Netflix",
+     "titre_source": "5 True Crime Cases Too Dark for Netflix",
+     "vues": 861578,
+     "chaine": "@tynotts",
+     "video_id": "mytGAhD4Z6I",
+     "ratio_vs_mediane": 19.5,
+     "vues_medianes_chaine": 44244,
+     "date": "2026-03-18"
+    },
+    {
+     "sujet": "Murdered By Her Church Pastor | Lauren Phelps",
+     "titre_source": "Murdered By Her Church Pastor | Lauren Phelps | True Crime Documentary",
+     "vues": 575146,
+     "chaine": "@tynotts",
+     "video_id": "HBU3W3kNVk8",
+     "ratio_vs_mediane": 13.0,
+     "vues_medianes_chaine": 44244,
+     "date": "2023-06-18"
+    },
+    {
+     "sujet": "5 True Crime Cases Dateline NBC Refused to Cover",
+     "titre_source": "5 True Crime Cases Dateline NBC Refused to Cover",
+     "vues": 445020,
+     "chaine": "@tynotts",
+     "video_id": "bbUWsnv6irU",
+     "ratio_vs_mediane": 10.1,
+     "vues_medianes_chaine": 44244,
+     "date": "2026-04-29"
+    },
+    {
+     "sujet": "The Murder of Bernadette Walker",
+     "titre_source": "The Murder of Bernadette Walker | True Crime Documentary 2024",
+     "vues": 410270,
+     "chaine": "@tynotts",
+     "video_id": "9RyebNZzSYg",
+     "ratio_vs_mediane": 9.3,
+     "vues_medianes_chaine": 44244,
+     "date": "2024-11-22"
+    },
+    {
+     "sujet": "5 More True Crime Cases Too Dark for Netflix",
+     "titre_source": "5 More True Crime Cases Too Dark for Netflix",
+     "vues": 409000,
+     "chaine": "@tynotts",
+     "video_id": "22s5iAf00iU",
+     "ratio_vs_mediane": 9.2,
+     "vues_medianes_chaine": 44244,
+     "date": "2026-04-08"
+    },
+    {
+     "sujet": "Strangest True Crime Cases of 2026",
+     "titre_source": "Strangest True Crime Cases of 2026",
+     "vues": 399312,
+     "chaine": "@tynotts",
+     "video_id": "yH4VtZszDmA",
+     "ratio_vs_mediane": 9.0,
+     "vues_medianes_chaine": 44244,
+     "date": "2026-07-08"
+    },
+    {
+     "sujet": "Summer Party Ends With Her Homicide Investigation | Kiely Rodni",
+     "titre_source": "Summer Party Ends With Her Homicide Investigation | Kiely Rodni | True Crime Documentary 2024",
+     "vues": 385358,
+     "chaine": "@tynotts",
+     "video_id": "vh5HUj-BEsg",
+     "ratio_vs_mediane": 8.7,
+     "vues_medianes_chaine": 44244,
+     "date": "2024-06-14"
+    },
+    {
+     "sujet": "Prime Crime: Iowa Woman Tortured to Death After Breakup",
+     "titre_source": "Prime Crime: Iowa Woman Tortured to Death After Breakup",
+     "vues": 1624437,
+     "chaine": "@lawandcrime",
+     "video_id": "YDK3kBATfR4",
+     "ratio_vs_mediane": 8.2,
+     "vues_medianes_chaine": 197040.0,
+     "date": "2026-06-27"
+    },
+    {
+     "sujet": "Torture House Hides Twisted Secrets",
+     "titre_source": "Torture House Hides Twisted Secrets",
+     "vues": 1489016,
+     "chaine": "@lawandcrime",
+     "video_id": "GPAVtCULpdY",
+     "ratio_vs_mediane": 7.6,
+     "vues_medianes_chaine": 197040.0,
+     "date": "2026-07-25"
+    },
+    {
+     "sujet": "Is Wendi Adelson Next?! Could New Evidence in Donna Adelson Trial Implicate More of The Adelsons",
+     "titre_source": "Is Wendi Adelson Next?! Could New Evidence in Donna Adelson Trial Implicate More of The Adelsons",
+     "vues": 393618,
+     "chaine": "@survivingthesurvivor",
+     "video_id": "1ehHUNEswhQ",
+     "ratio_vs_mediane": 7.3,
+     "vues_medianes_chaine": 53788,
+     "date": "2025-09-01"
+    },
+    {
+     "sujet": "Breaking News in Missing Nancy Guthrie Case; Active SWAT Situation Related to the Case",
+     "titre_source": "Breaking News in Missing Nancy Guthrie Case; Active SWAT Situation Related to the Case",
+     "vues": 388808,
+     "chaine": "@survivingthesurvivor",
+     "video_id": "svFfe_0u1oo",
+     "ratio_vs_mediane": 7.2,
+     "vues_medianes_chaine": 53788,
+     "date": "2026-02-14"
+    },
+    {
+     "sujet": "The Mystery That Changed Sweden Forever!",
+     "titre_source": "The Mystery That Changed Sweden Forever! | Lisa Holm",
+     "vues": 307350,
+     "chaine": "@tynotts",
+     "video_id": "eQkuCr2RnGk",
+     "ratio_vs_mediane": 6.9,
+     "vues_medianes_chaine": 44244,
+     "date": "2025-07-11"
+    },
+    {
+     "sujet": "Parents Booked for Murder After 7-Year-Old Son Dies at 255 Pounds",
+     "titre_source": "Parents Booked for Murder After 7-Year-Old Son Dies at 255 Pounds",
+     "vues": 1363786,
+     "chaine": "@lawandcrime",
+     "video_id": "Jqc8O4jkjBg",
+     "ratio_vs_mediane": 6.9,
+     "vues_medianes_chaine": 197040.0,
+     "date": "2026-07-01"
+    },
+    {
+     "sujet": "Prime Crime: Teen Murders Parents in Twisted Assassination Plot",
+     "titre_source": "Prime Crime: Teen Murders Parents in Twisted Assassination Plot",
+     "vues": 1354969,
+     "chaine": "@lawandcrime",
+     "video_id": "jtMqHCsC1HI",
+     "ratio_vs_mediane": 6.9,
+     "vues_medianes_chaine": 197040.0,
+     "date": "2026-07-19"
+    },
+    {
+     "sujet": "My Neighbor Ate My Son | Michael Woodmansee",
+     "titre_source": "My Neighbor Ate My Son | Michael Woodmansee | True Crime Documentary",
+     "vues": 297124,
+     "chaine": "@tynotts",
+     "video_id": "J71IAeJNidU",
+     "ratio_vs_mediane": 6.7,
+     "vues_medianes_chaine": 44244,
+     "date": "2023-07-16"
+    }
+   ]
+  },
+  "home_hacks": {
+   "chaines_source": [
+    "@eliasyoderamish",
+    "@frugalsolutionstv",
+    "@grandpasoldways",
+    "@homesteadtessie",
+    "@oldwayschronicle",
+    "@peopleofpattern",
+    "@saraconklinfrozenpennies",
+    "@savingsavers",
+    "@silascroweyt"
+   ],
+   "n_chaines": 9,
+   "n_chaines_tronquees_500": 1,
+   "n_videos_analysees": 1835,
+   "n_videos_toutes_durees": 1895,
+   "part_shorts": 0.032,
+   "n_faible": false,
+   "n_chaines_faible": false,
+   "rythme_coupe_s": {
+    "cible": 8.6,
+    "min": 4.1,
+    "max": 12.6,
+    "n_mesures": 9,
+    "source": "tableau P9 (ROADMAP.md 3.3), median des chaines de la niche",
+    "min_observe": 3.8,
+    "max_observe": 60.0,
+    "valeurs": [
+     {
+      "chaine": "Saving Savers",
+      "s_par_plan": 3.8
+     },
+     {
+      "chaine": "Elias Yoder Amish",
+      "s_par_plan": 4.1
+     },
+     {
+      "chaine": "Frugal Solutions",
+      "s_par_plan": 5.7
+     },
+     {
+      "chaine": "Old Ways Chronicle",
+      "s_par_plan": 6.9
+     },
+     {
+      "chaine": "Silas Crowe",
+      "s_par_plan": 8.6
+     },
+     {
+      "chaine": "People Pattern",
+      "s_par_plan": 12.6
+     },
+     {
+      "chaine": "Grandpa's Old Ways",
+      "s_par_plan": 14.1
+     },
+     {
+      "chaine": "Frozen Pennies",
+      "s_par_plan": 48.0
+     },
+     {
+      "chaine": "Homestead Tessie",
+      "s_par_plan": 60.0
+     }
+    ],
+    "facteur_hook": 0.7,
+    "commentaire_min_max": "min/max = p25/p75 des chaines retenues apres elagage (n>=4), sinon extremes de cet ensemble",
+    "cible_montage": 6.9,
+    "cible_montage_robustesse": {
+     "ecart_max_retrait_une_chaine_s": 0.85,
+     "n_apres_elagage": 7,
+     "sensible_a_une_chaine": false
+    },
+    "n_faible": false,
+    "cible_montage_methode": "mediane apres retrait des valeurs > 3x la mediane de la niche (plans tres longs = plateau, interview ou image fixe, non pertinents pour une video montee)",
+    "cible_montage_valeurs_ecartees": [
+     {
+      "chaine": "Frozen Pennies",
+      "s_par_plan": 48.0
+     },
+     {
+      "chaine": "Homestead Tessie",
+      "s_par_plan": 60.0
+     }
+    ],
+    "a_mesurer": false
+   },
+   "duree_s": {
+    "mediane": 1083.0,
+    "p25": 698.0,
+    "p75": 1408.0,
+    "cible": 1083.0,
+    "tolerance": 0.15,
+    "perimetre": "videos > 70 s (Shorts exclus)",
+    "n": 1835,
+    "dispersion_p75_p25": 2.0,
+    "distribution_large": false,
+    "note_distribution_large": "p75/p25 > 4 : la niche melange des formats de duree tres differentes. La mediane n'est pas un mode : l'etape 10 doit fixer la duree par chaine (format court ou long) et non viser la mediane de niche."
+   },
+   "ruptures_s": {
+    "cible": null,
+    "observee_s": 26.0,
+    "p25_s": 9.0,
+    "p75_s": 60.0,
+    "n": 27,
+    "a_mesurer": false,
+    "mesure_par": "etape_16",
+    "origine": "etape_16, sous-agent A : secondes entre deux ruptures de sujet sur les transcriptions EN (fenetre 15 s, chevauchement lexical < 8 %, ou question au spectateur, ou chiffre). La cadence APPLIQUEE reste 4 x rythme_coupe_s.cible_montage bornee a [20, 45] s.",
+    "n_faible": false
+   },
+   "densite_faits_par_minute": {
+    "cible": 4.0,
+    "plancher": 2.4,
+    "mediane_observee": 3.41,
+    "n_meilleures": 17,
+    "n_medianes": 17,
+    "n_faible": false,
+    "a_mesurer": false,
+    "mesure_par": "etape_16",
+    "origine": "etape_16, sous-agent B (methode) et density.py (mesure) : mediane de la moitie la plus vue des transcriptions EN de la niche, arrondie a 0,5. NON VALIDEE comme predicteur de vues (Spearman +0,057 sur 263 transcriptions, non significatif dans 9 niches sur 10).",
+    "valide_comme_predicteur": false
+   },
+   "cadence_par_semaine": {
+    "mediane": 1.65,
+    "p75": 3.92,
+    "n_chaines": 9,
+    "n_chaines_actives_6_mois": 9,
+    "mediane_chaines_actives": 1.65,
+    "fenetre": "182 derniers jours au 15/09/2026, videos > 70 s",
+    "cible": 1.65,
+    "cible_origine": "mediane des seules chaines ayant publie sur la fenetre ; la mediane brute vaut 0 des qu'une majorite de chaines est inactive"
+   },
+   "creneaux": {
+    "jours": [
+     "mercredi",
+     "jeudi",
+     "vendredi"
+    ],
+    "jours_parts": {
+     "mercredi": 0.162,
+     "jeudi": 0.148,
+     "vendredi": 0.148
+    },
+    "heures_utc": [
+     16,
+     23,
+     13
+    ],
+    "heures_parts": {
+     "16": 0.205,
+     "23": 0.199,
+     "13": 0.116
+    },
+    "n": 1632,
+    "n_faible": false,
+    "fenetre": "24 derniers mois"
+   },
+   "titres": {
+    "longueur_car": {
+     "mediane": 57,
+     "p90": 78.0,
+     "plafond_recommande": 78.0,
+     "plafond_youtube": 100
+    },
+    "longueur_mots_mediane": 10,
+    "patrons": [
+     {
+      "id": "nombre_en_tete",
+      "template": "{Nombre} {choses} that/qui {promesse}",
+      "part": 0.237,
+      "n_matches": 435,
+      "exemple": "27 Jobs For Women Over 50 When Money Is Tight",
+      "part_parmi_breakouts": 0.317
+     },
+     {
+      "id": "question_en_tete",
+      "template": "{Mot interrogatif} {sujet} ... ?",
+      "part": 0.143,
+      "n_matches": 262,
+      "exemple": "How Amish Preserve Meat Without Refrigeration",
+      "part_parmi_breakouts": 0.15
+     },
+     {
+      "id": "nom_propre_en_tete",
+      "template": "{Nom Propre} {verbe} {sujet}",
+      "part": 0.128,
+      "n_matches": 235,
+      "exemple": "Stop Buying Laundry Detergent — This Cheap $6 Amish Recipe (Lasts a Year)",
+      "part_parmi_breakouts": 0.091
+     },
+     {
+      "id": "superlatif",
+      "template": "The {adjectif superlatif} {sujet}",
+      "part": 0.096,
+      "n_matches": 176,
+      "exemple": "Stop Buying Laundry Detergent — This Cheap $6 Amish Recipe (Lasts a Year)",
+      "part_parmi_breakouts": 0.049
+     },
+     {
+      "id": "mise_en_garde",
+      "template": "Never/Stop {action} before {consequence}",
+      "part": 0.091,
+      "n_matches": 167,
+      "exemple": "20 Foods The Amish Stockpile That NEVER Expire",
+      "part_parmi_breakouts": 0.081
+     },
+     {
+      "id": "deux_points",
+      "template": "{Sujet} : {promesse}",
+      "part": 0.07,
+      "n_matches": 128,
+      "exemple": "STOP Feeding Chickens Grains: Amish DO THIS instead For $1.25/Week",
+      "part_parmi_breakouts": 0.025
+     },
+     {
+      "id": "verite_choc",
+      "template": "The {adjectif} truth about {sujet}",
+      "part": 0.053,
+      "n_matches": 98,
+      "exemple": "Amish Secret To Growing 1 Year Of Food In A Tiny Space",
+      "part_parmi_breakouts": 0.049
+     },
+     {
+      "id": "how_to",
+      "template": "How to {action}",
+      "part": 0.015,
+      "n_matches": 27,
+      "exemple": "How To Spot BAD LAND In 60 Seconds (BEFORE YOU BUY)",
+      "part_parmi_breakouts": 0.007
+     },
+     {
+      "id": "serie_numerotee",
+      "template": "{Sujet} Part {n} / Episode {n}",
+      "part": 0.009,
+      "n_matches": 17,
+      "exemple": "Low Income Woman's Frugal Living Secrets (Frugal Money Chats Series #1)",
+      "part_parmi_breakouts": 0.01
+     },
+     {
+      "id": "this_is_why",
+      "template": "This is why {sujet} {consequence}",
+      "part": 0.0,
+      "n_matches": 0,
+      "exemple": null,
+      "part_parmi_breakouts": 0.0
+     }
+    ]
+   },
+   "miniatures": {
+    "texte_mots": {
+     "mediane": 4.0,
+     "max": 8
+    },
+    "personnage": 0.73,
+    "palette": [
+     "#ffffff",
+     "#1a1a1a",
+     "#1e5fd9"
+    ],
+    "contraste": "eleve",
+    "contraste_parts": {
+     "eleve": 1.0
+    },
+    "composition": "sujet_droite",
+    "composition_parts": {
+     "sujet_droite": 0.5,
+     "sujet_gauche": 0.33,
+     "sujet_centre": 0.17
+    },
+    "marqueur": 0.43,
+    "styles": {
+     "photo": 0.57,
+     "illustration": 0.33,
+     "mixte": 0.1
+    },
+    "motifs_gagnants": [
+     "Sujet humain qui interpelle la camera (expert ou personnage recurrent), cadre a droite en priorite",
+     "Texte court a tres fort contraste (2 a 4 mots, capitales ou gras) sur bandeau noir/blanc",
+     "Badge ou icone fixe de la chaine repete sur toutes les miniatures (argent, logo, prix)",
+     "Contraste eleve systematique, que le style soit photo brute ou illustration BD",
+     "Objet concret du hack (outil, produit, astuce) visible a cote du sujet, pas seulement le visage"
+    ],
+    "n_miniatures": 30,
+    "n_chaines": 3,
+    "chaines": [
+     "elias-yoder-amish",
+     "frugal-solutions",
+     "saving-savers"
+    ],
+    "n_faible": false,
+    "methode_palette": "estimation visuelle par familles de couleurs sur planches-contacts, pas de mesure pixel",
+    "precision_palette": "famille de couleur a une nuance pres : utiliser comme intention chromatique, jamais comme valeur de charte",
+    "contraste_ratio_cible": 4.5,
+    "contraste_ratio_origine": "WCAG AA, decision de production pour l'etape 21 ; le champ contraste ci-dessus est un jugement visuel categoriel",
+    "n_chaines_faible": false
+   },
+   "hooks": {
+    "parts": {
+     "enjeu_personnel": 0.205,
+     "adresse_directe": 0.182,
+     "question_contrarienne": 0.159,
+     "mystere_ouvert": 0.159,
+     "liste_annoncee": 0.114,
+     "negation_du_sens_commun": 0.068,
+     "intro_chaine_neutre": 0.068,
+     "statistique_choc": 0.023,
+     "mise_en_scene_narrative": 0.023
+    },
+    "part_indeterminee": 0.0,
+    "longueur_mots": {
+     "mediane": 44,
+     "p25": 38.0,
+     "p75": 49.0,
+     "n": 43,
+     "n_sans_parole_avant_15s": 1,
+     "n_faible": false
+    },
+    "boucle_ouverte": {
+     "part": 0.136,
+     "position_s_mediane": 66.55,
+     "position_s_moyenne": 59.1,
+     "n": 6,
+     "fenetre": "90 premieres secondes",
+     "position_s_repli": 47.9,
+     "origine_repli": "mediane inter-niches des 28 boucles ouvertes reperees dans le corpus",
+     "n_faible": true
+    },
+    "boucles_minimum": 2,
+    "boucles_minimum_origine": "decision de production (etape 10), au-dela de l'usage observe",
+    "n_transcriptions": 44,
+    "n_faible": false,
+    "perimetre": "5 videos les plus vues par chaine, 15 premieres secondes"
+   },
+   "mots_par_minute": {
+    "mediane": 153.1,
+    "p25": 142.1,
+    "p75": 167.8,
+    "n": 44,
+    "n_faible": false,
+    "perimetre": "transcription entiere : mots hors tags non verbaux / duree parlee",
+    "methode": "mots (hors tags non verbaux) / duree entre le debut du premier snippet et la fin du dernier ; transcriptions de moins de 60 s ou de moins de 50 mots ecartees",
+    "debut_60s": {
+     "mediane_corrigee": 160.5,
+     "mediane_brute": 160.5,
+     "n": 44,
+     "n_ecartees_sous_60_mots_min": 0,
+     "usage": "caracterise l'ouverture (generique et musique compris), ne pas s'en servir pour dimensionner un script"
+    }
+   },
+   "densite_breakouts": 0.289,
+   "densite_breakouts_definition": "mediane, sur les chaines de la niche, de la part de leurs videos a plus de 3x leur propre mediane de vues. Valeur a viser pour UNE chaine.",
+   "densite_breakouts_agregee": 0.222,
+   "densite_breakouts_agregee_definition": "part de breakouts sur toutes les videos de la niche mises en commun ; dominee par les chaines les plus prolifiques, a ne pas utiliser comme cible de chaine.",
+   "ratio_top1_median": 31.6,
+   "sujets_porteurs": [
+    {
+     "sujet": "How Amish Preserve Meat Without Refrigeration",
+     "titre_source": "How Amish Preserve Meat Without Refrigeration",
+     "vues": 2530399,
+     "chaine": "@frugalsolutionstv",
+     "video_id": "Wl7PvOPVMj0",
+     "ratio_vs_mediane": 284.2,
+     "vues_medianes_chaine": 8904,
+     "date": "2024-10-01"
+    },
+    {
+     "sujet": "How Amish Heat Their Living Room Without Gas/Electricity",
+     "titre_source": "How Amish Heat Their Living Room Without Gas/Electricity",
+     "vues": 2477031,
+     "chaine": "@frugalsolutionstv",
+     "video_id": "SrC3wms8pQ8",
+     "ratio_vs_mediane": 278.2,
+     "vues_medianes_chaine": 8904,
+     "date": "2024-12-13"
+    },
+    {
+     "sujet": "How Amish HEAT Their Homes Without Gas/Electricity",
+     "titre_source": "How Amish HEAT Their Homes Without Gas/Electricity",
+     "vues": 1704505,
+     "chaine": "@frugalsolutionstv",
+     "video_id": "cN_CLWUMvWo",
+     "ratio_vs_mediane": 191.4,
+     "vues_medianes_chaine": 8904,
+     "date": "2024-09-17"
+    },
+    {
+     "sujet": "How Amish Heat a Greenhouse Without Gas/Electricity",
+     "titre_source": "How Amish Heat a Greenhouse Without Gas/Electricity",
+     "vues": 1612280,
+     "chaine": "@frugalsolutionstv",
+     "video_id": "m0tqV6Yw3i0",
+     "ratio_vs_mediane": 181.1,
+     "vues_medianes_chaine": 8904,
+     "date": "2024-11-11"
+    },
+    {
+     "sujet": "27 Jobs For Women Over 50 When Money Is Tight",
+     "titre_source": "27 Jobs For Women Over 50 When Money Is Tight",
+     "vues": 2530132,
+     "chaine": "@saraconklinfrozenpennies",
+     "video_id": "xueg3SFucys",
+     "ratio_vs_mediane": 170.8,
+     "vues_medianes_chaine": 14810,
+     "date": "2023-12-01"
+    },
+    {
+     "sujet": "How Amish Store Food for 20 Years Without Refrigeration",
+     "titre_source": "How Amish Store Food for 20 Years Without Refrigeration",
+     "vues": 1509819,
+     "chaine": "@frugalsolutionstv",
+     "video_id": "fTncSIqXT-g",
+     "ratio_vs_mediane": 169.6,
+     "vues_medianes_chaine": 8904,
+     "date": "2024-11-05"
+    },
+    {
+     "sujet": "Grandpa's 42 Clever WD-40 Hacks that will BLOW YOUR MIND & MAKE LIFE EASIER!!!",
+     "titre_source": "Grandpa's 42 Clever WD-40 Hacks that will BLOW YOUR MIND & MAKE LIFE EASIER!!!",
+     "vues": 1785834,
+     "chaine": "@savingsavers",
+     "video_id": "a2ztDNHXBwA",
+     "ratio_vs_mediane": 151.8,
+     "vues_medianes_chaine": 11768,
+     "date": "2024-10-26"
+    },
+    {
+     "sujet": "20 Foods The Amish Stockpile That NEVER Expire",
+     "titre_source": "20 Foods The Amish Stockpile That NEVER Expire",
+     "vues": 1169069,
+     "chaine": "@frugalsolutionstv",
+     "video_id": "gz6rKQEifLE",
+     "ratio_vs_mediane": 131.3,
+     "vues_medianes_chaine": 8904,
+     "date": "2024-11-27"
+    },
+    {
+     "sujet": "50 Amish Gardening Hacks You'll Wish You Knew Sooner",
+     "titre_source": "50 Amish Gardening Hacks You'll Wish You Knew Sooner",
+     "vues": 1041915,
+     "chaine": "@frugalsolutionstv",
+     "video_id": "4zL2Wn0few4",
+     "ratio_vs_mediane": 117.0,
+     "vues_medianes_chaine": 8904,
+     "date": "2025-01-23"
+    },
+    {
+     "sujet": "KILL EVERY Mosquito The AMISH Way. SAFE For Honey Bees & Pets!",
+     "titre_source": "KILL EVERY Mosquito The AMISH Way. SAFE For Honey Bees & Pets!",
+     "vues": 2199644,
+     "chaine": "@eliasyoderamish",
+     "video_id": "cVotLLx5bNs",
+     "ratio_vs_mediane": 114.9,
+     "vues_medianes_chaine": 19147.5,
+     "date": "2026-05-19"
+    },
+    {
+     "sujet": "STOP Feeding Chickens Grains: Amish DO THIS instead For $1.25/Week",
+     "titre_source": "STOP Feeding Chickens Grains: Amish DO THIS instead For $1.25/Week",
+     "vues": 981749,
+     "chaine": "@frugalsolutionstv",
+     "video_id": "JLVx7_x3BUU",
+     "ratio_vs_mediane": 110.3,
+     "vues_medianes_chaine": 8904,
+     "date": "2024-10-12"
+    },
+    {
+     "sujet": "Grandma's 42 Borax Hacks that will BLOW YOUR MIND & MAKE LIFE EASIER!!!",
+     "titre_source": "Grandma's 42 Borax Hacks that will BLOW YOUR MIND & MAKE LIFE EASIER!!!",
+     "vues": 1295327,
+     "chaine": "@savingsavers",
+     "video_id": "OaKJsLs0geo",
+     "ratio_vs_mediane": 110.1,
+     "vues_medianes_chaine": 11768,
+     "date": "2025-01-15"
+    },
+    {
+     "sujet": "Grandma's 25 BANNED Hydrogen Peroxide Hacks from 60s That INSTANTLY Fix Everyday Problems...",
+     "titre_source": "Grandma's 25 BANNED Hydrogen Peroxide Hacks from 60s That INSTANTLY Fix Everyday Problems...",
+     "vues": 1290543,
+     "chaine": "@savingsavers",
+     "video_id": "iyxnpmsmhAA",
+     "ratio_vs_mediane": 109.7,
+     "vues_medianes_chaine": 11768,
+     "date": "2026-03-05"
+    },
+    {
+     "sujet": "Amish Secret To Growing 1 Year Of Food In A Tiny Space",
+     "titre_source": "Amish Secret To Growing 1 Year Of Food In A Tiny Space",
+     "vues": 947437,
+     "chaine": "@frugalsolutionstv",
+     "video_id": "fkTyL7aDP2o",
+     "ratio_vs_mediane": 106.4,
+     "vues_medianes_chaine": 8904,
+     "date": "2025-02-11"
+    },
+    {
+     "sujet": "How Amish Preserve EGGS For 15 Years Without Refrigeration",
+     "titre_source": "How Amish Preserve EGGS For 15 Years Without Refrigeration",
+     "vues": 893058,
+     "chaine": "@frugalsolutionstv",
+     "video_id": "pCumtgPLTUg",
+     "ratio_vs_mediane": 100.3,
+     "vues_medianes_chaine": 8904,
+     "date": "2024-10-16"
+    }
+   ]
+  },
+  "niche_monetisable_complements_fr": {
+   "chaines_source": [
+    "@novoma6689",
+    "@nutriandco",
+    "@nutripurefr",
+    "@quentin_fitlife",
+    "@vincentbiohack"
+   ],
+   "n_chaines": 5,
+   "n_chaines_tronquees_500": 2,
+   "n_videos_analysees": 505,
+   "n_videos_toutes_durees": 1291,
+   "part_shorts": 0.609,
+   "n_faible": false,
+   "n_chaines_faible": true,
+   "rythme_coupe_s": {
+    "cible": null,
+    "min": null,
+    "max": null,
+    "n_mesures": 0,
+    "source": "tableau P9 (ROADMAP.md 3.3), median des chaines de la niche",
+    "min_observe": null,
+    "max_observe": null,
+    "valeurs": [],
+    "facteur_hook": 0.7,
+    "commentaire_min_max": "min/max = p25/p75 des chaines mesurees (n>=4), sinon valeurs extremes observees",
+    "a_mesurer": true,
+    "fallback_provisoire_s": 7.8,
+    "fallback_methode": "mediane robuste des 30 chaines mesurees du tableau P9 (valeurs > 3x la mediane globale ecartees). Valeur de secours pour que le code tourne, JAMAIS une cible : a mesurer au banc de l'etape 15.",
+    "note": "aucune chaine de cette niche n'est dans le tableau P9"
+   },
+   "duree_s": {
+    "mediane": 127.0,
+    "p25": 93.0,
+    "p75": 178.0,
+    "cible": 127.0,
+    "tolerance": 0.15,
+    "perimetre": "videos > 70 s (Shorts exclus)",
+    "n": 505,
+    "dispersion_p75_p25": 1.9,
+    "distribution_large": false,
+    "note_distribution_large": "p75/p25 > 4 : la niche melange des formats de duree tres differentes. La mediane n'est pas un mode : l'etape 10 doit fixer la duree par chaine (format court ou long) et non viser la mediane de niche."
+   },
+   "ruptures_s": {
+    "cible": null,
+    "observee_s": 21.0,
+    "p25_s": 7.0,
+    "p75_s": 58.0,
+    "n": 0,
+    "a_mesurer": false,
+    "mesure_par": "etape_16",
+    "origine": "etape_16, sous-agent A : secondes entre deux ruptures de sujet sur les transcriptions EN (fenetre 15 s, chevauchement lexical < 8 %, ou question au spectateur, ou chiffre). La cadence APPLIQUEE reste 4 x rythme_coupe_s.cible_montage bornee a [20, 45] s. Repli inter-niches 21 s (225 transcriptions).",
+    "n_faible": true
+   },
+   "densite_faits_par_minute": {
+    "cible": 5.5,
+    "plancher": 3.3,
+    "mediane_observee": null,
+    "n_meilleures": 0,
+    "n_medianes": 0,
+    "n_faible": true,
+    "a_mesurer": false,
+    "mesure_par": "etape_16",
+    "origine": "etape_16, sous-agent B (methode) et density.py (mesure) : mediane de la moitie la plus vue des transcriptions EN de la niche, arrondie a 0,5. NON VALIDEE comme predicteur de vues (Spearman +0,057 sur 263 transcriptions, non significatif dans 9 niches sur 10). Repli inter-niches 5.5 : niche sans transcription EN propre.",
+    "valide_comme_predicteur": false
+   },
+   "cadence_par_semaine": {
+    "mediane": 1.65,
+    "p75": 2.12,
+    "n_chaines": 5,
+    "n_chaines_actives_6_mois": 3,
+    "mediane_chaines_actives": 2.12,
+    "fenetre": "182 derniers jours au 15/09/2026, videos > 70 s",
+    "cible": 2.12,
+    "cible_origine": "mediane des seules chaines ayant publie sur la fenetre ; la mediane brute vaut 0 des qu'une majorite de chaines est inactive"
+   },
+   "creneaux": {
+    "jours": [
+     "jeudi",
+     "dimanche",
+     "vendredi"
+    ],
+    "jours_parts": {
+     "jeudi": 0.209,
+     "dimanche": 0.176,
+     "vendredi": 0.169
+    },
+    "heures_utc": [
+     17,
+     18,
+     16
+    ],
+    "heures_parts": {
+     "17": 0.229,
+     "18": 0.157,
+     "16": 0.151
+    },
+    "n": 484,
+    "n_faible": false,
+    "fenetre": "24 derniers mois"
+   },
+   "titres": {
+    "longueur_car": {
+     "mediane": 58,
+     "p90": 85.0,
+     "plafond_recommande": 85.0,
+     "plafond_youtube": 100
+    },
+    "longueur_mots_mediane": 10,
+    "patrons": [
+     {
+      "id": "deux_points",
+      "template": "{Sujet} : {promesse}",
+      "part": 0.4,
+      "n_matches": 202,
+      "exemple": "Séance Workout Fessier : un legday avec @kenyascandella #workout #legdayworkout #legday",
+      "part_parmi_breakouts": 0.404
+     },
+     {
+      "id": "question_en_tete",
+      "template": "{Mot interrogatif} {sujet} ... ?",
+      "part": 0.224,
+      "n_matches": 113,
+      "exemple": "La Whey Nutrimuscle : Haut de Gamme ou Gros Scam ?",
+      "part_parmi_breakouts": 0.173
+     },
+     {
+      "id": "nom_propre_en_tete",
+      "template": "{Nom Propre} {verbe} {sujet}",
+      "part": 0.089,
+      "n_matches": 45,
+      "exemple": "Séance Workout Fessier : un legday avec @kenyascandella #workout #legdayworkout #legday",
+      "part_parmi_breakouts": 0.115
+     },
+     {
+      "id": "serie_numerotee",
+      "template": "{Sujet} Part {n} / Episode {n}",
+      "part": 0.067,
+      "n_matches": 34,
+      "exemple": "#2 D'un monde à l'autre | Road To Elite 15",
+      "part_parmi_breakouts": 0.067
+     },
+     {
+      "id": "superlatif",
+      "template": "The {adjectif superlatif} {sujet}",
+      "part": 0.04,
+      "n_matches": 20,
+      "exemple": "#1 Le sacrifice invisible | Road To Elite 15",
+      "part_parmi_breakouts": 0.048
+     },
+     {
+      "id": "mise_en_garde",
+      "template": "Never/Stop {action} before {consequence}",
+      "part": 0.028,
+      "n_matches": 14,
+      "exemple": "Collagène marin : les dangers que personne ne vous explique",
+      "part_parmi_breakouts": 0.029
+     },
+     {
+      "id": "nombre_en_tete",
+      "template": "{Nombre} {choses} that/qui {promesse}",
+      "part": 0.01,
+      "n_matches": 5,
+      "exemple": "5 points simples à améliorer pour ton bien-être 💆‍♂️✨",
+      "part_parmi_breakouts": 0.01
+     },
+     {
+      "id": "verite_choc",
+      "template": "The {adjectif} truth about {sujet}",
+      "part": 0.004,
+      "n_matches": 2,
+      "exemple": "Les SECRETS de FABRICATION de notre SPIRULINE FRANÇAISE !",
+      "part_parmi_breakouts": 0.01
+     },
+     {
+      "id": "how_to",
+      "template": "How to {action}",
+      "part": 0.0,
+      "n_matches": 0,
+      "exemple": null,
+      "part_parmi_breakouts": 0.0
+     },
+     {
+      "id": "this_is_why",
+      "template": "This is why {sujet} {consequence}",
+      "part": 0.0,
+      "n_matches": 0,
+      "exemple": null,
+      "part_parmi_breakouts": 0.0
+     }
+    ]
+   },
+   "miniatures": {
+    "texte_mots": {
+     "mediane": 0.0,
+     "max": 5
+    },
+    "personnage": 0.5,
+    "palette": [
+     "#1a1a1a",
+     "#2e7d32",
+     "#d6221f"
+    ],
+    "contraste": "moyen",
+    "contraste_parts": {
+     "moyen": 0.58,
+     "faible": 0.25,
+     "eleve": 0.17
+    },
+    "composition": "sujet_centre",
+    "composition_parts": {
+     "sujet_centre": 0.67,
+     "sujet_droite": 0.25,
+     "sujet_gauche": 0.08
+    },
+    "marqueur": 0.0,
+    "styles": {
+     "photo": 1.0
+    },
+    "motifs_gagnants": [
+     "Peu ou pas de texte incruste (0 a 1 mot), laisser l'image parler",
+     "Photo d'action reelle (sport, musculation) sans montage ni habillage graphique",
+     "Sujet cadre au centre, format vertical de Short assume",
+     "Contraste modere, tons naturels, pas de palette criarde",
+     "Pas de fleche ni de cercle : miser sur l'authenticite plutot que le clickbait"
+    ],
+    "n_miniatures": 12,
+    "n_chaines": 2,
+    "chaines": [
+     "novoma",
+     "nutri-co"
+    ],
+    "n_faible": true,
+    "methode_palette": "estimation visuelle par familles de couleurs sur planches-contacts, pas de mesure pixel",
+    "precision_palette": "famille de couleur a une nuance pres : utiliser comme intention chromatique, jamais comme valeur de charte",
+    "contraste_ratio_cible": 4.5,
+    "contraste_ratio_origine": "WCAG AA, decision de production pour l'etape 21 ; le champ contraste ci-dessus est un jugement visuel categoriel",
+    "n_chaines_faible": true
+   },
+   "hooks": {
+    "parts": {
+     "question_contrarienne": 0.188,
+     "enjeu_personnel": 0.188,
+     "negation_du_sens_commun": 0.188,
+     "intro_chaine_neutre": 0.125,
+     "adresse_directe": 0.125,
+     "in_medias_res": 0.125,
+     "liste_annoncee": 0.063
+    },
+    "part_indeterminee": 0.111,
+    "longueur_mots": {
+     "mediane": 64.5,
+     "p25": 36.0,
+     "p75": 74.5,
+     "n": 16,
+     "n_sans_parole_avant_15s": 2,
+     "n_faible": true
+    },
+    "boucle_ouverte": {
+     "part": 0.056,
+     "position_s_mediane": 27.6,
+     "position_s_moyenne": 27.6,
+     "n": 1,
+     "fenetre": "90 premieres secondes",
+     "position_s_repli": 47.9,
+     "origine_repli": "mediane inter-niches des 28 boucles ouvertes reperees dans le corpus",
+     "n_faible": true
+    },
+    "boucles_minimum": 2,
+    "boucles_minimum_origine": "decision de production (etape 10), au-dela de l'usage observe",
+    "n_transcriptions": 18,
+    "n_faible": true,
+    "perimetre": "5 videos les plus vues par chaine, 15 premieres secondes"
+   },
+   "mots_par_minute": {
+    "mediane": 231.1,
+    "p25": 175.4,
+    "p75": 263.7,
+    "n": 12,
+    "n_faible": true,
+    "perimetre": "transcription entiere : mots hors tags non verbaux / duree parlee",
+    "methode": "mots (hors tags non verbaux) / duree entre le debut du premier snippet et la fin du dernier ; transcriptions de moins de 60 s ou de moins de 50 mots ecartees",
+    "debut_60s": {
+     "mediane_corrigee": 222,
+     "mediane_brute": 193.0,
+     "n": 15,
+     "n_ecartees_sous_60_mots_min": 3,
+     "usage": "caracterise l'ouverture (generique et musique compris), ne pas s'en servir pour dimensionner un script"
+    }
+   },
+   "densite_breakouts": 0.21,
+   "densite_breakouts_definition": "mediane, sur les chaines de la niche, de la part de leurs videos a plus de 3x leur propre mediane de vues. Valeur a viser pour UNE chaine.",
+   "densite_breakouts_agregee": 0.206,
+   "densite_breakouts_agregee_definition": "part de breakouts sur toutes les videos de la niche mises en commun ; dominee par les chaines les plus prolifiques, a ne pas utiliser comme cible de chaine.",
+   "ratio_top1_median": 11.7,
+   "sujets_porteurs": [
+    {
+     "sujet": "Séance Workout Fessier : un legday avec @kenyascandella",
+     "titre_source": "Séance Workout Fessier : un legday avec @kenyascandella #workout #legdayworkout #legday",
+     "vues": 275744,
+     "chaine": "@nutriandco",
+     "video_id": "6S5uHVayxE8",
+     "ratio_vs_mediane": 189.8,
+     "vues_medianes_chaine": 1453,
+     "date": "2025-08-31"
+    },
+    {
+     "sujet": "[FORMAT LONG] 24h avec @niko_sangohann : RUNNING, STREET WORKOUT & NUTRITION !",
+     "titre_source": "[FORMAT LONG] 24h avec @niko_sangohann : RUNNING, STREET WORKOUT & NUTRITION !",
+     "vues": 55445,
+     "chaine": "@nutriandco",
+     "video_id": "DKII2peJUOg",
+     "ratio_vs_mediane": 38.2,
+     "vues_medianes_chaine": 1453,
+     "date": "2024-11-15"
+    },
+    {
+     "sujet": "INSIDE NUTRI&CO I Au Coeur de notre Usine de Whey avec @AnanasMuscle @nikosangohan @MargotFit",
+     "titre_source": "INSIDE NUTRI&CO I Au Coeur de notre Usine de Whey avec @AnanasMuscle @nikosangohan @MargotFit",
+     "vues": 41831,
+     "chaine": "@nutriandco",
+     "video_id": "tjAhF5r_6vA",
+     "ratio_vs_mediane": 28.8,
+     "vues_medianes_chaine": 1453,
+     "date": "2025-11-19"
+    },
+    {
+     "sujet": "Vous pensez être réhydraté(e) après avoir bu de l'eau ? Pas forcément !",
+     "titre_source": "Vous pensez être réhydraté(e) après avoir bu de l'eau ? Pas forcément ! 👀",
+     "vues": 33595,
+     "chaine": "@nutriandco",
+     "video_id": "1YqIf6v-484",
+     "ratio_vs_mediane": 23.1,
+     "vues_medianes_chaine": 1453,
+     "date": "2026-06-27"
+    },
+    {
+     "sujet": "RECETTE Smoothie banane et fruits rouges | EN CUISINE AVEC @alexandraspl_ : Épisode 2",
+     "titre_source": "RECETTE Smoothie banane et fruits rouges 🥤🍌🫐 | EN CUISINE AVEC @alexandraspl_ : Épisode 2",
+     "vues": 27621,
+     "chaine": "@nutriandco",
+     "video_id": "AK8wnxQSOt8",
+     "ratio_vs_mediane": 19.0,
+     "vues_medianes_chaine": 1453,
+     "date": "2024-08-07"
+    },
+    {
+     "sujet": "Une Journée avec Clément Secchi I Nutri&Co",
+     "titre_source": "Une Journée avec Clément Secchi I Nutri&Co",
+     "vues": 25596,
+     "chaine": "@nutriandco",
+     "video_id": "0gC3xQptNqY",
+     "ratio_vs_mediane": 17.6,
+     "vues_medianes_chaine": 1453,
+     "date": "2025-10-08"
+    },
+    {
+     "sujet": "LE NOËL DE NUTRI&CO (ft. @AnanasMuscle @laulaupoussedelafonte @kenyascandella...)",
+     "titre_source": "LE NOËL DE NUTRI&CO (ft. @AnanasMuscle @laulaupoussedelafonte @kenyascandella...)",
+     "vues": 20323,
+     "chaine": "@nutriandco",
+     "video_id": "tOJfvaQK0o4",
+     "ratio_vs_mediane": 14.0,
+     "vues_medianes_chaine": 1453,
+     "date": "2025-12-10"
+    },
+    {
+     "sujet": "MARSEILLE CASSIS - RUN WITH NUTRI&CO",
+     "titre_source": "MARSEILLE CASSIS -  RUN WITH NUTRI&CO",
+     "vues": 19390,
+     "chaine": "@nutriandco",
+     "video_id": "srE5SAr61NI",
+     "ratio_vs_mediane": 13.3,
+     "vues_medianes_chaine": 1453,
+     "date": "2025-11-02"
+    },
+    {
+     "sujet": "Objectif Premier Trail — La Préparation",
+     "titre_source": "Objectif Premier Trail — La Préparation",
+     "vues": 19333,
+     "chaine": "@nutriandco",
+     "video_id": "UJXQKSjvCqI",
+     "ratio_vs_mediane": 13.3,
+     "vues_medianes_chaine": 1453,
+     "date": "2026-04-30"
+    },
+    {
+     "sujet": "TOUT SAVOIR sur la TESTOSTÉRONE",
+     "titre_source": "TOUT SAVOIR sur la TESTOSTÉRONE",
+     "vues": 19066,
+     "chaine": "@nutriandco",
+     "video_id": "-kGnxwx6icY",
+     "ratio_vs_mediane": 13.1,
+     "vues_medianes_chaine": 1453,
+     "date": "2024-02-28"
+    },
+    {
+     "sujet": "REBORN - Kenfit I NUTRI&CO",
+     "titre_source": "REBORN - Kenfit I NUTRI&CO",
+     "vues": 18146,
+     "chaine": "@nutriandco",
+     "video_id": "JRBq7JFYmQc",
+     "ratio_vs_mediane": 12.5,
+     "vues_medianes_chaine": 1453,
+     "date": "2025-03-05"
+    },
+    {
+     "sujet": "Le MEILLEUR Legday en 4 EXERCICES by @kenyascandella",
+     "titre_source": "Le MEILLEUR Legday en 4 EXERCICES by @kenyascandella 🍑🔥 #shorts",
+     "vues": 18056,
+     "chaine": "@nutriandco",
+     "video_id": "cIZjkYxU2PE",
+     "ratio_vs_mediane": 12.4,
+     "vues_medianes_chaine": 1453,
+     "date": "2026-03-08"
+    },
+    {
+     "sujet": "RÉSILIENCE - Clément Secchi I NUTRI&CO",
+     "titre_source": "RÉSILIENCE - Clément Secchi I NUTRI&CO",
+     "vues": 17057,
+     "chaine": "@nutriandco",
+     "video_id": "HgpH3uXhsJ8",
+     "ratio_vs_mediane": 11.7,
+     "vues_medianes_chaine": 1453,
+     "date": "2025-07-30"
+    },
+    {
+     "sujet": "Les 3 piliers d'une bonne récupération après le sport",
+     "titre_source": "Les 3 piliers d'une bonne récupération après le sport 💪",
+     "vues": 16716,
+     "chaine": "@nutriandco",
+     "video_id": "-lCZYescy2Y",
+     "ratio_vs_mediane": 11.5,
+     "vues_medianes_chaine": 1453,
+     "date": "2026-06-26"
+    },
+    {
+     "sujet": "DUNCAN PERRILLAT - PERFORMANCE I NUTRI&CO",
+     "titre_source": "DUNCAN PERRILLAT - PERFORMANCE I NUTRI&CO",
+     "vues": 15985,
+     "chaine": "@nutriandco",
+     "video_id": "I72cfZHY1qg",
+     "ratio_vs_mediane": 11.0,
+     "vues_medianes_chaine": 1453,
+     "date": "2025-06-01"
+    }
+   ]
+  }
+ },
+ "hooks_taxonomie": [
+  {
+   "id": "in_medias_res",
+   "definition": "Le hook place l'auditeur au milieu d'une action ou d'une scene deja engagee, sans adresse au spectateur.",
+   "regles": [
+    "Pas de 2e personne (you/vous) dans les 15 premiers mots",
+    "Verbe d'action conjugue (present ou passe) decrivant un evenement en cours des la 1re phrase",
+    "Absence de question et de statistique-choc en tete",
+    "Souvent un lieu/une date en amorce, sans salutation"
+   ],
+   "n_total": 66,
+   "part_globale_pct": 19.1,
+   "exemples": [
+    {
+     "verbatim": "La veille de son arrestation, Jésus réunit ses proches dans une chambre haute à Jérusalem. Pierre, Jean, Marie et Madeleine. Il pressentait qu'un malheur allait...",
+     "chaine": "Bibliotheque Gnostique",
+     "niche": "spiritualite",
+     "video_id": "zKq082FuM7U",
+     "langue": "fr"
+    },
+    {
+     "verbatim": "these powerful predators are twice the termite size with the colony's hunger driving her a matabili scout searches for a target the termites know that...",
+     "chaine": "AB Documentary",
+     "niche": "histoire_doc",
+     "video_id": "1GbnBwvYa9k",
+     "langue": "en"
+    },
+    {
+     "verbatim": "lying in the middle of a plane in modern-day iran is a forgotten ancient city built two and a half thousand years ago it was...",
+     "chaine": "AB Documentary",
+     "niche": "histoire_doc",
+     "video_id": "1iersaXphNw",
+     "langue": "en"
+    },
+    {
+     "verbatim": "from where the girls were attacked",
+     "chaine": "AB Documentary",
+     "niche": "histoire_doc",
+     "video_id": "U8ZkT5BPdoo",
+     "langue": "en"
+    }
+   ],
+   "productible": true
+  },
+  {
+   "id": "statistique_choc",
+   "definition": "La 1re phrase repose sur un nombre ou une mesure precise pour creer la surprise.",
+   "regles": [
+    "Au moins un nombre/chiffre dans les 15 premiers mots",
+    "Le nombre porte sur le sujet traite, pas sur la promesse de la video",
+    "Formulation orientee fait marquant (superlatif, comparaison, ampleur)"
+   ],
+   "n_total": 13,
+   "part_globale_pct": 3.8,
+   "exemples": [
+    {
+     "verbatim": "there are 196 countries in the world today and virtually none of them have purple on their national flag. Throughout history, purple was never used",
+     "chaine": "After Skool",
+     "niche": "niche_monetisable_longevite",
+     "video_id": "CYB-pmNs4VQ",
+     "langue": "en"
+    },
+    {
+     "verbatim": "and this is it a giant raised Canal or Aqueduct currently the largest",
+     "chaine": "BBC Earth Science",
+     "niche": "science_pop",
+     "video_id": "dyxrwVzrdW4",
+     "langue": "en"
+    },
+    {
+     "verbatim": "NASA's Kepler Space Telescope takes the search above Earth's atmosphere into space. Kepler travels 94 million miles away",
+     "chaine": "BBC Earth Science",
+     "niche": "science_pop",
+     "video_id": "oz-Y1Xzx5iQ",
+     "langue": "en"
+    },
+    {
+     "verbatim": "While most Americans watch their heating bills climb higher each winter over 360,000 Amish people have figured out how to stay warm without modern heating...",
+     "chaine": "Frugal Solutions",
+     "niche": "home_hacks",
+     "video_id": "SrC3wms8pQ8",
+     "langue": "en"
+    }
+   ],
+   "productible": true
+  },
+  {
+   "id": "question_contrarienne",
+   "definition": "Le hook ouvre par une question qui interpelle une croyance ou la curiosite du spectateur.",
+   "regles": [
+    "Structure interrogative (mot interrogatif ou inversion) dans les 30 premiers mots, jugee sur la formulation (pas de '?' fiable en auto-genere)",
+    "La question porte sur le sujet, pas sur l'identite du spectateur",
+    "Souvent formulee 'have you ever / what if / did you know / et si je vous disais'"
+   ],
+   "n_total": 58,
+   "part_globale_pct": 16.8,
+   "exemples": [
+    {
+     "verbatim": "et si je vous disais que la réalité essaie constamment de vous parler mais que vous avez été formé pour l'ignorer chaque jour des messages...",
+     "chaine": "Bibliotheque de Thot",
+     "niche": "spiritualite",
+     "video_id": "14xCj65Ou8c",
+     "langue": "fr"
+    },
+    {
+     "verbatim": "ever felt like the harder you try the worse things get it's a frustrating experience that many of us face you put in more effort...",
+     "chaine": "Affinity Arc",
+     "niche": "spiritualite",
+     "video_id": "7p7Epus9Q1s",
+     "langue": "en"
+    },
+    {
+     "verbatim": "have you ever wondered if your blood type holds the key to understanding your true Cosmic Origins it might sound surprising but there is a...",
+     "chaine": "Affinity Arc",
+     "niche": "spiritualite",
+     "video_id": "Db2v-X475aU",
+     "langue": "en"
+    },
+    {
+     "verbatim": "have you ever wondered how some people seem to effortlessly attract positivity success and abundance into their lives what if I told you that the...",
+     "chaine": "Affinity Arc",
+     "niche": "spiritualite",
+     "video_id": "UaB1hMxWMRs",
+     "langue": "en"
+    }
+   ],
+   "productible": true
+  },
+  {
+   "id": "negation_du_sens_commun",
+   "definition": "Contredit explicitement une croyance repandue avant d'apporter une version corrigee.",
+   "regles": [
+    "Marqueur de contraste explicite (mais/but/contrary to/on vous a menti/en fait)",
+    "Reference a une croyance ou attente generale (ce que vous pensez, most people believe)",
+    "Nouvelle affirmation formulee immediatement apres"
+   ],
+   "n_total": 48,
+   "part_globale_pct": 13.9,
+   "exemples": [
+    {
+     "verbatim": "Ti hanno detto che l'erba serve per rilassarsi, per ridere, per mangiare e per spegnere il cervello. Ma se ti",
+     "chaine": "Biblioteca di Thoth",
+     "niche": "spiritualite",
+     "video_id": "CVlMsgqz4l4",
+     "langue": "it"
+    },
+    {
+     "verbatim": "Ti è stata insegnata una versione della realtà che non hai mai potuto mettere in discussione, che Dio è un mistero, l'universo è un freddo...",
+     "chaine": "Biblioteca di Thoth",
+     "niche": "spiritualite",
+     "video_id": "lbilGO0Meqw",
+     "langue": "it"
+    },
+    {
+     "verbatim": "ils n'ont jamais été des dieux ils se sont seulement assurés que vous le croyiez bien avant que les récits de la Genèse ne soient...",
+     "chaine": "Bibliotheque de Thot",
+     "niche": "spiritualite",
+     "video_id": "FTiEcu07BTo",
+     "langue": "fr"
+    },
+    {
+     "verbatim": "Votre vie n'est pas le fruit du hasard. Elle a été écrite avant même votre naissance. Les personnes que vous avez rencontré, les chagrins que...",
+     "chaine": "Bibliotheque de Thot",
+     "niche": "spiritualite",
+     "video_id": "Y7QeU6C1-28",
+     "langue": "fr"
+    }
+   ],
+   "productible": true
+  },
+  {
+   "id": "enjeu_personnel",
+   "definition": "Ancre le sujet dans un souvenir, un vecu ou un investissement personnel du narrateur.",
+   "regles": [
+    "Pronom je/j'/my/I des la 1re phrase",
+    "Reference a un objet, un moment ou un lieu personnel date/situe",
+    "Absent de formule de bienvenue de chaine"
+   ],
+   "n_total": 30,
+   "part_globale_pct": 8.7,
+   "exemples": [
+    {
+     "verbatim": "Ça fait quelques mois que j'ai vraiment remis un gros focus sur le travail des fessiers dans mes séances et les résultats sont plutôt pas...",
+     "chaine": "Nutri&Co",
+     "niche": "niche_monetisable_complements_fr",
+     "video_id": "6S5uHVayxE8",
+     "langue": "fr"
+    },
+    {
+     "verbatim": "I have been spending millions of dollars for the past 3 years working to slow my speed of Aging today I'm going to show you...",
+     "chaine": "Bryan Johnson",
+     "niche": "niche_monetisable_longevite",
+     "video_id": "wFslPHjpdRk",
+     "langue": "en"
+    },
+    {
+     "verbatim": "The rise of artificial intelligence has become so strong in this day and age in 2025 that I had to explain to my mom that...",
+     "chaine": "choicooks",
+     "niche": "niche_monetisable_paris_sportifs",
+     "video_id": "Rarfkv3zW0g",
+     "langue": "en"
+    },
+    {
+     "verbatim": "For the last 7 days, I tried Kelchi as somebody who's never done any prediction markets. I've seen people like Brian doing $1,000 in a...",
+     "chaine": "Clark Knows Ball",
+     "niche": "niche_monetisable_paris_sportifs",
+     "video_id": "zka6_cVQZvE",
+     "langue": "en"
+    }
+   ],
+   "productible": true
+  },
+  {
+   "id": "adresse_directe",
+   "definition": "Interpelle directement le spectateur (vous/you) sur sa propre situation.",
+   "regles": [
+    "you/vous/your en 2e personne des la 1re phrase (ou imperatif 'imagine/regardez')",
+    "Scenario applicable au spectateur, non une question",
+    "Absent de storytelling personnel du narrateur ou de contradiction explicite"
+   ],
+   "n_total": 33,
+   "part_globale_pct": 9.6,
+   "exemples": [
+    {
+     "verbatim": "Si tu veux des pecs tellement gros que tu ne pourras pas attacher ton cartable à la rentrée mais que tu as aucun matériel chez...",
+     "chaine": "Nutri&Co",
+     "niche": "niche_monetisable_complements_fr",
+     "video_id": "A5uTSsTEZuE",
+     "langue": "fr"
+    },
+    {
+     "verbatim": "well i have a sort of suggestion and that is this that before we decide either to save the planet or to destroy it",
+     "chaine": "After Skool",
+     "niche": "niche_monetisable_longevite",
+     "video_id": "dYSQ1NF1hvw",
+     "langue": "en"
+    },
+    {
+     "verbatim": "You learn to be scared of speaking in public, fantastical monsters, or being stripped naked and having an accident while speaking in public.",
+     "chaine": "BBC Earth Science",
+     "niche": "science_pop",
+     "video_id": "KHvDrdswD80",
+     "langue": "en"
+    },
+    {
+     "verbatim": "We're living in an extraordinary moment in history. We are at a moment here in 2025 where we have world historic gamechanging technologies now starting...",
+     "chaine": "Big Think",
+     "niche": "niche_monetisable_longevite",
+     "video_id": "w5k72A30kUc",
+     "langue": "en"
+    }
+   ],
+   "productible": true
+  },
+  {
+   "id": "liste_annoncee",
+   "definition": "Annonce explicitement une structure en liste ou en classement pour la video.",
+   "regles": [
+    "Mot d'enumeration/rang (first, top, 3 ways, voici les, un chiffre + 'hacks/idees/raisons')",
+    "Implique plusieurs items a suivre, present dans les 40 premiers mots"
+   ],
+   "n_total": 8,
+   "part_globale_pct": 2.3,
+   "exemples": [
+    {
+     "verbatim": "J'en ai plein le cul. Que vous ne sachiez toujours pas choisir votre whey en 2026, c'est plus possible. Ça ça dégage. Pour vous aider,...",
+     "chaine": "Quentin fitlife",
+     "niche": "niche_monetisable_complements_fr",
+     "video_id": "fPJOaE-8JpM",
+     "langue": "fr"
+    },
+    {
+     "verbatim": "Today I'm going to walk through my honest experience after using Odds Jam for the last 4 months. I'm going to walk you through three...",
+     "chaine": "Clark Knows Ball",
+     "niche": "niche_monetisable_paris_sportifs",
+     "video_id": "PTnEjRanaLk",
+     "langue": "en"
+    },
+    {
+     "verbatim": "In this video, I'm going to talk about the three things I wish I knew before I started arbitrage betting 5 months ago. And this...",
+     "chaine": "Clark Knows Ball",
+     "niche": "niche_monetisable_paris_sportifs",
+     "video_id": "Tn1wFEjR7fs",
+     "langue": "en"
+    },
+    {
+     "verbatim": "here are Grandma's 45 Old life hacks You'll wish you knew sooner rub butter on cut onions to prevent spoilage grandma always knew how to...",
+     "chaine": "Saving Savers",
+     "niche": "home_hacks",
+     "video_id": "9hnEYVHigrg",
+     "langue": "en"
+    }
+   ],
+   "productible": true
+  },
+  {
+   "id": "promesse_chiffree",
+   "definition": "Promet un benefice ou un resultat quantifie pour le spectateur, sans forcement structurer en liste.",
+   "regles": [
+    "Nombre associe a un benefice/resultat/delai (en 30 jours, +25%, $10 000 en une semaine)",
+    "Le nombre porte sur ce que la video/la methode va apporter, pas un fait du monde"
+   ],
+   "n_total": 9,
+   "part_globale_pct": 2.6,
+   "exemples": [
+    {
+     "verbatim": "Voy a transmitirte tres palabras en arameo. No se trata de expresiones comunes ni de lenguaje simbólico superficial. Son términos concretos que surgieron del núcleo...",
+     "chaine": "La Biblioteca Gnostica",
+     "niche": "spiritualite",
+     "video_id": "TVhDsDgyxGo",
+     "langue": "es"
+    },
+    {
+     "verbatim": "$15,000, baby. All from one month of focus and strategic data driven sports betting. I'm gonna flip this camera right now to show you. Ignore...",
+     "chaine": "choicooks",
+     "niche": "niche_monetisable_paris_sportifs",
+     "video_id": "N9mx5yKH4GY",
+     "langue": "en"
+    },
+    {
+     "verbatim": "I made 30 grand in one month of sports betting. And in this video, I'm going to show you everything that you need to get...",
+     "chaine": "choicooks",
+     "niche": "niche_monetisable_paris_sportifs",
+     "video_id": "t7A3yjgG43o",
+     "langue": "en"
+    },
+    {
+     "verbatim": "Seven nights. That's all it took. Not seven years of study, not a decade inside mystery schools or a pilgrimage to some sacred site in...",
+     "chaine": "Hermetic Talk",
+     "niche": "spiritualite",
+     "video_id": "AhjjbNSl28s",
+     "langue": "en"
+    }
+   ],
+   "productible": true
+  },
+  {
+   "id": "mystere_ouvert",
+   "definition": "Pose une enigme non resolue sur le sujet, sans formuler explicitement une question.",
+   "regles": [
+    "Formulation d'ignorance/enigme (we don't know, personne ne sait, mystere, cache depuis)",
+    "Absence de question directe et de statistique-choc dominante"
+   ],
+   "n_total": 26,
+   "part_globale_pct": 7.5,
+   "exemples": [
+    {
+     "verbatim": "Hanno trascorso secoli nascondendo l'unica parte del tuo corpo che potrebbe renderti libero, non il tuo cuore, non",
+     "chaine": "Biblioteca di Thoth",
+     "niche": "spiritualite",
+     "video_id": "taqhcIGuwwc",
+     "langue": "it"
+    },
+    {
+     "verbatim": "The Book of Enoch, a recently discovered text which has captured the attention of Christians across the world. Amazing details excluded from the Bible are...",
+     "chaine": "AB Documentary",
+     "niche": "histoire_doc",
+     "video_id": "BAno6TLcHL4",
+     "langue": "en"
+    },
+    {
+     "verbatim": "The Egyptian pyramids are without a doubt the most mysterious structures on planet Earth We do not know when they were built how they were...",
+     "chaine": "After Skool",
+     "niche": "niche_monetisable_longevite",
+     "video_id": "Ft1waA3p2_w",
+     "langue": "en"
+    },
+    {
+     "verbatim": "Il existe une technique que Jésus a enseigné à ses disciples les plus proches et qui a été totalement exclu du christianisme officiel. Une pratique...",
+     "chaine": "Bibliotheque Gnostique",
+     "niche": "spiritualite",
+     "video_id": "WF_FH6w7MiY",
+     "langue": "fr"
+    }
+   ],
+   "productible": true
+  },
+  {
+   "id": "mise_en_scene_narrative",
+   "definition": "Dramatise ou fictionnalise la scene (dialogue invente, voix, ton theatral) plutot que rapporter un fait.",
+   "regles": [
+    "Dialogue ou voix stylisee non attribuable a un fait brut (personnage fictif, organe anthropomorphise, sketch)",
+    "Ton ludique ou dramatise assume, non factuel/documentaire"
+   ],
+   "n_total": 13,
+   "part_globale_pct": 3.8,
+   "exemples": [
+    {
+     "verbatim": "no digas más criatura Búscalo que alimente más lo nutritivo de verdad y olvídate de todo lo demás Esa es la sangre de mi mamá...",
+     "chaine": "CasiCreativo (parent ES)",
+     "niche": "science_pop",
+     "video_id": "1KtNPT9zph4",
+     "langue": "es"
+    },
+    {
+     "verbatim": "gentlemen gentlemen I want to thank you for attending this funk family farms traditional Thanksgiving dinner",
+     "chaine": "Bruce H. Lipton, Ph.D.",
+     "niche": "spiritualite",
+     "video_id": "vEfXK3D8vGc",
+     "langue": "en"
+    },
+    {
+     "verbatim": "okay here comes something I guess here's another carbohydrate heading your way that's great hey liver put your glucose that's perfect here's your thing muscle...",
+     "chaine": "CasiCreativo English",
+     "niche": "science_pop",
+     "video_id": "3zczNctdKXs",
+     "langue": "en"
+    },
+    {
+     "verbatim": "hey belly tell your boss that I just arrived show a little respect you little thing okay to you I missed your stomach whatever you...",
+     "chaine": "CasiCreativo English",
+     "niche": "science_pop",
+     "video_id": "BfzMi1EOe4I",
+     "langue": "en"
+    }
+   ],
+   "productible": true
+  },
+  {
+   "id": "autorite_citee",
+   "definition": "S'appuie sur une source, un lieu ou un titre nomme pour crediter d'emblee le propos.",
+   "regles": [
+    "Nomme une institution, un musee, un titre academique ou une etude precise",
+    "Sert a asseoir la credibilite avant le contenu, pas une anecdote personnelle dominante"
+   ],
+   "n_total": 13,
+   "part_globale_pct": 3.8,
+   "exemples": [
+    {
+     "verbatim": "Dans Piste et Sopia, un passage décrit une pratique quotidienne de Jésus délibérément retirée de la Bible. Avant de boire de l'eau, il prononçait deux...",
+     "chaine": "Bibliotheque Gnostique",
+     "niche": "spiritualite",
+     "video_id": "jqDdND6ZmLo",
+     "langue": "fr"
+    },
+    {
+     "verbatim": "“The masses have never thirsted after truth.",
+     "chaine": "After Skool",
+     "niche": "niche_monetisable_longevite",
+     "video_id": "09maaUaRT4M",
+     "langue": "en"
+    },
+    {
+     "verbatim": "Dans l'Évangile de Philippe, l'un des textes découverts à Nag Amadi en 1945 figure une phrase que les traducteurs ont mis des décennies à publier...",
+     "chaine": "Bibliotheque Gnostique",
+     "niche": "spiritualite",
+     "video_id": "qSG-AnzqduM",
+     "langue": "fr"
+    },
+    {
+     "verbatim": "So, I worked out recently that I've seen over 50,000 patients in my career so far. And after a while, you start to see things...",
+     "chaine": "Doctor Alex",
+     "niche": "niche_monetisable_longevite",
+     "video_id": "P210J6Y-zKQ",
+     "langue": "en"
+    }
+   ],
+   "productible": true
+  },
+  {
+   "id": "intro_chaine_neutre",
+   "definition": "Presentation formulaique de la chaine ou de l'hote, sans procede d'accroche.",
+   "regles": [
+    "Mention du nom de la chaine/de l'emission ou auto-presentation de l'hote",
+    "Aucun nombre, aucune question, aucune contradiction, aucun enjeu personnel",
+    "Formule recurrente identifiable (generique d'ouverture repete d'une video a l'autre)"
+   ],
+   "n_total": 28,
+   "part_globale_pct": 8.1,
+   "exemples": [
+    {
+     "verbatim": "Арт систем ТВ представляет вершины",
+     "chaine": "Khachakirner20",
+     "niche": "histoire_doc",
+     "video_id": "gVIDSBxBw3M",
+     "langue": "ru"
+    },
+    {
+     "verbatim": "hello and welcome to a special episode of after skool i'm andrew huberman professor of neurobiology and ophthalmology at stanford school of medicine i'm also...",
+     "chaine": "After Skool",
+     "niche": "niche_monetisable_longevite",
+     "video_id": "gR_f-iwUGY4",
+     "langue": "en"
+    },
+    {
+     "verbatim": "welcome to the huberman Lab podcast where we discuss science and science-based tools for everyday life I'm Andrew huberman and I'm a professor of neurobiology...",
+     "chaine": "Andrew Huberman",
+     "niche": "niche_monetisable_longevite",
+     "video_id": "50BZQRT1dAg",
+     "langue": "en"
+    },
+    {
+     "verbatim": "- Welcome to the Huberman Lab Podcast, where we discuss science and science-based tools for everyday life. I'm Andrew Huberman, and I'm a professor of...",
+     "chaine": "Andrew Huberman",
+     "niche": "niche_monetisable_longevite",
+     "video_id": "IAnhFUUCq6c",
+     "langue": "en"
+    }
+   ],
+   "productible": false,
+   "motif_non_productible": "ouverture de marque sans promesse : observee, jamais a tirer pour un script (etapes 10 et 16)"
+  }
+ ],
+ "regles_trajectoire": [
+  {
+   "id": "T1",
+   "regle": "Ouvrir une chaine par >= 50 videos en 90 jours en format long (duree mediane >= 1200 s), 0 % de Short.",
+   "preuve": "Elias Yoder : 57 videos / 95 j, 1274 s, 0 % Short -> 259 057 vues medianes (n=34, videos > 90 j)",
+   "confiance": "faible",
+   "appliquee_par": [],
+   "source": "registre/TRAJECTOIRES.md (4 chaines, agent D)",
+   "statut": "hypothese a tester",
+   "motif_statut": "une seule chaine, 4 mois d'existence ; la seule verification possible serait une chaine BMS suivant ce regime. N'est appliquee par aucune etape en l'etat."
+  },
+  {
+   "id": "T2",
+   "regle": "Piloter sur la mediane de vues des videos de plus de 90 jours, jamais sur le cumul de vues ni sur les abonnes.",
+   "preuve": "Mortes/decrue : 3 223 (n=116) et 4 499 (n=107). Vivantes : 271 617 (n=52) et 259 057 (n=34)",
+   "confiance": "moyenne",
+   "appliquee_par": [
+    "etape_15",
+    "etape_25",
+    "etape_26"
+   ],
+   "source": "registre/TRAJECTOIRES.md (4 chaines, agent D)"
+  },
+  {
+   "id": "T3",
+   "regle": "Ne jamais faire passer une chaine longue a l'ultra-court (<= 30 s, >= 75 % de Shorts) en un trimestre.",
+   "preuve": "CasiCreativo 2024-Q2 -> Q3 : 107 s -> 30 s, Shorts 50 % -> 75 %, vues/jour 585 -> 61,9 (division par 9,5)",
+   "confiance": "faible",
+   "appliquee_par": [
+    "etape_23.2"
+   ],
+   "source": "registre/TRAJECTOIRES.md (4 chaines, agent D)"
+  },
+  {
+   "id": "T4",
+   "regle": "Ne pas augmenter la cadence de plus de 60 % d'un trimestre a l'autre sans verifier la part de breakouts du trimestre precedent.",
+   "preuve": "Elias Yoder 57 -> 95 videos (+67 %) : breakouts 63 % -> 8 %, vues/jour 1170 -> 419. Life According to Science 8 -> 43 (x5,38) : vues medianes 11 550 -> 2 680 au trimestre suivant",
+   "confiance": "moyenne",
+   "appliquee_par": [
+    "etape_23.2",
+    "etape_25"
+   ],
+   "source": "registre/TRAJECTOIRES.md (4 chaines, agent D)"
+  },
+  {
+   "id": "T5",
+   "regle": "Ne jamais lire une part de breakouts comme une performance : elle est relative a la mediane de la chaine elle-meme, donc mecaniquement ecrasee des que la mediane monte. Comparer les vues absolues normalisees par l'age.",
+   "preuve": "Elias Yoder 63 % -> 8 % alors que la mediane de la chaine passe de 116 968 a 11 513 ; Life According to Science 54 % -> 28 % ; Health Snippet 80 % -> 57 % -> 0 %. La retombee est un artefact de la definition du breakout autant qu'un signal.",
+   "confiance": "forte",
+   "appliquee_par": [
+    "etape_25",
+    "etape_26"
+   ],
+   "source": "registre/TRAJECTOIRES.md (4 chaines, agent D)"
+  },
+  {
+   "id": "T6",
+   "regle": "Declencher l'alerte de decrue sur la mediane de vues, pas sur la cadence : une chaine peut mourir sans ralentir.",
+   "preuve": "Health Snippet publie 13 videos en 2024-Q4 a 683 vues medianes, puis 1, puis 0, sans ralentissement prealable",
+   "confiance": "faible",
+   "appliquee_par": [
+    "etape_25"
+   ],
+   "source": "registre/TRAJECTOIRES.md (4 chaines, agent D)"
+  },
+  {
+   "id": "T7",
+   "regle": "Ne jamais comparer deux videos ou deux trimestres en vues brutes quand l'ecart d'age median depasse 90 jours : normaliser par l'age.",
+   "preuve": "Ages medians par trimestre de 29 a 1 944 jours ; sans correction le trimestre 2026-Q3 de CasiCreativo affiche 11 429 vues/jour sur un age median de 29 jours",
+   "confiance": "forte",
+   "appliquee_par": [
+    "etape_15",
+    "etape_20",
+    "etape_25"
+   ],
+   "source": "registre/TRAJECTOIRES.md (4 chaines, agent D)"
+  },
+  {
+   "id": "T8",
+   "regle": "Ne pas compter sur la regularite de publication comme facteur de survie (non teste a l'echelle du registre : les 74 chaines n'ont pas d'etiquette de survie).",
+   "preuve": "Health Snippet : intervalle median 7 jours pendant 4 ans -> morte. CasiCreativo : 9 a 272 jours, irregulier -> 707 000 abonnes",
+   "confiance": "moyenne",
+   "appliquee_par": [
+    "etape_23.2"
+   ],
+   "source": "registre/TRAJECTOIRES.md (4 chaines, agent D)",
+   "statut": "partiellement testable",
+   "motif_statut": "le test sur >= 10 chaines est executable sur le registre mais exige une etiquette de survie par chaine, que la collecte ne fournit pas."
+  },
+  {
+   "id": "T9",
+   "regle": "Ne pas ouvrir une chaine sur les Shorts par imitation.",
+   "preuve": "Elias Yoder 0 % de Shorts (explosion) ; Health Snippet et Life According to Science 0 % (morte et decrue) ; le seul trimestre de CasiCreativo a 75 % de Shorts est son pire (61,9 vues/jour)",
+   "confiance": "moyenne",
+   "appliquee_par": [
+    "etape_23.2"
+   ],
+   "source": "registre/TRAJECTOIRES.md (4 chaines, agent D)"
+  },
+  {
+   "id": "T10",
+   "regle": "Optimiser la mediane de vues par video avant le volume.",
+   "preuve": "CasiCreativo : 57 videos -> 707 000 abonnes, 271 617 vues medianes. Health Snippet : 116 videos -> 89 900 abonnes, 3 223 vues medianes",
+   "confiance": "moyenne",
+   "appliquee_par": [
+    "etape_20",
+    "etape_25"
+   ],
+   "source": "registre/TRAJECTOIRES.md (4 chaines, agent D)"
+  },
+  {
+   "id": "T11",
+   "regle": "Garder la duree mediane stable d'un trimestre a l'autre (+/- 30 %).",
+   "preuve": "CasiCreativo 107 -> 30 s (division par 3,6) puis vues/jour divisees par 9,5 ; Life According to Science 778 -> 1188 s (x1,53) puis vues medianes divisees par 4,3",
+   "confiance": "moyenne",
+   "appliquee_par": [
+    "etape_12.1",
+    "etape_23.2"
+   ],
+   "source": "registre/TRAJECTOIRES.md (4 chaines, agent D)"
+  },
+  {
+   "id": "T12",
+   "regle": "Suivre l'indice de Jaccard des mots-cles de titres entre trimestres et alerter sous 0,15 (seuil arbitraire, a recalibrer sur le registre).",
+   "preuve": "Health Snippet : exercises/benefits -> every day eating -> shocking secrets/anti aging, Jaccard tombant a 0,00, vues medianes 93 184 -> 683",
+   "confiance": "faible",
+   "appliquee_par": [
+    "etape_20"
+   ],
+   "source": "registre/TRAJECTOIRES.md (4 chaines, agent D)",
+   "statut": "seuil arbitraire",
+   "motif_statut": "le seuil de 0,15 vient d'une chaine dont le Jaccard tombe a 0,00 ; a recalibrer a l'etape 20.",
+   "seuil_arbitraire": true
+  }
+ ],
+ "avertissements": [
+  "Breakout = vues > 3x la mediane de sa propre chaine. Aucun groupe temoin exploitable pour les miniatures et les hooks : l'echantillon de miniatures (10 par chaine) et de transcriptions (5 par chaine) est par construction constitue des videos les plus vues (188 miniatures sur 192 et 331 hooks sur 345 sont des breakouts). Les motifs et les parts de hooks decrivent donc ce que font les meilleures videos, pas ce qui les distingue des mauvaises.",
+  "29 chaines sur 74 sont tronquees aux 500 videos les plus recentes : leurs agregats decrivent l'activite recente, pas l'historique complet.",
+  "mots_par_minute est mesure sur les 60 premieres secondes, generique et musique compris ; ce n'est pas le debit de narration d'une video entiere. A remesurer sur la voix produite a l'etape 11 et au banc de l'etape 15.",
+  "Les patrons de titre viennent de 10 heuristiques regex ; leurs parts ne sont pas exclusives et nom_propre_en_tete sur-detecte en anglais (title case). A lire comme un plafond.",
+  "rythme_coupe_s vient du tableau P9 (mesure par l'equipe de Sofiane, 30 chaines), pas de la collecte : aucune valeur n'y est recalculable ici. Trois niches n'ont aucune mesure.",
+  "Les palettes de miniature sont une estimation visuelle par familles de couleurs, pas une mesure pixel.",
+  "La taxonomie des hooks est une classification a un seul codeur, sans double codage ni accord inter-juges. Les frontieres entre negation_du_sens_commun et mystere_ouvert d'une part, in_medias_res et mise_en_scene_narrative d'autre part, sont poreuses et ont ete tranchees au cas par cas : les parts de ces quatre types se lisent a quelques points pres.",
+  "4 transcriptions sur 349 (2 coreennes, 2 arabes) etaient illisibles et sont exclues de la classification.",
+  "Toutes les valeurs de duree, cadence, titre et breakout excluent les Shorts (<= 70 s), sauf part_shorts.",
+  "Les donnees API sources doivent etre purgees ou rafraichies au 14/10/2026 (docs/CONFORMITE.md 9) ; ce referentiel, mesure derivee, se conserve."
+ ],
+ "consommateurs": {
+  "etape_10": [
+   "niches.<n>.sujets_porteurs",
+   "niches.<n>.duree_s.cible",
+   "niches.<n>.duree_s.tolerance",
+   "niches.<n>.hooks.parts",
+   "niches.<n>.hooks.boucles_minimum",
+   "hooks_taxonomie (productible: true seulement)",
+   "niches.<n>.mots_par_minute.mediane (debit de narration sur video entiere, jamais debut_60s)"
+  ],
+  "etape_12.1": [
+   "niches.<n>.rythme_coupe_s.cible_montage",
+   "niches.<n>.rythme_coupe_s.cible",
+   "niches.<n>.rythme_coupe_s.min",
+   "niches.<n>.rythme_coupe_s.max",
+   "niches.<n>.rythme_coupe_s.facteur_hook",
+   "niches.<n>.rythme_coupe_s.fallback_provisoire_s",
+   "niches.<n>.duree_s"
+  ],
+  "etape_15": [
+   "niches.<n>.rythme_coupe_s",
+   "niches.<n>.duree_s",
+   "niches.<n>.mots_par_minute",
+   "niches.<n>.hooks.longueur_mots",
+   "niches.<n>.hooks.boucle_ouverte",
+   "niches.<n>.miniatures.texte_mots",
+   "production.loudness_lufs",
+   "production.true_peak_dbtp",
+   "production.couverture_sous_titres"
+  ],
+  "etape_16": [
+   "hooks_taxonomie",
+   "niches.<n>.hooks.parts",
+   "niches.<n>.hooks.longueur_mots",
+   "niches.<n>.hooks.boucle_ouverte.position_s_mediane",
+   "niches.<n>.mots_par_minute"
+  ],
+  "etape_20": [
+   "niches.<n>.sujets_porteurs",
+   "niches.<n>.densite_breakouts",
+   "niches.<n>.ratio_top1_median",
+   "regles_trajectoire (T7, T10, T12)"
+  ],
+  "etape_21": [
+   "niches.<n>.titres.patrons",
+   "niches.<n>.titres.longueur_car",
+   "niches.<n>.miniatures.motifs_gagnants",
+   "niches.<n>.miniatures.palette",
+   "niches.<n>.miniatures.texte_mots",
+   "niches.<n>.miniatures.contraste"
+  ],
+  "etape_23.2": [
+   "niches.<n>.cadence_par_semaine",
+   "niches.<n>.creneaux",
+   "regles_trajectoire"
+  ]
+ },
+ "production": {
+  "loudness_lufs": {
+   "cible": -14.0,
+   "tolerance": 1.0,
+   "origine": "norme de normalisation YouTube, pas une mesure du registre",
+   "a_mesurer": false
+  },
+  "true_peak_dbtp": {
+   "cible": -1.0,
+   "origine": "pratique de diffusion, decision",
+   "a_mesurer": false
+  },
+  "silence_max_s": {
+   "cible": null,
+   "a_mesurer": true,
+   "mesure_par": "etape_15",
+   "note": "non mesurable sur les donnees du registre : exige l'audio des videos sources, qui n'est pas telecharge (docs/CONFORMITE.md)"
+  },
+  "couverture_sous_titres": {
+   "cible": 1.0,
+   "origine": "decision de production : sous-titres mot a mot sur 100 % de la parole",
+   "a_mesurer": false
+  },
+  "note": "aucune de ces valeurs ne vient du registre : l'audio et la video des chaines tierces ne sont jamais telecharges. Elles sont ici pour que l'etape 15 lise ses cibles au meme endroit, marquees par leur origine."
+ },
+ "variantes_style": {
+  "avatar": {
+   "attributs": [
+    "Meme personnage/visage recycle sur toutes les videos de la chaine (persona identifiable, type avatar genere)",
+    "Sujet cadre a droite dominant, texte cale a gauche",
+    "Fleche (rouge ou jaune) pointant l'objet de preuve, le prix ou le symbole - marqueur le plus frequent du format",
+    "Texte plus long que la moyenne de la niche d'accueil (mediane 6 mots, jusqu'a 8), souvent avec un prix ($X) ou une accroche choc",
+    "Montage mixte photo reelle du visage + insert graphique (livre, diagramme, capture, produit) a cote, contraste toujours eleve"
+   ],
+   "chaines_source": [
+    "@eliasyoderamish",
+    "@danielmorenoyt"
+   ],
+   "n_miniatures": 20,
+   "note": "format de production (persona recycle), applicable a toute niche ; n'est pas une niche",
+   "recompte": true,
+   "recompte_note": "ces 20 miniatures sont deja comptees dans home_hacks (Elias Yoder) et spiritualite (Daniel Moreno) : ne pas les additionner aux effectifs de niche"
+  }
+ },
+ "ordre_de_lecture": {
+  "rythme_coupe_s": [
+   "cible_montage",
+   "cible",
+   "fallback_provisoire_s"
+  ],
+  "note": "lire le premier champ non nul. fallback_provisoire_s n'est pas une cible : toute niche qui l'utilise porte a_mesurer: true et doit etre mesuree au banc (etape 15)."
+ }
+}

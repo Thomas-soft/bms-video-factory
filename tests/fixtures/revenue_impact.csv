@@ -1,0 +1,7 @@
+Action Id,Action Date,Campaign,SubId1,Status,Sale Amount,Payout,Currency
+FIXTURE-0001,2026-09-21 14:02:11,Example supplement,bms-science-en-20260920-s57f,Approved,39.90,4.79,USD
+FIXTURE-0002,2026-09-22 09:40:03,Example supplement,bms-science-en-20260920-s57f,Pending,39.90,4.79,USD
+FIXTURE-0003,2026-09-22 18:15:47,Example supplement,bms-science-en-20260919-mtn7,Approved,79.80,9.58,USD
+FIXTURE-0004,2026-09-23 07:05:00,Example supplement,bms-science-en_en_bms-science-en-20260923-c7km,Approved,39.90,4.79,USD
+FIXTURE-0005,2026-09-23 11:30:00,Example supplement,bms-science-en-20260923-c7km,Reversed,39.90,4.79,USD
+FIXTURE-0006,2026-09-23 12:00:00,Example supplement,inconnu-hors-usine,Approved,39.90,4.79,USD

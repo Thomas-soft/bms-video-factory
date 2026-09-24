@@ -1,0 +1,38 @@
+schema_version: "1.0"
+# Chaîne pilote. La langue de lancement est l'anglais (arbitrage d'Alek, 15/09/2026).
+# Le compte Google n'existe pas encore : question ouverte à Alek (STATE.md).
+id: bms-science-en
+name: "BMS Science EN"
+lang: en                        # doit exister dans config/languages/
+niche: science_pop              # doit exister dans config/niches/
+style: illustre                 # doit exister dans config/styles/
+templates: [sci-a, sci-b, sci-c]        # >= 3, rotation exigée par CONFORMITE § 5
+# charte → config/chartes/bms-science-en.yaml (étape 29)
+voice_id: serena_en             # doit appartenir à config/languages/en.yaml
+cadence:
+  per_week_max: 2               # plafond dur des 90 premiers jours, CONFORMITE § 6
+  days: [tuesday, friday, saturday]   # les 3 jours du REFERENTIEL (science_pop) ; le planificateur alterne
+  hours_local: ["17:00", "11:00"]   # 21 h et 15 h UTC, 1er et 3e créneaux de la niche (REFERENTIEL)
+  jitter_min: 90                # ± 90 min autour du créneau (fenêtre de 3 h), étape 23.2
+  timezone: "America/New_York"
+google_account:
+  alias: bms-science-en
+  brand_account: "BMS Science EN"
+  owner: BMS
+  gcp_project: bms-factory      # projet unique, identique pour toutes les chaînes
+  token_ref: "secrets/tokens/bms-science-en.json"   # référence, jamais la valeur
+  two_fa_enabled: false         # à activer à la création du compte (étape 13)
+  phone_verified: false
+products: []                    # ids de config/products/ ; non vide => paid_promotion
+derive_from: null                # étape 24 désactivée : full anglais, aucune production FR (Thomas, 23/09/2026)
+auto_approve: false             # true retirerait l'exception éditoriale RIA pour cette chaîne
+youtube:
+  audit_passed: false           # tant que false, publish_path = manual_studio
+  channel_id: null
+  playlist_id: null
+  captions_upload: true         # exclusif de charte.subtitles.burn_in
+  category_id: "28"            # Science & Technology — snippet.categoryId de videos.insert
+  notify_subscribers: true      # faux pour un rattrapage de retard : pas 4 notifications le même jour
+library:
+  cooldown_videos: 10
+  max_uses_per_channel: 3

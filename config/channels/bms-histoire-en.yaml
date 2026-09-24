@@ -1,0 +1,46 @@
+schema_version: "1.0"
+# Chaîne histoire documentaire en anglais — **la cible de production de la niche** (étape 17).
+# `bms-histoire-fr` et `bms-histoire-es` restent en configuration mais ne sont plus des cibles.
+# Style documentaire : vidéos et images réelles de banques libres, donc aucune mention « Images
+# virtuelles » tant qu'aucun plan ne retombe sur le repli généré — et une attribution par asset
+# obligatoire (CONFORMITE § 8), composée automatiquement par `metadata.py`.
+id: bms-histoire-en
+name: "BMS History EN"
+lang: en                        # doit exister dans config/languages/
+niche: histoire_doc             # doit exister dans config/niches/
+style: documentaire             # doit exister dans config/styles/
+templates: [hist-a, hist-b, hist-c]     # >= 3, rotation exigée par CONFORMITE § 5
+# charte → config/chartes/bms-histoire-en.yaml (étape 29)
+# Deux chaînes de même langue ne partagent pas leur voix (CONFORMITE § 5, anti-clonage) :
+# `serena_en` est prise par `bms-science-en`, et la configuration stricte refuse le doublon.
+# `ryan_en` est une voix masculine des mêmes poids Qwen3-TTS (Apache-2.0), ajoutée à
+# `config/languages/en.yaml` par cette étape. **Elle n'a jamais été écoutée** : Thomas doit la
+# valider avant le premier run de production. L'arbitrage GPL de Kokoro reste ouvert (STATE.md).
+voice_id: ryan_en
+cadence:
+  per_week_max: 2               # plafond dur des 90 premiers jours, CONFORMITE § 6
+  days: [tuesday, thursday, saturday] # les 3 jours du REFERENTIEL (histoire_doc) ; le planificateur alterne
+  hours_local: ["12:00", "19:00"]   # 16 h UTC (1er créneau de la niche) et 23 h UTC ; écart de 4 h avec science-en tenu par le calendrier
+  jitter_min: 90                # ± 90 min autour du créneau (fenêtre de 3 h), étape 23.2
+  timezone: "America/New_York"
+google_account:
+  alias: bms-histoire-en
+  brand_account: "BMS History EN"
+  owner: BMS
+  gcp_project: bms-factory      # projet unique, identique pour toutes les chaînes
+  token_ref: "secrets/tokens/bms-histoire-en.json"   # référence, jamais la valeur
+  two_fa_enabled: false
+  phone_verified: false
+products: []                    # ids de config/products/ ; non vide => paid_promotion
+derive_from: null
+auto_approve: false             # true retirerait l'exception éditoriale RIA pour cette chaîne
+youtube:
+  audit_passed: false           # tant que false, publish_path = manual_studio
+  channel_id: null
+  playlist_id: null
+  captions_upload: true         # exclusif de charte.subtitles.burn_in
+  category_id: "27"             # Éducation — snippet.categoryId de videos.insert
+  notify_subscribers: true
+library:
+  cooldown_videos: 10           # un clip de banque ne revient pas avant 10 vidéos
+  max_uses_per_channel: 3

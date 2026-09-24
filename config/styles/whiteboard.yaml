@@ -1,0 +1,48 @@
+schema_version: "1.0"
+# Whiteboard animé : vtracer (MIT) pour la vectorisation, animation de tracé et main PNG.
+# Aucun équivalent VideoScribe clé en main (veille du 13/09/2026). Livré par l'étape 30.2.
+id: whiteboard
+engine: whiteboard
+backend: revideo
+statut: retenu_v1
+templates: [trace, trace_texte]
+params:
+  scene:
+    fps: 30
+    resolution: "1920x1080"
+    resolution_scale: 1.0
+    # Marge plus large que le motion design : un dessin qui touche le bord se lit comme une
+    # image découpée, pas comme une page.
+    marge_px: 110
+  image:
+    # Le dessin n'est jamais montré tel quel — il est vectorisé. Un contour tracé à 768 px se
+    # rend aussi net à 1080p qu'un contour tracé à 1280 px, pour 54 % du temps de génération
+    # (mesuré le 19/09/2026 : 63,6 s contre 137,0 s sur cette machine).
+    resolution: "768x768"
+    model: "mlx-community/FLUX.2-Klein-4B-4bit"
+    steps: 4
+  trace:
+    tool: vtracer                 # MIT. Jamais potrace, qui est GPL.
+    mode: spline                  # cubiques : un trait qui s'allonge, pas une ligne brisée
+    colormode: binary             # noir sur blanc : une seule couleur à suivre
+    hierarchical: cutout          # les boucles sont creusées, pas empilées
+    # Contrainte dure de l'étape 30.2 : au-delà, le dessin fourmille. Le moteur descend
+    # l'échelle de simplification jusqu'à tenir, et journalise chaque image.
+    plafond_chemins: 400
+  draw:
+    # 80 % de la durée du plan pour tracer, 20 % pour laisser lire le dessin fini.
+    part_trace: 0.80
+    papier: "#f7f4ec"             # fond papier — pas la charte : elle décrit un fond sombre
+    encre: "#1a1a1a"              # trait du dessin ; les marqueurs, eux, viennent de la charte
+    grain: 0.05                   # opacité du grain de papier
+    tremblement: true             # léger flottement de caméra, comme une caméra posée sur table
+    police: "Caveat SemiBold"     # OFL-1.1, la seule manuscrite du dépôt
+    mains: [assets/charte/main.png, assets/charte/main_2.png]
+    pointe_x: 44                  # pointe du feutre dans la planche de main, en pixels
+    pointe_y: 40
+  revideo:
+    version: "0.11.0"
+    disable_telemetry: true
+    lot: 20
+    workers: 1                    # 2 workers saturent 16 Go (mesure de l'étape 5.2)
+  person_review: false

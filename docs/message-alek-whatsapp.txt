@@ -1,0 +1,32 @@
+Salut Alek,
+
+On a tranché les 7 styles que tu voulais, mesures à l'appui. Résultat : *6 styles utilisables*, portés par 5 moteurs.
+
+1. Illustration animée (images générées + mouvement de caméra)
+2. Motion design
+3. Documentaire (archives, images d'illustration)
+4. Réaliste — vrais plans filmés, banques libres de droits
+5. Whiteboard animé
+6. Avatar 2D qui parle
+
+*Où on en est vraiment, style par style* : un seul a été produit en vidéo complète et regardé de bout en bout — l'illustration animée. Les 5 autres n'ont été vus que sur des extraits de quelques secondes, et je ne les compte pas comme validés tant qu'ils n'ont pas tourné sur 10 minutes. L'avatar 2D se pose par-dessus les autres styles, donc ça fait plus de rendus différents que 6 — et la vraie variété vient de la charte de chaque chaîne (palette, typo, rythme de coupe) : deux chaînes dans le même style ne se ressemblent pas.
+
+*Le 7e, les animations poussées, je l'abandonne.* C'est du travail d'animateur à la main, pas une question de puissance : CasiCreativo, ta référence, en fait — et publie 57 vidéos en 5 ans. On ne tiendra pas ce niveau à 2 vidéos par semaine, et aucun serveur n'y change quoi que ce soit.
+
+*Ce qu'on ne fait pas* : la vidéo réaliste générée par IA. Preuve plutôt qu'avis — 4 secondes en très basse résolution ont pris 7 minutes de calcul, avec des traces de filigrane dans l'image. Une minute coûterait 1h49, contre 20 à 33 minutes selon le style en images fixes. Ce n'est pas un réglage qu'on aurait raté, c'est une classe de matériel qu'on n'a pas. Sur le serveur on pourra en insérer des plans de 3-4 secondes en habillage, jamais une vidéo entière. Et regarde tes propres références : aucune n'en a besoin — CasiCreativo c'est du motion design, les 3 bibliothèques de Thoth (398, 324 et 241 vidéos) tournent sur de la voix off, Elias Yoder c'est 358 000 abonnés en 4 mois avec un personnage récurrent.
+
+*La démo est faite, et je te dis aussi ce qui cloche.* Le système a produit une vidéo entière tout seul : sujet, recherche, texte, voix, sous-titres, 124 plans, miniature, description. 12 minutes, 2h23 de calcul, zéro intervention. Et trois défauts que j'ai mesurés plutôt que devinés : elle ne montrait que 36 images différentes sur 12 minutes — l'une d'elles revenait 22 fois — la voix ne s'arrête jamais de parler (pas un silence en 12 minutes), et les images décorent au lieu d'expliquer. Le premier défaut était un bug, il est corrigé : on passe à 67 images. Les deux autres sont du réglage éditorial, c'est la suite du travail.
+
+*Un défaut que je te dis tout de suite* : sur une série de 8 plans, le 8e a changé le personnage. Ça se corrige en grande partie au texte qu'on donne au modèle ; pour le reste, on fait relire à l'œil les seuls plans qui montrent quelqu'un.
+
+*Volume* : tout tourne sur mon MacBook Air M2 16 Go, qui est aussi ma machine de travail. Une vidéo de 12 minutes coûte 2h23 de calcul — et la correction ci-dessus la fait passer à environ 3h15. Sur cette seule mesure je table sur 3 à 5 vidéos par semaine, pas 7, et je te redonne le chiffre quand j'en aurai produit plusieurs d'affilée. 10, non.
+
+*Le serveur* : on part sur les ~50 €/mois que tu as validés, mais la machine n'est pas choisie. Je regarde ce que ce budget achète vraiment et je te donne les chiffres avant qu'on engage. Il servira soit à produire plus, soit à faire de plus belles images — pas les deux à fond, c'est le même calcul. En revanche il ne donnera pas une voix française plus naturelle : ça, c'est une question de données d'entraînement, pas de puissance.
+
+*La suite* : une démo par style, en commençant par le documentaire — c'est le seul qui met à l'écran des plans qui bougent vraiment. Et surtout j'ouvre le dossier de publication : c'est le vrai chemin critique. YouTube force en privé tout ce qui sort d'un projet développeur non audité, et l'audit prend des semaines à des mois. Le code qui publie est écrit et testé ; ce qui manque, ce sont les comptes — d'où ma demande ci-dessous.
+
+*Il me faut 2 choses de ta part* :
+— raison sociale, SIREN et adresse de BMS (c'est obligatoire pour déposer le dossier d'audit : il faut une politique de confidentialité en ligne avec le nom de la société dessus)
+— les comptes Google sous lesquels les chaînes doivent vivre (ça débloque aussi la banque de musique de YouTube, sans laquelle nos vidéos sortent sans musique de fond — c'est le cas de la démo)
+
+Thomas

@@ -1,0 +1,24 @@
+schema_version: "1.0"
+# Motion design programmatique. Revideo 0.11.0 (MIT), épinglé par `render/package-lock.json`.
+# Télémétrie PostHog coupée par `DISABLE_TELEMETRY=true`, imposé par le moteur à chaque appel.
+id: motion
+engine: motion_design
+backend: revideo
+statut: retenu_v1               # livré par l'étape 30.1 (19/09/2026)
+templates: [kinetic, structure, chiffre]
+params:
+  scene:
+    fps: 30
+    resolution: "1920x1080"
+    # 1,0 = 1080p natif. Mesuré le 19/09 : 0,45 x le temps réel bout en bout sur M2, donc très
+    # au-dessous du plafond de 8 x ; aucune raison de descendre à 720p (0,667) pour l'instant.
+    resolution_scale: 1.0
+    marge_px: 96
+  revideo:
+    version: "0.11.0"
+    disable_telemetry: true
+    # Plans par lancement de Chromium. Un lancement coûte ~4 s ; vingt plans l'amortissent sans
+    # qu'un échec de fin de lot coûte trop cher à rejouer.
+    lot: 20
+    workers: 1                  # 2 workers saturent 16 Go (mesure de l'étape 5.2)
+  person_review: false

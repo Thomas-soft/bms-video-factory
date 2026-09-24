@@ -1,0 +1,162 @@
+{
+  "version": "1.0",
+  "generated_at": "2026-09-23T14:41:31+00:00",
+  "n_videos": 0,
+  "n_videos_with_y": 0,
+  "n_min_per_level": 8,
+  "multiplier_bounds": [
+    0.7,
+    1.4
+  ],
+  "target": "y = log(views_7d / médiane J+7 des autres vidéos de la chaîne)",
+  "frozen": [
+    "is_child",
+    "lang",
+    "niche",
+    "publish_hour",
+    "publish_weekday",
+    "style",
+    "voice_id"
+  ],
+  "factors": {
+    "hook_type": {
+      "type": "catégoriel",
+      "frozen": true,
+      "levels": {}
+    },
+    "title_pattern": {
+      "type": "catégoriel",
+      "frozen": true,
+      "levels": {}
+    },
+    "thumbnail_template": {
+      "type": "catégoriel",
+      "frozen": true,
+      "levels": {}
+    },
+    "style": {
+      "type": "catégoriel",
+      "frozen": true,
+      "levels": {}
+    },
+    "topic_cluster": {
+      "type": "catégoriel",
+      "frozen": true,
+      "levels": {}
+    },
+    "topic_source": {
+      "type": "catégoriel",
+      "frozen": true,
+      "levels": {}
+    },
+    "niche": {
+      "type": "catégoriel",
+      "frozen": true,
+      "levels": {}
+    },
+    "lang": {
+      "type": "catégoriel",
+      "frozen": true,
+      "levels": {}
+    },
+    "voice_id": {
+      "type": "catégoriel",
+      "frozen": true,
+      "levels": {}
+    },
+    "publish_weekday": {
+      "type": "catégoriel",
+      "frozen": true,
+      "levels": {}
+    },
+    "publish_hour": {
+      "type": "catégoriel",
+      "frozen": true,
+      "levels": {}
+    },
+    "is_child": {
+      "type": "catégoriel",
+      "frozen": true,
+      "levels": {}
+    },
+    "cut_rhythm_ratio": {
+      "type": "continu (terciles)",
+      "frozen": true,
+      "levels": {}
+    },
+    "duration_s": {
+      "type": "continu (terciles)",
+      "frozen": true,
+      "levels": {}
+    },
+    "density_facts_per_min": {
+      "type": "continu (terciles)",
+      "frozen": true,
+      "levels": {}
+    },
+    "thumbnail_text_len": {
+      "type": "continu (terciles)",
+      "frozen": true,
+      "levels": {}
+    }
+  },
+  "topics": {
+    "cluster": {},
+    "niche": {}
+  },
+  "hooks": {
+    "histoire_doc": {
+      "parts": {
+        "in_medias_res": 0.6702,
+        "mystere_ouvert": 0.1099,
+        "mise_en_scene_narrative": 0.1099,
+        "intro_chaine_neutre": 0.1099
+      },
+      "changed": false
+    },
+    "science_pop": {
+      "parts": {
+        "in_medias_res": 0.2149,
+        "mise_en_scene_narrative": 0.2149,
+        "adresse_directe": 0.1671,
+        "question_contrarienne": 0.1426,
+        "mystere_ouvert": 0.1192,
+        "statistique_choc": 0.0713,
+        "negation_du_sens_commun": 0.0699
+      },
+      "changed": false
+    }
+  },
+  "titles": {
+    "patterns": {}
+  },
+  "cut_rhythm": {
+    "histoire_doc": {
+      "reference_s": 4.5,
+      "factor": 1.0,
+      "adjusted_s": 4.5,
+      "source": "référentiel (aucun tercile actif)"
+    },
+    "science_pop": {
+      "reference_s": 5.85,
+      "factor": 1.0,
+      "adjusted_s": 5.85,
+      "source": "référentiel (aucun tercile actif)"
+    }
+  },
+  "channels": {},
+  "thumbnail_policy": {
+    "prior": {
+      "ctr": 0.04,
+      "strength": 200.0,
+      "source": "défaut de config (aucun CTR observé)"
+    },
+    "active": false,
+    "templates": {},
+    "rotation": {
+      "after_days": 7,
+      "criterion": "ctr_7d < médiane CTR de la chaîne"
+    }
+  },
+  "retention_rules": []
+}

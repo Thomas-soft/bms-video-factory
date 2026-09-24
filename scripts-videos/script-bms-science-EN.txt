@@ -1,0 +1,317 @@
+SCRIPT — BMS Science EN
+=======================
+
+Language : en   ·   Segments : 28   ·   Words : 1405
+Recorded voice duration : 11:07 (667.2 s)   ·   Loudness : -14.3 LUFS
+Voice : serena_en   ·   Engine : qwen3_tts
+
+EDITORIAL ANGLE: donnee_proprietaire
+    — A visual schema showing the breakdown of sucrose into glucose and
+      fructose.
+    — An explanation of why lactose cannot be extracted from plants.
+    — A distinction between monosaccharides and compound sugars.
+
+------------------------------------------------------------------------------
+
+HOOK  [adresse_directe]
+
+    when you quit sugar your body finds new energy from plants or dairy
+
+------------------------------------------------------------------------------
+
+SEG_00  ·  hook  ·  0:00 → 0:04  (4.9 s)
+    ON SCREEN: NEW ENERGY SOURCES
+
+    when you quit sugar your body finds new energy from plants or dairy
+
+    SOURCES: f01
+
+SEG_01  ·  contexte  ·  0:05 → 0:39  (33.6 s)
+    ON SCREEN: SUGAR IS COMPOUND SUGAR
+
+    White sugar is almost pure sucrose. This compound sugar is made of two
+    bonded monosaccharides. We eat this daily but rarely think about its
+    structure. The sweetness we love hides a simple chemical secret. It is
+    not a single sugar molecule at all. Two smaller sugars hold hands tightly
+    together. This bond is what makes white sugar so distinct. We will see
+    where this specific sugar comes from. The source is far more interesting
+    than you think.
+
+    SOURCES: f02
+
+SEG_02  ·  point  ·  0:39 → 1:05  (25.8 s)
+    ON SCREEN: PLANTS MAKE SUCROSE
+
+    Sucrose is the main constituent of white sugar and is produced naturally
+    in plants. Farmers grow these crops on a massive scale. The bond between
+    the two monosaccharides breaks down easily. Your body can split them
+    apart for fuel. This breakdown happens every time you digest a sweet
+    snack. Plants create this specific pair of sugars.
+
+    SOURCES: f03
+
+SEG_03  ·  point  ·  1:05 → 1:28  (23.2 s)
+    ON SCREEN: BILLION TONNES OF SUGAR
+
+    In 2016 the combined world production of sugarcane and sugar beet was
+    about two billion tonnes. That volume represents the total harvest of
+    these specific crops. Farmers work hard to gather this much plant matter.
+    It takes years to build such a massive supply chain. This number shows
+    how essential sugar is for the economy.
+
+    SOURCES: f04
+
+SEG_04  ·  point  ·  1:29 → 1:55  (26.7 s)
+    ON SCREEN: ONE HUNDRED EIGHTY FIVE MILLION
+
+    About 185 million tonnes of sugar were produced worldwide in 2017. That
+    share remains a significant portion of the total crop. The output
+    fluctuates slightly from year to year. Weather patterns influence the
+    final harvest numbers. Scientists track these changes to predict future
+    trends. We still do not know the exact future yield.
+
+    SOURCES: f05
+
+SEG_05  ·  point  ·  1:56 → 2:20  (24.0 s)
+    ON SCREEN: SUCROSE SPLITS INTO TWO
+
+    Sucrose breaks apart when your body digests it. The compound splits into
+    two smaller pieces. One part is glucose. The other part is fructose. Both
+    pieces are simple sugars now. They are ready for energy use. The body
+    does not keep them bonded. It separates them completely. This change
+    happens inside your cells.
+
+    SOURCES: f02
+
+SEG_06  ·  point  ·  2:20 → 2:48  (28.4 s)
+    ON SCREEN: GLUCOSE MAKES ENERGY
+
+    Glucose powers every living thing on Earth. All organisms use it to make
+    ATP. This molecule stores energy for you. It fuels your muscles and
+    brain. Without glucose, life stops working. Your cells need this specific
+    fuel. It is the most abundant monosaccharide. Everything relies on this
+    single sugar. It drives the machinery of life. No other source works as
+    well.
+
+    SOURCES: f01
+
+SEG_07  ·  point  ·  2:49 → 3:20  (31.1 s)
+    ON SCREEN: FRUCTOSE IS IN FRUIT
+
+    Fructose comes from many natural places. You find it in honey and fruits.
+    Trees and vines also hold this sweet. Flowers and berries contain it too.
+    Even root vegetables have some inside. It is a common monosaccharide in
+    nature. Your body uses it for energy. It is not made by factories. It
+    grows in the wild world. Nature provides this sugar freely.
+
+    SOURCES: f06
+
+SEG_08  ·  point  ·  3:20 → 3:47  (26.5 s)
+    ON SCREEN: PLANTS CANNOT MAKE LACTOSE
+
+    Plants cannot make lactose at all. This sugar exists only in milk. Some
+    dairy products hold it inside. You will never find it in nature. Plants
+    ignore this specific compound. They focus on other sugars instead.
+    Lactose is unique to animals. It comes from mammary glands only. No plant
+    produces this fuel. You must get it from dairy sources.
+
+    SOURCES: f07
+
+SEG_09  ·  point  ·  3:47 → 4:02  (14.5 s)
+    ON SCREEN: LACTOSE IS DAIRY ONLY
+
+    No plant can make lactose. This sugar exists only in milk and some dairy
+    products. You must get it from animal sources. Plants simply do not
+    produce this specific fuel for your body to use.
+
+    SOURCES: f07
+
+SEG_10  ·  point  ·  4:02 → 4:19  (17.3 s)
+    ON SCREEN: ONE OR TWO SUGARS
+
+    White sugar is almost pure sucrose. This is a compound sugar made of two
+    bonded monosaccharides. Glucose and fructose join together to form this
+    sweet energy source. Your body breaks them apart later to power your
+    cells.
+
+    SOURCES: f02
+
+SEG_11  ·  point  ·  4:20 → 4:36  (15.8 s)
+    ON SCREEN: NO MORE SUCROSE
+
+    Stopping sucrose intake changes your diet fast. You no longer eat that
+    compound sugar made of two bonded monosaccharides. Your body must find
+    other ways to generate power without relying on refined sugar anymore.
+
+    SOURCES: f02
+
+SEG_12  ·  point  ·  4:36 → 4:54  (18.2 s)
+    ON SCREEN: BODY FINDS NEW FUEL
+
+    Your body seeks new fuel immediately. Glucose is the most abundant
+    monosaccharide and is used by all living organisms to make adenosine
+    triphosphate for energy. Without added sugar, you must eat natural foods
+    to keep your cells running.
+
+    SOURCES: f01
+
+SEG_13  ·  point  ·  4:54 → 5:09  (14.2 s)
+    ON SCREEN: DAIRY BECOMES OPTION
+
+    You can turn to milk for fuel now. Lactose is the only sugar that cannot
+    be extracted from plants. It occurs only in milk and some dairy products.
+    Your body finds this new source when you stop eating white sugar.
+
+    SOURCES: f07
+
+SEG_14  ·  point  ·  5:09 → 5:28  (19.2 s)
+    ON SCREEN: PLANT SUGARS REMAIN
+
+    Nature still offers other choices for energy. Fructose is a common
+    monosaccharide found in honey, tree and vine fruits, flowers, berries,
+    and most root vegetables. These plant foods remain available even when
+    you quit added sugar entirely.
+
+    SOURCES: f06
+
+SEG_15  ·  point  ·  5:29 → 5:49  (19.9 s)
+    ON SCREEN: ENERGY SOURCE SHIFTS
+
+    Your cells now seek different fuels to run. Glucose is the most abundant
+    monosaccharide and is used by all living organisms to make adenosine
+    triphosphate for energy. Fructose from nature helps fill the gap. Lactose
+    from dairy becomes a key part of your diet.
+
+    SOURCES: f01 · f06 · f07
+
+SEG_16  ·  point  ·  5:49 → 6:08  (19.3 s)
+    ON SCREEN: GLUCOSE STAYS ESSENTIAL
+
+    Simple sugars remain vital for life. Glucose is the most abundant
+    monosaccharide and is used by all living organisms to make adenosine
+    triphosphate for energy. You cannot stop needing this specific molecule
+    to power your body effectively every single day.
+
+    SOURCES: f01
+
+SEG_17  ·  point  ·  6:09 → 6:36  (27.4 s)
+    ON SCREEN: FRUCTONE IS WIDESPREAD
+
+    Your body finds other monosaccharides in nature. One common type lives in
+    honey, fruits, flowers, and berries. It also hides in most root
+    vegetables. This fuel exists outside white sugar. Your cells use it for
+    power. Nature provides this sweet option freely. Many sources contain
+    this simple sugar. You can find it in vine fruits.
+
+    SOURCES: f06
+
+SEG_18  ·  point  ·  6:36 → 7:04  (27.5 s)
+    ON SCREEN: LACTONE IS LIMITED
+
+    Not all sugars come from the ground. One specific sugar lives only in
+    milk. It appears in some dairy products exclusively. You cannot extract
+    it from plants. Your body needs this unique fuel. Plants ignore this
+    molecule entirely. Only animals produce this sweetener. It is found in
+    cow milk. This source is completely different.
+
+    SOURCES: f07
+
+SEG_19  ·  point  ·  7:04 → 7:33  (28.7 s)
+    ON SCREEN: NO COMPOUND SUGAR
+
+    Stopping white sugar stops a compound sugar. This type has two bonded
+    monosaccharides inside. You no longer eat that linked pair. Your system
+    needs separate parts instead. The body rejects the bonded form. Simple
+    sugars replace the complex ones. You avoid the double structure. Nature
+    offers single units only. This change helps your health. You seek simple
+    fuel now.
+
+    SOURCES: f02
+
+SEG_20  ·  point  ·  7:33 → 8:03  (30.1 s)
+    ON SCREEN: PLANT SUGAR VARIETY
+
+    Nature holds many different sweet options. One monosaccharide lives in
+    honey and fruit. It is common in flowers and berries. You can find it in
+    root vegetables. This simple sugar powers your cells. It exists in vines
+    and trees. Nature provides this fuel widely. Many plants contain this
+    energy. You have plenty of choices. This source is everywhere around you.
+
+    SOURCES: f06
+
+SEG_21  ·  point  ·  8:04 → 8:25  (21.6 s)
+    ON SCREEN: DAIRY SUGAR UNIQUE
+
+    This source is everywhere around you. Lactose is the only sugar that
+    cannot be extracted from plants. It occurs only in milk and some dairy
+    products. Plants cannot make it for your body to use. You must look to
+    animals for this specific fuel. The body stops finding it in the ground.
+
+    SOURCES: f07
+
+SEG_22  ·  point  ·  8:26 → 8:50  (24.4 s)
+    ON SCREEN: PATHWAY CHANGES NOW
+
+    Your body seeks new fuel when sucrose is gone. Glucose is the most
+    abundant monosaccharide and is used by all living organisms to make
+    adenosine triphosphate for energy. Life depends on this molecule to run.
+    Without it, cells cannot function properly. You need this spark to keep
+    going. The system forces a change in source.
+
+    SOURCES: f01
+
+SEG_23  ·  point  ·  8:50 → 9:16  (25.4 s)
+    ON SCREEN: FOCUS ON MONOSACCHARIDES
+
+    White sugar is almost pure sucrose, which is a compound sugar made of two
+    bonded monosaccharides. This pair breaks apart inside your stomach. The
+    body handles simple sugars differently. Complex ones take more work to
+    split. You quit the compound form quickly. Simple units enter the
+    bloodstream fast. Your system prefers these smaller parts.
+
+    SOURCES: f02
+
+SEG_24  ·  point  ·  9:16 → 9:44  (27.8 s)
+    ON SCREEN: NATURAL SOURCES PERSIST
+
+    Plant sugars remain available in nature. Fructose is a common
+    monosaccharide found in honey, tree and vine fruits, flowers, berries,
+    and most root vegetables. These sources grow freely in the wild. You can
+    find them in gardens and forests. Nature hides this sweet energy in
+    leaves. Your body accepts these natural forms easily.
+
+    SOURCES: f06
+
+SEG_25  ·  point  ·  9:44 → 10:09  (25.0 s)
+    ON SCREEN: DAIRY SUGAR ROLE
+
+    Milk holds a unique sugar. Plants cannot make lactose. This means dairy
+    is the only source for that specific fuel. Your body finds this new
+    energy when sugar stops. The shift completes now. You have options beyond
+    white grains. Natural sources persist everywhere. Lactose joins the list
+    of choices. Fruit and flowers offer a wide range.
+
+    SOURCES: f07
+
+SEG_26  ·  cta  ·  10:10 → 10:37  (27.1 s)
+    ON SCREEN: SUBSCRIBE FOR MORE
+
+    Subscribe for more science today. Glucose powers every living cell to
+    make ATP. White sugar is a compound of two parts. Fructose hides in
+    berries and honey. Lactose lives only in milk and dairy. These facts
+    build a clear picture. Stay tuned for the next deep dive. Your journey
+    into biology starts here. Keep watching to learn more.
+
+    SOURCES: f01 · f02 · f06 · f07
+
+SEG_27  ·  conclusion  ·  10:37 → 11:07  (29.8 s)
+    ON SCREEN: SUGAR FACTS SUMMARY
+
+    We summarize the sugar facts now. Glucose is the key to making ATP. White
+    sugar is a compound of two. Fructose appears in fruits and honey. Lactose
+    exists only in dairy products. This distinction changes your energy view.
+    Plants and animals serve different roles. Understanding this helps your
+    daily choices. Science explains the path ahead.
+
+    SOURCES: f01 · f02 · f06 · f07
+

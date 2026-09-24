@@ -1,0 +1,45 @@
+# Patrons réduits, pour les tests seulement : la vraie table vit dans
+# `factory/retention/patterns_en.yaml` et change avec le corpus.
+schema_version: "1.0"
+langue: en
+elements_cles:
+  question_contrarienne: question
+  statistique_choc: chiffre
+  negation_du_sens_commun: contradiction
+  in_medias_res: action
+  adresse_directe: adresse
+lexiques:
+  question: ["what if", "have you ever", "did you know", "why do", "how does"]
+  chiffre: []
+  contradiction: ["but", "contrary to", "in fact", "actually", "you were told"]
+  adresse: []
+hook_patrons:
+  question_contrarienne:
+    - patron: "What if {common_belief} was actually {opposite}?"
+      element_cle: question
+      longueur_mots_mediane: 24
+      n_observe: 9
+  statistique_choc:
+    - patron: "{figure} {unit} of {subject}, and almost nobody knows {gap}."
+      element_cle: chiffre
+      longueur_mots_mediane: 26
+      n_observe: 5
+formulations_proscrites:
+  - "in this video"
+  - "hey guys"
+  - "welcome back"
+  - "don't forget to subscribe"
+  - "before we begin"
+boucle:
+  marqueurs_plantation:
+    - "by the end of this video"
+    - "stick around"
+    - "i'll come back to"
+    - "more on that in a moment"
+  marqueurs_paiement:
+    - "as i promised"
+    - "here is the answer"
+    - "remember when i said"
+    - "that brings us back to"
+  phrases_paiement:
+    - "Here is the answer to {promise}."

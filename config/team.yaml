@@ -1,0 +1,9 @@
+schema_version: "1.0"
+# Le nom du relecteur est un champ obligatoire du manifeste : « l'équipe » n'est pas une
+# réponse valable (CONFORMITE § 4). Qui relit et à quelle fréquence reste à trancher par Alek.
+relecteurs:
+  - { id: thomas,  nom: "Thomas",  role: developpeur, langues: [fr, en],     lots_par_semaine: 2 }
+  - { id: alek,    nom: "Alek",    role: proprietaire, langues: [en, fr, es], lots_par_semaine: 1 }
+  - { id: sofiane, nom: "Sofiane", role: proprietaire, langues: [en],        lots_par_semaine: 1 }
+taille_lot: 5
+delai_max_heures: 48            # au-delà, le run passe blocked et une alerte part

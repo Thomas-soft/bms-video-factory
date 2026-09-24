@@ -1,0 +1,31 @@
+/* Les trois familles OFL du dépôt (assets/fonts/), recopiées dans src/fonts/ pour que Vite les
+   serve. Aucune police système n'est employée : une police non redistribuable ne doit jamais
+   se retrouver dans un rendu publié (outils/LICENCES.md). */
+@font-face {
+  font-family: 'BMSInter';
+  src: url('./fonts/Inter-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'BMSPlayfair';
+  src: url('./fonts/Playfair-Variable.ttf') format('truetype');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'BMSSourceSerif';
+  src: url('./fonts/SourceSerif-Variable.ttf') format('truetype');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'BMSCaveat';
+  src: url('./fonts/Caveat-Variable.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: block;
+}

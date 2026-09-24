@@ -1,0 +1,94 @@
+{
+ "video_id": "demo1",
+ "fps": 30,
+ "width": 1920,
+ "height": 1080,
+ "resolution_scale": 1,
+ "workers": 1,
+ "out_dir": "out/demo1",
+ "charte": {
+  "bg": "#0d1117",
+  "text": "#ffffff",
+  "text_outline": "#101010",
+  "accent": "#1e5fd9",
+  "highlight": "#f2c94c",
+  "font_title": {
+   "family": "BMSInter",
+   "weight": 600
+  },
+  "font_body": {
+   "family": "BMSInter",
+   "weight": 400
+  },
+  "marge_px": 96
+ },
+ "lots": [
+  {
+   "name": "demo1",
+   "shots": [
+    {
+     "id": "d0",
+     "scene": "assemble",
+     "duration_s": 6.0,
+     "props": {
+      "seed": 11,
+      "bg_variant": 0,
+      "title": "what a galaxy is made of",
+      "heading": "Every galaxy is an assembly",
+      "parts": [
+       "Gas",
+       "Dust",
+       "Stars",
+       "Dark matter"
+      ]
+     }
+    },
+    {
+     "id": "d1",
+     "scene": "echelle",
+     "duration_s": 6.5,
+     "props": {
+      "seed": 22,
+      "bg_variant": 1,
+      "title": "scale",
+      "small": "The Sun",
+      "big": "Betelgeuse",
+      "ratio": 700
+     }
+    },
+    {
+     "id": "d2",
+     "scene": "systeme",
+     "duration_s": 7.0,
+     "props": {
+      "seed": 33,
+      "bg_variant": 2,
+      "title": "orbits",
+      "centre": "A star",
+      "satellites": [
+       "Rocky worlds",
+       "Gas giants",
+       "Ice belt"
+      ]
+     }
+    },
+    {
+     "id": "d3",
+     "scene": "coupe",
+     "duration_s": 6.5,
+     "props": {
+      "seed": 44,
+      "bg_variant": 3,
+      "title": "inside",
+      "heading": "What is under the surface",
+      "layers": [
+       "Crust",
+       "Mantle",
+       "Core"
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

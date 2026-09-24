@@ -1,0 +1,62 @@
+schema_version: "1.0"
+# Cibles reprises de registre/REFERENTIEL.json (généré le 2026-09-15).
+# Le code lit le JSON ; ce fichier porte les surcharges assumées et le motif de chacune.
+id: niche_monetisable_paris_sportifs
+# Ambiance du lit musical (étape 13.1) — paris sportifs : tension d'avant-match.
+musique:
+  mood: tension
+rythme_coupe_s:
+  cible: null
+  cible_montage: null
+  min: null
+  max: null
+  facteur_hook: 0.7
+  n: 0
+  a_mesurer: true
+  fallback_provisoire_s: 7.8
+duree_s:
+  cible: 538
+  p25: 389
+  p75: 751
+  tolerance: 0.15
+  distribution_large: false
+mots_par_minute: { mediane: 219, n: 23 }
+hooks:
+  parts:
+    promesse_chiffree: 0.25
+    enjeu_personnel: 0.208
+    adresse_directe: 0.167
+    negation_du_sens_commun: 0.125
+    intro_chaine_neutre: 0.125
+    liste_annoncee: 0.083
+    autorite_citee: 0.042
+  boucles_minimum: 2
+  boucle_position_s_repli: 47.9
+titres:
+  longueur_car: { mediane: 63, p90: 81,
+                 plafond_recommande: 81, plafond_youtube: 100 }
+miniatures:
+  mots_texte_median: 3.5
+  part_visage: 0.9
+  contraste_ratio_cible: 4.5     # cible WCAG, décision de production, pas une mesure du registre
+cadence_par_semaine: { mediane: 0.31, cible: 0.38 }
+# Étape 16 — densité d'information et cadence des ruptures, mesurées sur les
+# transcriptions anglaises du registre. La cible de densité est un **garde-fou de rédaction**,
+# pas un prédicteur : la mesure ne sépare pas les vidéos les plus vues des autres.
+densite_faits_par_minute:
+  cible: 12.5
+  plancher: 7.5          # 60 % de la cible : sous ce seuil le run échoue
+  mediane_observee: 9.55   # moitié la MOINS vue de la niche, pas la cible ; voir docs/QC.md § 3.10
+  n_meilleures: 11
+  n_medianes: 12
+  n_faible: false
+  origine: "médiane de la moitié la plus vue des transcriptions EN de la niche (étape 16) ;
+    non validée comme prédicteur de vues"
+ruptures_s:
+  observee_s: 6.0
+  p25_s: 3.0
+  p75_s: 18.0
+  n: 23
+  origine: "cadence observée (sous-agent A, étape 16) ; la cadence appliquée reste
+    4 × rythme_coupe_s.cible_montage bornée à [20, 45] s"
+surcharges: []                   # {champ, valeur, motif, date, qui} — jamais une valeur sans motif

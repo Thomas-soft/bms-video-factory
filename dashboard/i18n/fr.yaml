@@ -1,0 +1,199 @@
+# Textes du tableau de bord — français (langue par défaut).
+page_vue: Vue d'ensemble
+page_production: Production
+page_relecture: Relecture
+page_performances: Performances
+page_editorial: Éditorial
+page_configuration: Configuration
+page_journal: Journal
+page_aide: Aide
+oui: oui
+non: non
+aucune: aucune
+toutes: toutes
+statut_queued: En file
+statut_running: En cours
+statut_awaiting_review: À relire
+statut_blocked: Bloqué
+statut_failed: Échoué
+statut_exported: Exporté
+statut_published: Publié
+col_job: Job
+col_chaine: Chaîne
+col_sujet: Sujet
+col_etape: Étape
+col_statut: Statut
+col_qc: Score QC
+col_priorite: Priorité
+col_date_prevue: Date prévue
+col_date: Date
+col_niveau: Niveau
+col_message: Message
+col_video: Vidéo
+col_score: Score
+col_angle: Angle
+col_preuves: Preuves
+col_facteur: Facteur
+col_niveau_f: Valeur
+col_multiplicateur: Multiplicateur
+col_niche: Niche
+col_reference: Référence (s/plan)
+col_ajuste: Ajusté (s/plan)
+col_source: Source
+tache_lancee: "Lancé : {commande}"
+tache_deja: Cette commande tourne déjà ; attendez sa fin.
+tache_en_cours: En cours… l'état se met à jour toutes les 5 secondes.
+tache_journal: Sortie de la commande
+vue_jobs: Vidéos dans la file
+vue_machine: Machine
+vue_disque: Disque libre
+vue_disque_bas: Moins de 8 Go libres — la production s'arrête d'elle-même. Libérez de la place.
+vue_memoire: Mémoire disponible
+vue_daemon: Production auto
+vue_daemon_aide: "Le daemon de production tourne-t-il ? Processus : {pid}"
+vue_quota: Quota YouTube du jour
+vue_sauvegarde: Dernière sauvegarde
+vue_alertes: Alertes récentes
+vue_aucune_alerte: Aucune alerte.
+vue_digest: Digest du jour
+prod_tous: Afficher aussi les vidéos terminées
+prod_vide: Aucune vidéo dans la file.
+prod_choisir: Vidéo à traiter
+prod_relancer: Relancer
+prod_motif: Motif du blocage
+prod_bloquer: Bloquer
+prod_priorite: Priorité (plus grand passe d'abord)
+prod_prioriser: Changer la priorité
+prod_fait: "Job {job} → {statut}, étape {etape}, priorité {priorite}."
+prod_miniature: Miniature
+prod_pas_miniature: Pas encore de miniature.
+prod_video: Vidéo finale
+prod_ouvrir: Ouvrir la vidéo
+prod_pas_video: Pas encore de vidéo finale.
+rel_pas_equipe: Aucun relecteur dans config/team.yaml.
+rel_relecteur: Qui relit ?
+rel_chaine: Chaîne
+rel_compte: "{n} script(s) en attente de relecture."
+rel_rien: Aucun script à relire. 
+rel_hook: Accroche
+rel_angle: Angle
+rel_duree: Durée estimée
+rel_duree_aide: "Cible : {cible:.1f} min"
+rel_densite: Faits par minute
+rel_rejets: Rejets précédents
+rel_texte: "Texte complet ({mots} mots, {n} segments)"
+rel_approuver: Approuver
+rel_motif: Motif du rejet
+rel_rejeter: Rejeter
+rel_editer: Éditer
+rel_valider_edition: Enregistrer, revérifier et approuver
+rel_fait: "Job {job} → {statut} (relecteur : {relecteur})."
+perf_chaine: Résumé de la chaîne
+perf_aucune: Aucune vidéo publiée sur cette chaîne pour l'instant.
+perf_vues_7: Vues 7 j
+perf_vues_30: Vues 30 j
+perf_pct: Pourcentage moyen vu
+perf_ctr: CTR 7 j
+perf_sans_reach: non mesuré
+perf_top: Top 5 (vues 7 j)
+perf_flop: Flop 5 (vues 7 j)
+perf_retention: Courbe de rétention
+perf_pas_courbe: Aucune courbe de rétention capturée (jalons J+2, J+7, J+30 après publication).
+perf_video: Vidéo
+perf_jour: "Courbe à J+{j} ; les traits rouges marquent les chutes, situées dans le script."
+perf_axe_temps: Temps (s)
+perf_axe_part: Part de la vidéo
+perf_axe_retention: Spectateurs restants (%)
+perf_appris: Ce que le système a appris
+perf_pas_poids: Aucun apprentissage encore (learned/weights.json absent).
+perf_n_videos: Vidéos analysées
+perf_n_y: Vidéos avec résultat à 7 j
+perf_n_min: Minimum par valeur
+perf_genere: "Dernier calcul : {date} (UTC)"
+perf_rien_appris: "Rien d'appris pour l'instant : il faut au moins {n} vidéos par valeur testée. Les réglages par défaut s'appliquent."
+perf_geles: "Facteurs figés (non appris) : {liste}"
+perf_rythme: Rythme de coupe
+perf_regles: "{n} règle(s) de rétention candidate(s)."
+perf_recalculer: Recalculer (learn)
+edi_niches: Classement des niches
+edi_pas_niches: Aucun classement de niches calculé.
+edi_sujets: File de sujets
+edi_vide: Aucun sujet dans cette sélection.
+edi_choisir: Sujets à approuver ou bannir
+edi_approuver: Approuver
+edi_bannir: Bannir
+edi_fait: "{n} sujet(s) → {statut}."
+edi_rafraichir: Rafraîchir les sujets
+cfg_onglet_regler: Régler une chaîne
+cfg_onglet_ajouter: Ajouter une chaîne
+cfg_cadence: Cadence de publication
+cfg_par_semaine: Vidéos par semaine (maximum)
+cfg_par_semaine_aide: Plafond de 2 pendant les 90 premiers jours (règles de conformité).
+cfg_jitter: Variation autour de l'heure (minutes)
+cfg_jours: Jours de publication
+cfg_heures: Heures locales (séparées par des virgules)
+cfg_heures_aide: "Format HH:MM, fuseau {tz}"
+cfg_style_voix: Style, voix et gabarits
+cfg_style: Style visuel
+cfg_voix: Voix
+cfg_voix_aide: "Deux chaînes de même langue ne peuvent pas partager une voix (conformité) ; la validation le vérifie."
+cfg_templates: Gabarits de miniature (au moins 3)
+cfg_templates_aide: Identifiants séparés par des virgules.
+cfg_produits: Produits affiliés
+cfg_derive: Déclinaison de la chaîne
+cfg_auto: Approbation automatique
+cfg_auto_avertissement: "ATTENTION : l'approbation automatique publie des scripts que personne n'a lus. L'exception éditoriale du règlement européen sur l'IA (art. 50) tombe pour ces vidéos. Ne l'activez qu'avec l'accord écrit d'Alek."
+cfg_auto_case: Activer l'approbation automatique
+cfg_auto_confirme: Je confirme avoir lu l'avertissement et disposer de l'accord écrit
+cfg_auto_non_confirme: "Rien n'est enregistré : cochez la confirmation pour activer l'approbation automatique."
+cfg_valider: Valider et enregistrer
+cfg_refuse: "Rien n'est enregistré : {n} erreur(s). Corrigez puis réessayez."
+cfg_enregistre: "{id} enregistré ; l'ancienne version est gardée en .yaml.bak. Modifications :"
+cfg_ajout_intro: "La nouvelle chaîne copie les réglages d'une chaîne existante, puis est validée comme les autres. Le compte Google se relie ensuite par une commande à lancer vous-même."
+cfg_id: Identifiant (ex. bms-cuisine-en)
+cfg_nom: Nom affiché
+cfg_compte: Compte Google (alias)
+cfg_compte_aide: Un nom de repère, jamais un mot de passe.
+cfg_langue: Langue
+cfg_niche: Niche
+cfg_modele: Copier les réglages de
+cfg_modele_aide: Charte, cadence et gabarits sont repris puis modifiables dans l'onglet « Régler ».
+cfg_creer: Valider et créer
+cfg_id_invalide: Identifiant vide ou déjà utilisé.
+cfg_cle_absente: "Rien n'est enregistré : la clé {cle} n'est pas sur une seule ligne du fichier ; modification à faire à la main."
+cfg_jeton: Relier le compte YouTube
+cfg_jeton_aide: "À lancer dans le Terminal : une page Google s'ouvre, vous vous connectez, le jeton est rangé dans secrets/ sans jamais s'afficher."
+jour_monday: lundi
+jour_tuesday: mardi
+jour_wednesday: mercredi
+jour_thursday: jeudi
+jour_friday: vendredi
+jour_saturday: samedi
+jour_sunday: dimanche
+jou_blocages: Ce qui attend quelqu'un
+jou_aucun_blocage: Rien n'est bloqué.
+jou_sans_raison: (aucune raison enregistrée)
+jou_remede_relecture: "Remède : relire le script (page Relecture)."
+jou_remede_qc: "Remède : le banc qualité a refusé la vidéo — voir Aide, EXPLOITATION § 8 ; après correction, « Relancer » le job {job} (page Production)."
+jou_remede_echec: "Remède : tentatives épuisées — lire les événements ci-dessous, corriger, puis « Relancer » le job {job}."
+jou_remede_garde: "Remède : un garde-fou a arrêté le job (disque, mémoire, fenêtre, relecture, comptes) — voir Aide, EXPLOITATION § 3 ; puis « Relancer » le job {job}."
+jou_log: Journal (factory.log)
+jou_filtre: Filtrer (texte)
+jou_lignes: Lignes
+jou_pas_log: "Journal absent : {chemin}"
+jou_rien: Rien à afficher.
+jou_evenements: Événements d'une vidéo
+aide_commandes: Commandes utiles (Terminal)
+aide_col_cmd: Commande
+aide_col_effet: Ce qu'elle fait
+aide_cmd_dashboard: Ouvre ce tableau de bord (http://localhost:8501)
+aide_cmd_status: État de la file de production
+aide_cmd_review: Relecture des scripts dans le Terminal
+aide_cmd_daemon: La production automatique tourne-t-elle ?
+aide_cmd_digest: Le résumé du jour
+aide_cmd_validate: Vérifie toute la configuration
+aide_cmd_manual: Vidéos à publier à la main dans YouTube Studio
+aide_cmd_backup: Liste des sauvegardes
+aide_cmd_doctor: Contrôle rapide de la machine
+aide_exploitation: Mode d'emploi (EXPLOITATION.md)
+aide_pas_doc: Le mode d'emploi docs/EXPLOITATION.md n'existe pas encore.

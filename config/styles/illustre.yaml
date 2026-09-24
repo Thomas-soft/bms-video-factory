@@ -1,0 +1,18 @@
+schema_version: "1.0"
+# Images générées localement + parallaxe 2.5D. Route mesurée à l'étape 5.2 :
+# FLUX.2-Klein-4B-4bit (4,62 Go, Apache-2.0) et Depth-Anything-V2-Small (0,10 Go, Apache-2.0).
+id: illustre
+engine: illustre_anime
+backend: ffmpeg
+statut: retenu_v1               # livré par l'étape 12.2 (16/09/2026)
+templates: [sci-a, sci-b, sci-c]
+params:
+  image: { model: "mlx-community/FLUX.2-Klein-4B-4bit", resolution: "1280x720", steps: 4 }
+  depth: { model: "depth-anything/Depth-Anything-V2-Small-hf" }
+  motion:
+    default: ken_burns
+    ken_burns_supersample: 4    # le suréchantillonnage ×4 supprime le jitter (étape 5.2)
+    parallax_layers: 3
+    alpha_ramp_px: 3
+    magenta_hole_check: true    # contrôle de non-régression : un pixel magenta = échec
+  person_review: true           # barrière humaine sur les plans à personnage (étape 5.2)

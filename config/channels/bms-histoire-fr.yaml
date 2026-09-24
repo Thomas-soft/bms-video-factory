@@ -1,0 +1,60 @@
+schema_version: "1.0"
+# Chaîne histoire documentaire en français. Style documentaire : aucune image générée,
+# donc aucune mention « Images virtuelles » et une attribution par asset obligatoire.
+id: bms-histoire-fr
+name: "BMS Histoire FR"
+lang: fr
+niche: histoire_doc
+style: documentaire
+templates: [hist-a, hist-b, hist-c]
+charte:
+  version: "2026.09.1-hist"
+  fonts: { title: "Playfair Display SemiBold", body: "Source Serif 4" }
+  palette: { bg: "#1b1410", text: "#f5efe6", text_outline: "#0c0906",
+             accent: "#b07d4a", highlight: "#e0c068" }
+  transitions: [cut, fade, dip_black]
+  subtitles: { align: bottom_center, margin_v_px: 110, size_px: 60,
+               max_chars_per_line: 36, max_lines: 2, karaoke: false, burn_in: false }
+  framing: { person_shots: bust_only, prefer: [archive, lieu, carte, objet],
+             background: "uncluttered aged-paper background that reaches every edge of the frame",
+             subject_scale: "single subject filling about two thirds of the frame, centered, no border" }
+  # Style d'image de la chaîne — lu par `factory/assets/images.py`, jamais en dur dans un moteur.
+  # Le préfixe est employé **mot pour mot** sur toutes les images : c'est lui qui tient la
+  # cohérence, pas la graine (une graine fixe ne fige que le bruit initial). Le fond et l'échelle
+  # du sujet sont écrits ici parce que, laissés au modèle, ils changent d'un plan à l'autre —
+  # un plan sur huit encadré d'une marge quand les autres allaient au bord (étape 5.2 § 2.11).
+  style_prefix: >-
+    textured documentary illustration, muted warm palette of aged copper #b07d4a, pale gold #e0c068 and deep sepia #1b1410, engraved line work, soft directional light, visible paper fibre
+  style_suffix: >-
+    smooth matte surfaces, uniform colour fields, soft even shading, sober historical mood, 16:9 cinematic composition
+# Deux chaînes de même langue ne partagent pas leur voix (CONFORMITE § 5, anti-clonage).
+# kokoro_ff_siwis n'a jamais été écouté et le moteur n'est pas installé : à mesurer avant
+# le premier run français (STATE.md, arbitrage GPL de Kokoro encore ouvert).
+voice_id: kokoro_ff_siwis
+cadence:
+  per_week_max: 2
+  days: [thursday, saturday]    # créneaux de la niche (REFERENTIEL : samedi, jeudi, mardi)
+  hours_local: ["20:00"]        # décalé de science FR : `factory calendar plan` arbitre le ± 30 min
+  jitter_min: 90
+  timezone: "Europe/Paris"
+google_account:
+  alias: bms-histoire-fr
+  brand_account: "BMS Histoire FR"
+  owner: BMS
+  gcp_project: bms-factory
+  token_ref: "secrets/tokens/bms-histoire-fr.json"
+  two_fa_enabled: false
+  phone_verified: false
+products: []
+derive_from: null
+auto_approve: false
+youtube:
+  audit_passed: false
+  channel_id: null
+  playlist_id: null
+  captions_upload: true
+  category_id: "27"            # Éducation — snippet.categoryId de videos.insert
+  notify_subscribers: true      # faux pour un rattrapage de retard : pas 4 notifications le même jour
+library:
+  cooldown_videos: 10
+  max_uses_per_channel: 3

@@ -1,0 +1,18 @@
+schema_version: "1.0"
+# Avatar 2D en calques + Rhubarb Lip Sync (MIT, visèmes) — livré par l'étape 29.
+# Rhubarb 1.14.0 x86_64 tourne sous Rosetta 2 : dépendance à tracer sur toute machine de production.
+# LivePortrait est écarté (InsightFace non commercial).
+id: avatar2d
+engine: avatar2d
+backend: ffmpeg                 # compositing Pillow + ffmpeg ; Revideo n'est pas nécessaire
+statut: retenu_v2
+templates: []
+params:
+  mode: overlay                 # overlay (sur le style de la chaîne) | presenter (plein cadre, fond de charte)
+  host_style: null              # null = channel.style
+  segments: [hook, cta]         # rôles de segment où le personnage apparaît
+  character: null               # null = personnage dont character.yaml → channel = la chaîne
+  lipsync: { tool: rhubarb, version: "1.14.0", rosetta2_requis: true,
+             recognizer_en: pocketSphinx, recognizer_autres: phonetic }
+  sway: { amplitude_deg: 0.8, period_s: 5.5 }   # balancement de tête sinusoïdal
+  person_review: true           # un avatar est un personnage : relecture humaine

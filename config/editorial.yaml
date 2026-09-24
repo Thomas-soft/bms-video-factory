@@ -1,0 +1,785 @@
+schema_version: "1.0"
+topics_queue: { taille_max: 200, score_minimal: 0.45, age_max_jours: 45 }
+# Dédoublonnage par DISTANCE de Hamming, jamais par égalité, et de portée globale
+# (toutes chaînes confondues) — CONFORMITE § 5.
+dedupe: { script_simhash_distance_min: 12, thumbnail_phash_distance_min: 10, portee: globale }  # non lu : les seuils appliqués sont dans qc.yaml § precheck (étape 23.2)
+angles_autorises: [opinion, comparaison_chiffree, test, donnee_proprietaire]
+sources_blanches: [pexels, pixabay, openverse, wikimedia, nasa, internet_archive]
+purge_cache_api_jours: 30       # Developer Policies III.E.4 : purge des données de tiers
+
+# ═══════════════════════════════════════ étape 20 — percées, clusters, file de sujets
+#
+# Même règle qu'en 19 : tout arbitrage est ici, le code ne fait que mesurer et pondérer.
+# Chaque seuil porte la raison de sa valeur — un nombre sans raison se change à l'aveugle.
+topics:
+  # Fenêtre d'observation, en jours. Le prompt de l'étape 20 la fixe à 180. Conséquence
+  # MESURÉE le 20/09/2026 sur l'entrepôt : 5 597 vidéos, dont en 5 104 · fr 460 · tr 28 ·
+  # es 5 · **it 0** — la chaîne italienne suivie (Biblioteca di Thoth) n'a rien publié
+  # depuis le 02/02/2026. Le trou multilingue IT est donc structurellement vide dans
+  # cette fenêtre, et le rapport l'écrit au lieu de laisser croire à une absence de trou.
+  fenetre_jours: 180
+
+  percees:
+    # « ≥ 3 × la médiane de sa chaîne à âge comparable ». Même seuil qu'en 19 et que
+    # registre/REFERENTIEL.md § 2 : trois seuils différents pour la même notion seraient
+    # trois vérités.
+    seuil_ratio: 3.0
+    # Fenêtre d'âge : ±30 %. Comparer une vidéo de 10 jours à une de 300 mesurerait l'âge,
+    # pas le succès.
+    fenetre_age_relative: 0.30
+    # Sous ce nombre de comparables, la médiane n'est pas une médiane. La vidéo n'est ni
+    # percée ni non-percée : elle est **non notée**, et le rapport le dit.
+    min_comparables: 5
+    # Repli documenté : `views_d7` / `views_d30` (vue `v_video_views_at`) exigent DEUX
+    # instantanés qui encadrent l'âge cible. Au 20/09/2026 l'entrepôt n'a qu'un jour de
+    # collecte : ces colonnes sont NULL partout et la percée se mesure sur les vues
+    # observées au dernier instantané. Le jour où deux jours seront en base, `preferer_dN`
+    # rebascule sur la mesure exacte sans toucher au code.
+    preferer_dN: true
+
+  regroupement:
+    # Agglomératif, cosinus, lien moyen (rapport de veille du 20/09/2026). Déterministe,
+    # et sans classe « bruit » — HDBSCAN jette 30 % des titres courts.
+    #
+    # **Le 0,30-0,45 du rapport de veille est FAUX pour ce modèle, et c'est mesuré.**
+    # `multilingual-e5-small` a un plancher de similarité très haut : sur 4 000 paires
+    # tirées au hasard dans le corpus du 20/09/2026, le cosinus médian vaut **0,812** et
+    # le 5ᵉ percentile **0,767**. Deux titres sans rapport sont donc déjà à 0,19 de
+    # distance. Balayage mesuré sur les 5 604 titres :
+    #
+    #   | seuil | clusters ≥ 2 | isolés | plus gros cluster |
+    #   |-------|--------------|--------|-------------------|
+    #   | 0,08  |          604 |  2 913 |   151 (2,7 %)     |
+    #   | 0,10  |          743 |  1 872 |   153 (2,7 %)     |
+    #   | 0,12  |          738 |    904 |   153 (2,7 %)     |
+    #   | 0,15  |          365 |    196 |   933 (16,6 %)    |
+    #   | 0,18  |           83 |     28 | 3 246 (57,9 %)    |
+    #   | 0,22  |            6 |      0 | 5 585 (99,7 %)    |
+    #   | 0,35  |            1 |      0 | 5 604 (100 %)     |
+    #
+    # À 0,35, **tout le corpus est un seul cluster** : la valeur du rapport aurait produit
+    # un résultat unique, faux, et silencieux. 0,12 retient le plus de groupes réels avec
+    # le moins d'isolés, et le plus gros groupe reste à 2,7 % du corpus.
+    # **Un changement de modèle d'embeddings impose de refaire ce balayage.**
+    seuil_distance: 0.12
+    # Un cluster d'une seule vidéo n'est pas un thème : il est écarté du classement,
+    # mais compté dans le rapport (sinon le nombre de clusters ment).
+    taille_min: 2
+    # Aucune réduction de dimension : UMAP est stochastique et déforme les distances que
+    # l'agglomératif compare (rapport de veille). 384 dimensions × 5 600 titres tiennent.
+    reduction_dimension: false
+
+  trous:
+    multilingue:
+      # Un seul sens : source fr/es/it → cible anglais. L'anglais est la seule langue de
+      # production (ROADMAP § 3.1, Alek 15/09/2026).
+      langues_source: [fr, es, it]
+      langue_cible: en
+      min_percees_source: 2
+      max_videos_cible: 1
+    demande:
+      # « demande élevée, peu de vidéos récentes ». Le niveau de demande vient du seed
+      # Wikipédia le plus proche du cluster (embeddings), avec les séries DÉJÀ en cache
+      # de l'étape 19 : aucun appel réseau neuf.
+      #
+      # **Calibré, pas choisi.** `fenetre_recente_jours: 180` égalait la fenêtre du corpus :
+      # « peu de vidéos récentes » devenait « petit cluster », et le critère se déclenchait
+      # sur 150 clusters sur 738. Mesuré le 20/09/2026 : percentile 60 / 180 j → 150 ;
+      # 80 / 90 j → 113 ; **90 / 90 j → 47** (6 % des clusters). Le décile supérieur de
+      # demande et une fenêtre plus courte que le corpus : c'est la seule combinaison qui
+      # discrimine.
+      max_videos_recentes: 3
+      fenetre_recente_jours: 90
+      percentile_demande_min: 90
+    resurgence:
+      # Un cluster ancien qui regagne de la vélocité.
+      #
+      # **Deux corrections imposées par la mesure du 20/09/2026.**
+      # (1) `age_median_min_jours: 365` était **inatteignable** : le corpus ne remonte qu'à
+      #     180 jours, donc aucun cluster n'avait 365 jours d'âge médian et le critère ne
+      #     pouvait jamais se déclencher. Porté à 120 j, atteignable dans la fenêtre.
+      # (2) Le ratio se mesurait sur `velocity_life` = vues / âge, qui **décroît
+      #     mécaniquement avec l'âge** : vélocité médiane de 4 736 vues/j entre 0 et 30
+      #     jours, 227 entre 30 et 90, 150 entre 90 et 180 — facteur 31. Résultat : 9
+      #     clusters éligibles sur 10 passaient le seuil, et 10 sur 10 avaient un ratio
+      #     > 1,0. Le critère mesurait l'âge. Il porte désormais sur l'**indice de
+      #     vélocité** (vélocité / médiane du décile d'âge du corpus).
+      age_median_min_jours: 120
+      ratio_velocite_min: 1.5
+      min_videos_recentes: 2
+
+  # Notation d'un sujet POUR UNE CHAÎNE. Somme à 1,00 ; le malus se retranche après.
+  ponderations:
+    force_cluster: 0.25       # vues totales du cluster, log puis min-max
+    velocite: 0.20            # vélocité médiane des vidéos récentes du cluster
+    lacune: 0.25              # trou multilingue > trou de demande > résurgence
+    demande: 0.15             # niveau Wikimedia du seed le plus proche
+    fit: 0.15                 # proximité du cluster à la niche de la chaîne (embeddings)
+  # Barème de la lacune. Un trou multilingue vaut plus qu'une résurgence : c'est le modèle
+  # Thoth, et c'est le seul avantage que le système ait sur un concurrent anglophone.
+  bareme_lacune: { multilingue: 1.0, demande: 0.8, resurgence: 0.6, aucune: 0.0 }
+  # Malus de répétition : similarité du sujet aux sujets DÉJÀ produits par BMS. En dessous
+  # du seuil, aucun malus ; au-dessus, il croît jusqu'au poids plein à la similarité 1,0.
+  # Le même seuil sert de refus dans `factory/steps/plan.py` : un seul nombre, une vérité.
+  #
+  # **0,80 était FAUX, et pour la même raison que le seuil de regroupement.** Ce modèle a
+  # un plancher de similarité haut : deux sujets sans rapport sont déjà à 0,77-0,84.
+  # Mesuré le 20/09/2026 sur les 30 sujets de `bms-science-en` :
+  #   - deux sujets sans rapport (« charts électriques » / « mafia new-yorkaise ») : 0,767
+  #   - un sujet contre les sujets BMS déjà produits : médiane 0,844
+  #   - le même sujet à la casse près (vrai doublon)  : 0,994
+  # À 0,80, **tous** les candidats de `bms-histoire-en` étaient rejetés et `plan` retombait
+  # sur le référentiel sans que rien ne le signale. 0,92 sépare proprement : rien de
+  # légitime ne l'atteint, un vrai doublon est à 0,99.
+  malus_similarite: { seuil: 0.92, poids: 0.30 }
+  # Un sujet trop proche d'un TITRE de concurrent est reformulé une fois par le LLM, puis
+  # écarté s'il colle encore (CONFORMITE § 4-5 : un thème, jamais un titre repris).
+  # **Vérifié, celui-là** : sur 30 sujets × 6 000 titres, le maximum légitime est **0,918**
+  # (« The Science of Cosmic Alignment » contre « The real science of black holes », qui
+  # n'est pas une reprise), et un vrai doublon est à 0,994. 0,95 passe entre les deux.
+  reformulation_seuil: 0.95
+  # Clusters envoyés au LLM pour libellé et angles. Au-delà, le coût de génération dépasse
+  # l'usage : la file n'est consommée qu'à deux vidéos par semaine et par chaîne.
+  clusters_libelles: 60
+  clusters_angles: 30
+  # Lots d'appels au LLM. Le contexte du 9B est plafonné à 8 k jetons (factory/llm.py).
+  lot_libelles: 12
+  lot_angles: 6
+  # Angles autorisés — le prompt de l'étape 20 en nomme quatre. `angles_autorises` (haut de
+  # ce fichier) reste la liste des SIGNATURES éditoriales de `script.py` : deux notions
+  # voisines, deux usages, pas de fusion silencieuse.
+  types_angle: [contrarien, comparatif_chiffre, recit, test]
+
+# ═══════════════════════════════════════════════════ étape 19 — notation des niches
+#
+# Tout ce qui est SUBJECTIF est ici, jamais dans le code : les notes de monétisation
+# et de faisabilité, leurs sources, leurs dates. `factory/editorial/niches.py` ne
+# fait que lire, mesurer et pondérer.
+#
+# Les seeds Wikipédia ont été proposés par le LLM puis **validés par règle** le
+# 20/09/2026 : `demand.articles_existent()` sur en.wikipedia, redirections suivies,
+# titres canoniques écrits ici. 84 titres sur 88 existaient ; les 4 écarts sont
+# corrigés en commentaire à leur ligne.
+niche_scoring:
+  ponderations: { demande: 35, concurrence: 25, monetisation: 25, faisabilite: 15 }
+
+  demande:
+    # L'autocomplete est passé de 0,20 à 0,10 après le contradicteur : le nombre de
+    # suggestions sature à 10 par mot-clé (donc 50 pour les onze niches, identique), et
+    # seule la diversité varie — un signal trop pauvre pour peser un cinquième.
+    sous_ponderations: { niveau: 0.55, tendance: 0.35, autocomplete: 0.10 }
+    fenetre_mois: 24          # deux ans : le minimum pour voir un mois civil deux fois
+    # Pente mensuelle bornée avant normalisation : sans borne, un seul article qui
+    # décuple emporte tout le sous-score de tendance des dix autres niches.
+    pente_bornee: 0.06        # ±6 %/mois
+    # Un seed dont l'ajustement log-linéaire est mauvais n'apporte pas sa pente : une
+    # série plate et bruitée pesait autant qu'une tendance nette (r² = 0,0004 observé).
+    r2_minimal: 0.3
+    # Un mois n'est nommé « meilleur mois » qu'au-dessus de cet indice ET avec deux
+    # observations. En dessous, 1,04 à 1,13 est du bruit publié à deux décimales.
+    seuil_saison_nomme: 1.20
+  concurrence:
+    # `pression_velocite` compte À L'ENVERS : une vélocité médiane élevée sur les
+    # vidéos récentes dit que les chaînes en place captent déjà l'attention. Comptée
+    # positivement (version du 20/09 matin), elle faisait de `true_crime` — 31 320
+    # vues/j de médiane — une niche « peu concurrentielle ».
+    sous_ponderations: { rarete_chaines: 0.45, part_percees: 0.35, pression_velocite: 0.20 }
+    chaine_active_videos_par_semaine: 1.0
+    fenetre_activite_jours: 90
+    fenetre_velocite_jours: 30
+    fenetre_percees_jours: 365
+    seuil_percee_ratio: 3.0   # même seuil que registre/REFERENTIEL.md § 2
+    # Plancher de données : sous ces seuils la niche n'est PAS notée sur la concurrence.
+    # Sans lui, « 0 chaîne active » vaut une rareté parfaite et l'ignorance paie.
+    plancher_videos: 200
+    plancher_chaines: 3
+  wikimedia:
+    max_appels_par_execution: 400
+    source: "https://wikimedia.org/api/rest_v1/ — CC0, User-Agent identifiant obligatoire"
+  autocomplete:
+    # Point d'entrée NON DOCUMENTÉ. Plafond dur exigé par le prompt de l'étape 19.
+    max_appels_par_execution: 200
+    statut: "non documenté — aucun volume, seulement un ordre de suggestions"
+  autocomplete_regions:
+    en: { hl: en, gl: US }
+    fr: { hl: fr, gl: FR }
+    es: { hl: es, gl: ES }
+    it: { hl: it, gl: IT }
+
+  limites:
+    - "**Wikipédia n'est pas YouTube.** Le niveau de demande est un nombre de lecteurs
+      d'encyclopédie, pas de spectateurs. Il mesure la curiosité documentaire d'un sujet ;
+      il ne dit rien de l'appétit pour une vidéo de 20 minutes sur ce sujet, et il
+      sous-estime structurellement tout ce qui ne s'écrit pas en article : astuces
+      domestiques, formats de divertissement, personnalités récentes."
+    - "**La concurrence est mesurée sur 74 chaînes, pas sur YouTube.** L'entrepôt de
+      l'étape 18 ne contient que le registre. « 3 chaînes actives » veut dire trois dans
+      l'échantillon, pas trois au monde. Le sous-score de concurrence est donc un
+      classement relatif entre niches du registre, jamais une mesure de saturation."
+    - "**Une seule journée d'instantanés (20/09/2026).** La vélocité à 7 jours n'existe
+      pas encore : `v_video_velocity` retombe sur `velocity_life` (vues ÷ âge). Une
+      vidéo de deux jours à fort démarrage écrase une vidéo d'un an, et les ratios de
+      percée montent jusqu'à 441. Le classement se stabilisera après une semaine de
+      collecte ; à relancer alors."
+    - "**Les niches candidates sont repérées par les mots de leurs titres**, pas par
+      des chaînes étiquetées. Leur concurrence est donc sous-estimée par construction :
+      on ne compte que les chaînes déjà suivies qui parlent du sujet."
+    - "**Deux observations par mois civil.** L'indice de saisonnalité vient de 24 mois,
+      soit deux passages par mois. La tendance est retirée avant le calcul (modèle
+      multiplicatif log-linéaire) pour ne pas prendre une croissance pour un pic de
+      saison, mais un indice sur n = 2 reste indicatif."
+    - "**Les notes de monétisation et de faisabilité sont des jugements**, bornés 1-5,
+      écrits dans ce fichier avec leur source. Elles pèsent 40 % du score composite.
+      Un investisseur doit les lire avant le classement, pas après."
+    - "**Les bandes de CPM ne sont pas comparables entre elles.** Une seule source
+      ouvre des analytics réels (AIR Media-Tech, 300 chaînes, 3 595 mois monétisés,
+      01/07/2026) ; elle publie du **RPM créateur**, pas du CPM annonceur. Les autres
+      chiffres qui circulent viennent de blogs de marketing sans méthode publiée et
+      se contredisent d'un facteur 5 à 25. Quatre thématiques sur onze n'ont
+      **aucune donnée sourçable** et le disent."
+    - "**Le sens du biais Wikipédia est connu, et il n'est pas neutre.** Il SURESTIME
+      `histoire_doc` (articles de révision scolaire : un lecteur de « Roman Empire » révise,
+      il ne cherche pas un documentaire de 25 minutes) et `espace_astronomie` (pics
+      d'actualité JWST et Mars, qui ne se reproduisent pas sur commande). Il SOUS-ESTIME
+      `home_hacks` et `sante_metabolique`, dont les sujets ne s'écrivent pas en article
+      d'encyclopédie. Le classement doit se lire en le sachant."
+    - "**Le dernier mois clos de Wikimedia n'est pas consolidé.** Mesuré le 20/09/2026 :
+      le point d'entrée `monthly` rend 2 274 vues pour « Ancient Egypt » en août 2026, là
+      où le point d'entrée `daily` du même mois donne 31 jours à ≈ 2 500 vues (≈ 78 000,
+      l'ordre de grandeur de juillet). Laissé tel quel, ce seul point tirait la pente à
+      −14 %/mois sur les onze niches à la fois. Les mois de queue sous 40 % de la médiane
+      des six précédents sont donc retirés, et leur nombre est inscrit dans les preuves."
+    - "**Google Trends : aucun accès.** API officielle en alpha sur candidature, aucune
+      clé en self-service au 20/09/2026 ; trendspy écarté (points d'entrée internes,
+      429). Le champ est nul, pas estimé."
+
+  # ─────────────────── objections du contradicteur (20/09/2026) et ce qui a été fait
+  # Format : problème → correction → statut. Une objection écartée dit pourquoi.
+  objections:
+    - probleme: "Le rang 1 (69) et le rang 2 (67) sont séparés par moins qu'un cran de
+        note humaine : un cran de faisabilité ou de monétisation inverse le classement."
+      correction: "Scores affichés sans décimale, et un bloc « Sensibilité » calcule ce que
+        déplace un cran de note. Quand l'écart de tête est plus petit qu'un cran, le rapport
+        écrit que les deux premières ne sont pas départagées."
+      statut: appliquée
+    - probleme: "L'en-tête affirmait que « les quatre sous-scores sont normalisés entre les
+        niches ». Faux : monétisation et faisabilité viennent d'une échelle absolue, et
+        elles pèsent 40 %."
+      correction: "L'en-tête distingue les deux échelles et dit ce que vaut un 100 dans
+        chacune."
+      statut: appliquée
+    - probleme: "`marches_predictifs` était classé 7/11 sans que le rapport mentionne
+        l'interdit de la loi 2023-451 art. 4 VI, pourtant écrit dans la configuration."
+      correction: "Porte éliminatoire : `eliminatoire: true` et son motif ; la niche est
+        marquée ⛔, sortie du top 5, et son motif précède le classement. Même traitement
+        pour `niche_monetisable_paris_sportifs`."
+      statut: appliquée
+    - probleme: "L'ignorance payait. `rarete = 1 − minmax(...)` donnait 1,000 à « 0 chaîne
+        active » : `niche_monetisable_complements_fr` obtenait 45,0 de concurrence sur
+        **0 vidéo et 0 chaîne** en anglais."
+      correction: "Plancher de données — ≥ 200 vidéos et ≥ 3 chaînes. En dessous, les trois
+        sous-mesures valent None, la concurrence tombe à 0 et le rapport écrit « sous le
+        plancher, non notée »."
+      statut: appliquée
+    - probleme: "La vélocité médiane comptait POSITIVEMENT dans un score dit « inverse » :
+        `true_crime`, dont les concurrents font 31 320 vues/j, passait pour peu
+        concurrentielle. 55 % du sous-score était un second score de demande."
+      correction: "Signe inversé et sous-score renommé `pression_velocite`. La lecture
+        contraire — une vélocité élevée signale une niche vivante — est portée par le
+        sous-score de demande, et c'est dit dans le code."
+      statut: appliquée
+    - probleme: "`r2` était calculé, stocké, jamais lu : la pente d'`espace_astronomie`
+        agrégeait un seed à r² = 0,0004."
+      correction: "Seuls les seeds à r² ≥ 0,3 apportent leur pente ; sans aucun, le rapport
+        écrit « pente non significative » et donne le nombre de seeds ajustés."
+      statut: appliquée
+    - probleme: "Août et septembre n'ont qu'UNE observation après la coupe du mois non
+        consolidé, et des indices de 1,04 à 1,13 étaient publiés comme des saisons."
+      correction: "Un mois n'est nommé qu'avec n ≥ 2 observations ET un indice ≥ 1,20 ;
+        le n est inscrit dans les preuves. Une niche sans mois qualifiant affiche « — »."
+      statut: appliquée
+    - probleme: "`(note − 1) / 4 × 100` écrasait la note 1 à 0, indiscernable d'une note
+        absente."
+      correction: "`note / 5 × 100`. Une note 1 vaut 20 ; 0 est réservé à l'absence."
+      statut: appliquée
+    - probleme: "Le niveau de demande était la SOMME des médianes des seeds : ajouter deux
+        articles massifs à la configuration gonflait la niche."
+      correction: "Médiane des seeds. La somme reste dans les preuves sous `niveau_somme`."
+      statut: appliquée
+    - probleme: "« 50 suggestions YouTube » était identique pour les onze niches
+        (saturation à 10 par mot-clé) et publié comme une mesure."
+      correction: "Le compte est retiré du rapport (il reste dans les preuves) et le poids
+        de l'autocomplete passe de 0,20 à 0,10 au profit du niveau et de la tendance."
+      statut: appliquée
+    - probleme: "Le sens du biais Wikipédia n'était pas écrit."
+      correction: "Une limite nomme les deux sens et les niches concernées."
+      statut: appliquée
+    - probleme: "Un min-max sur onze points : retirer une niche recalcule les dix autres."
+      correction: "Écrit dans l'en-tête : le tableau ne vaut qu'à périmètre constant."
+      statut: appliquée
+    - probleme: "`cpm_fiabilite` n'est jamais lu : le 2/5 de `spiritualite` (fiabilité 1,
+        aucune bande sourçable) pèse autant que celui de `longevite` (fiabilité 4, 3 595
+        mois mesurés). Correction proposée : rapprocher la note de 2,5 selon la fiabilité."
+      correction: "**Écartée dans l'arithmétique, appliquée à l'affichage.** Rapprocher de
+        2,5 ferait REMONTER une note basse peu fiable : `spiritualite` passerait de 2 à 2,5
+        et dépasserait `longevite`, mesurée basse. On récompenserait l'absence de donnée —
+        exactement le défaut que le plancher de données vient de corriger. La fiabilité est
+        donc affichée à côté de chaque note, et laissée au lecteur."
+      statut: écartée, motivée
+    - probleme: "Dix pentes sur onze sont négatives ; les deux positives sont les niches de
+        paris (élection américaine). Correction proposée : centrer les pentes sur leur
+        médiane."
+      correction: "**Écartée : sans effet.** Le min-max est invariant par translation —
+        centrer ne change aucun classement. Le fond de l'objection (un pic ponctuel lu comme
+        une tendance) est traité par le filtre r², qui écarte les séries mal ajustées."
+      statut: écartée, motivée
+
+# ────────────────────────────────────────────────────────── les onze niches notées
+#
+# `origine: registre`  — les 8 niches de registre/REFERENTIEL.md § 1.
+# `origine: candidate` — 3 propositions du LLM tirées des percées de l'entrepôt,
+#                        absentes du registre, notées à la même grille.
+#
+# `labels_entrepot` reprend les étiquettes telles qu'elles sont en base, y compris
+# les trois fusionnées par l'étape 3 (`frugal` et `yoder` → home_hacks, `moreno` →
+# spiritualite) : la fusion est actée dans REFERENTIEL.md, pas dans channels_watch.
+niches_notees:
+
+  histoire_doc:
+    origine: registre
+    labels_entrepot: [histoire_doc]
+    seeds_wikipedia: [Ancient Egypt, Roman Empire, World War II, Cold War,
+                      Ottoman Empire, Mesopotamia, Vikings, French Revolution]
+    mots_cles: [history documentary, ancient history, world war 2 documentary,
+                lost civilizations, medieval history]
+    monetisation:
+      en:
+        note: 4
+        resume: "RPM mesuré le plus haut de l'échantillon, affiliation livres"
+        cpm_bande_usd: { min: 2.31, max: 19.50, mediane: 10.22, unite: "RPM créateur" }
+        cpm_source: "AIR Media-Tech, catégorie « Education & Science » — 300 chaînes,
+          3 595 mois monétisés lus dans YouTube Studio, 05/2025–05/2026, médianes"
+        cpm_url: "https://air.io/en/air-data-findings/which-youtube-niche-makes-the-most-money-in-2026-ranked-by-real-rpm-and-cpm"
+        cpm_date: "2026-07-01"
+        cpm_fiabilite: 4
+        affiliation:
+          - { reseau: amazon, categorie: "Physical Books", taux: "4,5 %",
+              url: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" }
+          - { reseau: amazon, categorie: "Digital Videos", taux: "5 %" }
+        restrictions: "aucune restriction spécifique (support.google.com/youtube/answer/6162278)"
+    faisabilite:
+      note: 3
+      resume: "documentaire dégradé, pas de clé de banque vidéo ; sources factuelles abondantes"
+      styles: [documentaire, motion]
+      detail: "rythme de coupe cible 4,5 s (REFERENTIEL § 2) : l'illustré est intenable
+        (20-31 min/min, docs/STYLES.md § 3.1). Le documentaire est le style naturel mais
+        tourne sans clé Pexels/Pixabay depuis l'étape 17 — repli image fixe + Ken Burns."
+      sources_factuelles: "Wikipédia, Internet Archive, Wikimedia Commons (domaine public)"
+
+  home_hacks:
+    origine: registre
+    labels_entrepot: [home_hacks, frugal, yoder]
+    seeds_wikipedia: [Sodium bicarbonate, Vinegar, Hydrogen peroxide, Do it yourself,
+                      Amish, Home improvement, Frugality, Food preservation]
+    mots_cles: [home hacks, cleaning hacks, amish, diy tips, frugal living]
+    monetisation:
+      en:
+        note: 3
+        resume: "RPM bas mais affiliation produit directe (Amazon maison/outils 3 %)"
+        cpm_bande_usd: { min: null, max: null, mediane: 2.39, unite: "RPM créateur" }
+        cpm_source: "AIR Media-Tech, catégorie « Crafting & Handmade » — PROXY : la
+          catégorie « astuces domestiques / frugal living » n'a aucune donnée sourçable"
+        cpm_url: "https://air.io/en/air-data-findings/which-youtube-niche-makes-the-most-money-in-2026-ranked-by-real-rpm-and-cpm"
+        cpm_date: "2026-07-01"
+        cpm_fiabilite: 3
+        affiliation:
+          - { reseau: amazon, categorie: "Home, Home Improvement, Tools, Lawn & Garden",
+              taux: "3 %", url: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" }
+          - { reseau: amazon, categorie: "Kitchen", taux: "4,5 %" }
+        restrictions: "aucune"
+    faisabilite:
+      note: 2
+      resume: "exige du métrage réel d'objets et de gestes : aucun style local ne le sert"
+      styles: []
+      detail: "rythme 6,9 s et contenu démonstratif (mains, objets, avant/après).
+        L'illustré ne montre pas un geste ; le documentaire sans clé de banque vidéo
+        tombe sur des photos fixes. Sources factuelles quasi nulles : une astuce
+        domestique n'a pas de source libre faisant autorité."
+      sources_factuelles: "aucune source libre faisant autorité"
+
+  science_pop:
+    origine: registre
+    labels_entrepot: [science_pop]
+    seeds_wikipedia: [Black hole, Quantum mechanics, DNA, Human brain, Evolution,
+                      Solar System, Big Bang, Photosynthesis]
+    mots_cles: [science explained, how it works, space documentary, physics explained,
+                human body]
+    monetisation:
+      en:
+        note: 4
+        resume: "même catégorie mesurée que l'histoire : RPM médian le plus haut"
+        cpm_bande_usd: { min: 2.31, max: 19.50, mediane: 10.22, unite: "RPM créateur" }
+        cpm_source: "AIR Media-Tech, catégorie « Education & Science » (77 % de vues
+          monétisées, 1,84 annonce par session)"
+        cpm_url: "https://air.io/en/air-data-findings/which-youtube-niche-makes-the-most-money-in-2026-ranked-by-real-rpm-and-cpm"
+        cpm_date: "2026-07-01"
+        cpm_fiabilite: 4
+        affiliation:
+          - { reseau: amazon, categorie: "Physical Books", taux: "4,5 %",
+              url: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" }
+        restrictions: "aucune, sauf si la vidéo verse dans le remède non prouvé
+          (démonétisé — support.google.com/youtube/answer/6162278)"
+    faisabilite:
+      note: 4
+      resume: "le motion design sert exactement ce contenu, et c'est le style le moins cher"
+      styles: [motion, documentaire]
+      detail: "schéma animé mesuré à 20,1 s de rendu par minute de vidéo (étape 30.1),
+        soit 40 fois moins cher que l'illustré, sans anatomie générée. Rythme 5,85 s
+        atteignable parce que le motion ne paie pas ses visuels à l'image."
+      sources_factuelles: "Wikipédia, OpenAlex (CC0, 100 000 appels/jour), NASA (domaine public)"
+
+  spiritualite:
+    origine: registre
+    labels_entrepot: [spiritualite, moreno]
+    # « Kybalion » redirige vers « The Kybalion » : c'est la cible qui est écrite ici.
+    seeds_wikipedia: [Hermeticism, Gnosticism, Meditation, Law of attraction, Kundalini,
+                      Carl Jung, The Kybalion, Astral projection]
+    mots_cles: [manifestation, law of attraction, hermeticism, spiritual awakening, meditation]
+    monetisation:
+      en:
+        note: 2
+        resume: "aucune bande de CPM sourçable ; aucune restriction non plus"
+        cpm_bande_usd: { min: null, max: null, mediane: null, unite: null }
+        cpm_source: "AUCUNE DONNÉE SOURÇABLE au 20/09/2026. Le seul chiffre qui circule
+          (« law of attraction 28,90 $ ») vient d'une infographie anonyme et non datée :
+          écarté. Repère de marché à défaut : médiane toutes niches AIR ≈ 2,30 $ de RPM."
+        cpm_url: null
+        cpm_date: null
+        cpm_fiabilite: 1
+        affiliation:
+          - { reseau: amazon, categorie: "All Other Categories", taux: "4 %",
+              url: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" }
+        restrictions: "aucune — occult, psychic, astrology, tarot et paranormal
+          n'apparaissent nulle part dans les advertiser-friendly guidelines
+          (support.google.com/youtube/answer/6162278, vérifié le 20/09/2026)"
+    faisabilite:
+      note: 4
+      resume: "rythme lent : c'est la niche que l'illustré, seul style prouvé, sait tenir"
+      styles: [illustre, whiteboard]
+      detail: "rythme de coupe 11,4 s — la seule famille de niches où le coût par plan
+        de l'illustré (137 s/plan mesuré à l'étape 12.2) reste absorbable. Corpus
+        d'images sans anatomie réaliste, donc pas d'étiquette de synthèse."
+      sources_factuelles: "textes du domaine public (Internet Archive, Sacred Texts),
+        Wikipédia ; aucune vérification factuelle n'est possible sur le fond, ce qui
+        déplace la charge sur la signature humaine (CONFORMITE § 4)"
+
+  true_crime:
+    origine: registre
+    labels_entrepot: [true_crime]
+    seeds_wikipedia: [True crime, Serial killer, Ted Bundy, Jeffrey Dahmer,
+                      Forensic science, Cold case, Zodiac Killer]
+    mots_cles: [true crime, unsolved mystery, serial killer documentary, cold case,
+                murder case]
+    monetisation:
+      en:
+        note: 2
+        resume: "bandes contradictoires d'un facteur 5, et images fortes = ads limitées"
+        cpm_bande_usd: { min: 1.50, max: 12.00, mediane: null, unite: "RPM créateur" }
+        cpm_source: "FluxNote (5-12 $, « 50 chaînes », méthode non publiée) CONTREDIT par
+          FlowShorts (1,50-5 $, source non divulguée). Deux blogs de marketing, aucune
+          mesure : la bande est donnée pour montrer le désaccord, pas pour être utilisée."
+        cpm_url: "https://fluxnote.io/blog/is-true-crime-a-good-youtube-niche-in-2026-rpm-and-growth-data"
+        cpm_date: "2026-05-01"
+        cpm_fiabilite: 1
+        affiliation:
+          - { reseau: amazon, categorie: "All Other Categories", taux: "4 %",
+              url: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" }
+        restrictions: "« Documentaries about crime » monétisable ; corps visibles en
+          contexte documentaire = ads limitées ; « graphic dead bodies in a
+          non-educational video » = démonétisé (support.google.com/youtube/answer/6162278)"
+    faisabilite:
+      note: 2
+      resume: "rythme lent favorable, mais personnes réelles : risque juridique, pas technique"
+      styles: [illustre, documentaire]
+      detail: "rythme 15,7 s, donc techniquement le plus confortable. Ce qui bloque est
+        ailleurs : les faits portent sur des personnes identifiables (diffamation,
+        droit à l'image, RGPD) et l'illustration générée d'une personne réelle est
+        exclue. Aucun garde-fou de ce type n'existe encore dans le pipeline."
+      sources_factuelles: "décisions de justice publiques, presse — aucune source libre
+        réutilisable en image"
+
+  niche_monetisable_longevite:
+    origine: registre
+    labels_entrepot: [niche_monetisable_longevite]
+    seeds_wikipedia: [Longevity, Intermittent fasting, Dietary supplement, Creatine,
+                      Nicotinamide adenine dinucleotide, Peptide, Testosterone,
+                      Gut microbiota]
+    mots_cles: [longevity, supplements, biohacking, gut health, testosterone]
+    monetisation:
+      en:
+        note: 2
+        resume: "RPM mesuré le plus bas (1,23 $), Amazon 1 %, et démonétisation possible"
+        cpm_bande_usd: { min: 0.72, max: 1.53, mediane: 1.23, unite: "RPM créateur" }
+        cpm_source: "AIR Media-Tech, catégorie « Health & Sport ». CheckTheWorth annonce
+          3-9 $ de RPM : blog sans méthode, écarté. La sous-niche longévité/biohacking
+          n'est isolée par aucune source."
+        cpm_url: "https://air.io/en/air-data-findings/which-youtube-niche-makes-the-most-money-in-2026-ranked-by-real-rpm-and-cpm"
+        cpm_date: "2026-07-01"
+        cpm_fiabilite: 4
+        affiliation:
+          - { reseau: amazon, categorie: "Health & Personal Care", taux: "1 %",
+              url: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" }
+          - { reseau: impact, categorie: "marques de compléments", taux: "non sourçable —
+              le répertoire d'annonceurs d'Impact n'est pas public" }
+        restrictions: "« Videos that encourage or provide instructions for scientifically
+          unproven remedies for medical conditions » = DÉMONÉTISÉ
+          (support.google.com/youtube/answer/6162278). C'est le cœur de la niche."
+    faisabilite:
+      note: 3
+      resume: "sources scientifiques libres abondantes, motion design adapté, mais QC lourd"
+      styles: [motion, illustre]
+      detail: "le schéma animé sert bien la donnée physiologique. Le coût réel est
+        éditorial : chaque affirmation doit être sourcée pour ne pas tomber sous la
+        règle du remède non prouvé, et la densité de faits exigée (étape 16) est la
+        plus haute du projet."
+      sources_factuelles: "OpenAlex, PubMed (résumés libres), Wikipédia"
+
+  niche_monetisable_complements_fr:
+    origine: registre
+    labels_entrepot: [niche_monetisable_complements_fr]
+    # Les cinq chaînes de cette niche sont FR : elles restent une source de veille.
+    # Les seeds sont en anglais parce que la production l'est (décision du 15/09/2026).
+    seeds_wikipedia: [Dietary supplement, Vitamin D, Magnesium, Omega−3 fatty acid,
+                      Probiotic, Collagen, Multivitamin, Bodybuilding supplement]
+    mots_cles: [food supplements, vitamin d, magnesium, omega 3, probiotics]
+    monetisation:
+      en:
+        note: 2
+        resume: "même économie que la longévité ; le marché mesuré est FR, la production EN"
+        cpm_bande_usd: { min: 0.72, max: 1.53, mediane: 1.23, unite: "RPM créateur" }
+        cpm_source: "AIR Media-Tech, « Health & Sport » — marché anglophone. Aucune bande
+          FR sourçable, et aucune n'aurait d'emploi : rien n'est produit en français."
+        cpm_url: "https://air.io/en/air-data-findings/which-youtube-niche-makes-the-most-money-in-2026-ranked-by-real-rpm-and-cpm"
+        cpm_date: "2026-07-01"
+        cpm_fiabilite: 3
+        affiliation:
+          - { reseau: amazon, categorie: "Health & Personal Care", taux: "1 %",
+              url: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" }
+        restrictions: "idem longévité : remèdes non prouvés démonétisés. En plus, la
+          réglementation UE sur les allégations de santé (1924/2006) s'applique au
+          discours commercial."
+    faisabilite:
+      note: 1
+      resume: "hors périmètre : niche définie par un marché francophone, production EN"
+      styles: [motion]
+      detail: "les 5 chaînes de référence sont françaises et à 61 % de Shorts (durée
+        médiane 127 s, REFERENTIEL § 2). Transposée en anglais, la niche se confond
+        avec la longévité et n'a plus de référence propre : il n'y a rien à copier."
+      sources_factuelles: "OpenAlex, EFSA (allégations autorisées)"
+
+  niche_monetisable_paris_sportifs:
+    origine: registre
+    labels_entrepot: [niche_monetisable_paris_sportifs]
+    # Redirections résolues le 20/09/2026 : « Parlay (gambling) » → « Parlay »,
+    # « Point spread » → « Spread betting ». Les titres écrits ici sont les cibles.
+    seeds_wikipedia: [Sports betting, Gambling, Parlay, Odds, Prediction market,
+                      Spread betting, Fantasy sport, Arbitrage betting]
+    mots_cles: [sports betting, betting picks, parlay, kalshi, arbitrage betting]
+    monetisation:
+      en:
+        note: 1
+        resume: "INTERDITE à un éditeur français : loi 2023-451 art. 4 VI, 2 ans et 300 000 €"
+        cpm_bande_usd: { min: null, max: null, mediane: null, unite: null }
+        cpm_source: "AUCUNE DONNÉE SOURÇABLE au 20/09/2026."
+        cpm_url: null
+        cpm_date: null
+        cpm_fiabilite: 1
+        affiliation:
+          - { reseau: cj, categorie: "opérateurs de paris (BetMGM)", taux: "non sourçable",
+              url: "https://junction.cj.com/article/cj-is-wagering-big-on-the-sports-betting-vertical-want-in" }
+        restrictions: "**Trois verrous cumulés.** (1) YouTube : « Content that facilitates
+          access to, promotes, or depicts online gambling » → restriction d'âge, donc
+          « limited or no ads » (support.google.com/youtube/answer/9229611 et /2802167).
+          (2) Loi 2023-451 art. 4 VI : interdiction faite à tout influenceur de promouvoir
+          des abonnements à des conseils ou pronostics sportifs — c'est le modèle
+          « sports picks » lui-même ; sanction art. 4 IX : 2 ans et 300 000 €. (3) Loi
+          2010-476 art. 57 : promouvoir un opérateur non agréé par l'ANJ = 100 000 €,
+          portés au quadruple des dépenses publicitaires. Le critère « public en France »
+          de l'art. 9 ne vise que les personnes non établies dans l'UE : produire en
+          anglais n'exonère pas un éditeur français."
+        eliminatoire: true
+        motif_eliminatoire: "**Interdit pénal, pas score faible.** Loi 2023-451 art. 4 VI :
+          un influenceur ne peut promouvoir aucun abonnement à des conseils ou pronostics
+          sportifs — c'est le modèle même de la niche. Sanction art. 4 IX : 2 ans et
+          300 000 €. Produire en anglais n'exonère pas un éditeur français (art. 9). Niche
+          non ouvrable sans avis juridique écrit. → **Alek**, avant l'étape 21."
+        decision_humaine: "note plafonnée à 1 tant qu'Alek n'a pas d'avis juridique écrit.
+          → Alek, avant l'étape 21."
+    faisabilite:
+      note: 1
+      resume: "aucune source de cotes gratuite, cadence d'actualité incompatible"
+      styles: [motion]
+      detail: "le contenu exige des cotes et des résultats en temps réel : aucune API
+        gratuite ne les sert, et la cadence du registre (6,65 vidéos/semaine côté
+        actualité) dépasse la capacité mesurée de ≈ 7 vidéos/semaine tous styles."
+      sources_factuelles: "aucune source gratuite de cotes"
+
+  # ─────────────────────────────────── candidates hors registre (proposées par le LLM)
+  # Tirées des percées de l'entrepôt au 20/09/2026, par fréquence lexicale sur les
+  # titres des vidéos à ratio > 3. Chacune porte le comptage qui l'a fait retenir.
+
+  espace_astronomie:
+    origine: candidate
+    labels_entrepot: []
+    filtre_titre: ["%space%", "%universe%", "%galaxy%", "%black hole%", "%astronom%",
+                   "%cosmos%", "%nasa%"]
+    seeds_wikipedia: [Astronomy, James Webb Space Telescope, Mars, Exoplanet, Galaxy,
+                      NASA, Interstellar travel, Supernova]
+    mots_cles: [space documentary, james webb telescope, black hole, exoplanets, nasa]
+    justification: "79 vidéos en percée, 15 chaînes, 6 étiquettes de niche différentes —
+      le cluster le plus transversal de l'entrepôt : il traverse science_pop,
+      spiritualite, longevite, home_hacks, true_crime et frugal. Aucune étiquette du
+      registre ne le nomme."
+    monetisation:
+      en:
+        note: 4
+        resume: "catégorie « Education & Science », la seule à RPM médian élevé"
+        cpm_bande_usd: { min: 2.31, max: 19.50, mediane: 10.22, unite: "RPM créateur" }
+        cpm_source: "AIR Media-Tech, « Education & Science » — l'astronomie n'est pas
+          isolée par la source ; elle est rattachée à cette catégorie."
+        cpm_url: "https://air.io/en/air-data-findings/which-youtube-niche-makes-the-most-money-in-2026-ranked-by-real-rpm-and-cpm"
+        cpm_date: "2026-07-01"
+        cpm_fiabilite: 3
+        affiliation:
+          - { reseau: amazon, categorie: "Physical Books", taux: "4,5 %",
+              url: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" }
+        restrictions: "aucune"
+    faisabilite:
+      note: 5
+      resume: "la seule niche dont les images sont déjà libres, gratuites et en HD"
+      styles: [documentaire, motion]
+      detail: "NASA est déjà une source blanche du pipeline (`sources_blanches`) et son
+        fonds est dans le domaine public : c'est la seule niche où le style documentaire
+        ne dépend pas des clés Pexels/Pixabay absentes depuis l'étape 17. Le motion
+        design couvre les échelles et les trajectoires. Aucun visage, donc aucune
+        étiquette « images virtuelles »."
+      sources_factuelles: "NASA (domaine public), ESA, OpenAlex, Wikipédia"
+
+  sante_metabolique:
+    origine: candidate
+    labels_entrepot: []
+    filtre_titre: ["%gut %", "%microbiome%", "%blood sugar%", "%insulin%", "%fasting%",
+                   "%fast for%"]
+    seeds_wikipedia: [Blood sugar level, Insulin resistance, Gut microbiota,
+                      Metabolic syndrome, Glycemic index, Type 2 diabetes,
+                      Intermittent fasting, Fasting]
+    mots_cles: [blood sugar, insulin resistance, gut health, fasting, metabolic health]
+    justification: "29 vidéos en percée chez 11 chaînes réparties sur deux niches
+      (longevite et science_pop) : le sujet circule d'une niche à l'autre sans qu'aucune
+      chaîne du registre en fasse son objet. Titres-témoins : « What Happens to Your
+      Organs If You Fast for 24 Hours » (ratio 221), « How gut bacteria guide your
+      immune system » (118), « Walk or Squat After Eating? » (66)."
+    monetisation:
+      en:
+        note: 2
+        resume: "santé : RPM mesuré 1,23 $ et démonétisation du remède non prouvé"
+        cpm_bande_usd: { min: 0.72, max: 1.53, mediane: 1.23, unite: "RPM créateur" }
+        cpm_source: "AIR Media-Tech, « Health & Sport »"
+        cpm_url: "https://air.io/en/air-data-findings/which-youtube-niche-makes-the-most-money-in-2026-ranked-by-real-rpm-and-cpm"
+        cpm_date: "2026-07-01"
+        cpm_fiabilite: 4
+        affiliation:
+          - { reseau: amazon, categorie: "Health & Personal Care", taux: "1 %",
+              url: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" }
+        restrictions: "remèdes non prouvés démonétisés (answer/6162278) — risque central"
+    faisabilite:
+      note: 3
+      resume: "littérature libre abondante, motion design adapté, charge de vérification lourde"
+      styles: [motion]
+      detail: "la donnée métabolique se dessine (courbes de glycémie, cycles) : c'est le
+        terrain du schéma animé mesuré à l'étape 30.1. En contrepartie, chaque énoncé
+        doit être adossé à une publication, sous peine de démonétisation."
+      sources_factuelles: "OpenAlex, PubMed, Wikipédia"
+
+  marches_predictifs:
+    origine: candidate
+    labels_entrepot: []
+    filtre_titre: ["%kalshi%", "%polymarket%", "%arbitrage%", "%oddsjam%",
+                   "%prediction market%"]
+    seeds_wikipedia: [Prediction market, Polymarket, Kalshi, Arbitrage betting,
+                      Betting exchange, Futures exchange]
+    mots_cles: [kalshi, polymarket, prediction markets, arbitrage betting, ev betting]
+    justification: "58 vidéos en percée, mais chez 4 chaînes seulement — le cluster le
+      plus concentré. « arbitrage » apparaît 33 fois et « oddsjam » 24 fois dans les
+      titres en percée ; « How to ACTUALLY Win On Kalshi » sort à un ratio de 226 sur
+      50 373 vues, c'est-à-dire une percée sur une petite chaîne, exactement le signal
+      recherché. Contrepartie : la niche est adjacente aux paris et hérite de leurs
+      interdits."
+    monetisation:
+      en:
+        note: 1
+        resume: "adjacente aux paris : hérite de la restriction YouTube et du risque pénal"
+        cpm_bande_usd: { min: null, max: null, mediane: null, unite: null }
+        cpm_source: "AUCUNE DONNÉE SOURÇABLE."
+        cpm_url: null
+        cpm_date: null
+        cpm_fiabilite: 1
+        affiliation:
+          - { reseau: cj, categorie: "opérateurs de paris", taux: "non sourçable" }
+        restrictions: "les marchés prédictifs ne sont pas nommés par la règle YouTube,
+          qui vise « online gambling » ; mais le contenu observé (arbitrage, +EV, picks)
+          relève du conseil de pari, donc de l'art. 4 VI de la loi 2023-451. **Aucune
+          source officielle ne tranche le statut des marchés événementiels pour un
+          éditeur français.**"
+        eliminatoire: true
+        motif_eliminatoire: "**Même interdit que les paris sportifs, et non tranché.** Le
+          contenu observé dans l'entrepôt (arbitrage, +EV, OddsJam) est du conseil de pari :
+          loi 2023-451 art. 4 VI. Le statut propre des marchés événementiels (Kalshi,
+          Polymarket) pour un éditeur français n'est établi par aucune source officielle
+          consultable. Niche non ouvrable sans avis juridique écrit. → **Alek**, avant
+          l'étape 21."
+    faisabilite:
+      note: 1
+      resume: "aucune donnée de marché gratuite, et un interdit non levé"
+      styles: [motion]
+      detail: "le contenu vit de cotes et de spreads en temps réel ; aucune API gratuite
+        ne les sert. La faisabilité technique est secondaire tant que le point juridique
+        n'est pas tranché."
+      sources_factuelles: "aucune source gratuite"
+
+# ═══════════════════════════════════════ étape 26 — apprentissage (`factory learn`)
+#
+# Peu de données au début : ces seuils décident quand le système a le droit d'agir.
+apprentissage:
+  # Sous ce n par niveau, le multiplicateur reste 1,0 (le référentiel décide).
+  n_min_par_niveau: 8
+  # Et au-dessus du seuil, il faut encore P(effet > 0) ≥ 0,95 (ou ≤ 0,05) pour agir.
+  # 0,8 donnait ~20 % de faux positifs par niveau sur ~60 niveaux (contradicteur, 23/09/2026).
+  prob_min_action: 0.95
+  # Bornes des multiplicateurs : le système ne peut ni doubler ni annuler un choix.
+  multiplicateur_min: 0.7
+  multiplicateur_max: 1.4
+  # Rythme de coupe : ±20 % au plus autour de la cible du référentiel.
+  rythme_ajustement_max: 0.20
+  # Médiane de chaîne : sous 3 autres vidéos, rétrécie vers la médiane de la niche.
+  n_min_chaine_mediane: 3
+  # Règle de rétention candidate : au moins 6 segments observés.
+  n_min_regle_retention: 6
+  # Banc vs résultats : docs/QC.md § 8 exige n ≥ 30 avant de toucher aux seuils.
+  n_min_banc: 30
+  # Thompson (miniatures) : a priori Beta de 200 impressions au CTR médian de la chaîne.
+  thompson_force_prior: 200
+  ctr_prior_defaut: 0.04
+  # Facteurs gelés (multiplicateur 1,0 quel que soit n) — contradicteur du 23/09/2026 :
+  # niche, style, lang, voice_id, is_child sont constants par chaîne, donc ≈ 0 par
+  # construction une fois y centré sur la chaîne ; publish_hour/weekday portent un artefact
+  # de fenêtre (J0 en UTC, perf_daily en heure du Pacifique) tant que la vue n'est pas corrigée.
+  facteurs_geles: [niche, style, lang, voice_id, is_child, publish_hour, publish_weekday]
+  # Gel global : aucun multiplicateur actif avant 30 vidéos à y calculable ET 3 chaînes à
+  # ≥ 5 vidéos chacune.
+  n_min_global: 30
+  n_min_chaines: 3
+  n_min_par_chaine: 5
+  # Gel sur tendance : si l'effet rétréci du rang de publication dépasse 0,10 (log), la
+  # croissance de la chaîne se confond avec tout facteur adopté tard.
+  tendance_max: 0.10

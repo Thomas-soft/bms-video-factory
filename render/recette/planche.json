@@ -1,0 +1,246 @@
+{
+ "video_id": "recette",
+ "fps": 30,
+ "width": 1920,
+ "height": 1080,
+ "resolution_scale": 1,
+ "workers": 1,
+ "out_dir": "out/recette",
+ "charte": {
+  "bg": "#0d1117",
+  "text": "#ffffff",
+  "text_outline": "#101010",
+  "accent": "#1e5fd9",
+  "highlight": "#f2c94c",
+  "font_title": {
+   "family": "BMSInter",
+   "weight": 600
+  },
+  "font_body": {
+   "family": "BMSInter",
+   "weight": 400
+  },
+  "marge_px": 96
+ },
+ "lots": [
+  {
+   "name": "planche",
+   "shots": [
+    {
+     "id": "s0",
+     "scene": "kinetic_text",
+     "duration_s": 3.0,
+     "props": {
+      "seed": 7,
+      "bg_variant": 0,
+      "title": "forgetting curve",
+      "words": [
+       {
+        "w": "Your",
+        "t": 0.05,
+        "e": 0.3
+       },
+       {
+        "w": "brain",
+        "t": 0.32,
+        "e": 0.72
+       },
+       {
+        "w": "forgets",
+        "t": 0.75,
+        "e": 1.25
+       },
+       {
+        "w": "on",
+        "t": 1.28,
+        "e": 1.45
+       },
+       {
+        "w": "purpose.",
+        "t": 1.48,
+        "e": 2.1
+       },
+       {
+        "w": "Here",
+        "t": 2.2,
+        "e": 2.45
+       },
+       {
+        "w": "is",
+        "t": 2.47,
+        "e": 2.6
+       },
+       {
+        "w": "why.",
+        "t": 2.62,
+        "e": 2.95
+       }
+      ]
+     }
+    },
+    {
+     "id": "s1",
+     "scene": "stat_counter",
+     "duration_s": 3.0,
+     "props": {
+      "seed": 12,
+      "bg_variant": 2,
+      "value": 68,
+      "unit": "%",
+      "label": "OF WHAT YOU READ TODAY",
+      "title": "evidence"
+     }
+    },
+    {
+     "id": "s2",
+     "scene": "chart",
+     "duration_s": 3.5,
+     "props": {
+      "seed": 3,
+      "bg_variant": 1,
+      "title": "spaced repetition",
+      "data": {
+       "kind": "bar",
+       "unit": "%",
+       "heading": "Recall after 24 hours",
+       "series": [
+        {
+         "label": "No review",
+         "value": 33
+        },
+        {
+         "label": "One review",
+         "value": 58
+        },
+        {
+         "label": "Spaced",
+         "value": 81
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "s3",
+     "scene": "chart",
+     "duration_s": 3.5,
+     "props": {
+      "seed": 19,
+      "bg_variant": 3,
+      "title": "decay over days",
+      "data": {
+       "kind": "line",
+       "unit": "%",
+       "heading": "Recall, day by day",
+       "series": [
+        {
+         "label": "Day 1",
+         "value": 72
+        },
+        {
+         "label": "Day 2",
+         "value": 54
+        },
+        {
+         "label": "Day 4",
+         "value": 38
+        },
+        {
+         "label": "Day 7",
+         "value": 29
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "s4",
+     "scene": "icon_grid",
+     "duration_s": 3.0,
+     "props": {
+      "seed": 9,
+      "bg_variant": 0,
+      "heading": "Three levers",
+      "icons": [
+       {
+        "icon": "brain",
+        "label": "Attention"
+       },
+       {
+        "icon": "clock",
+        "label": "Spacing"
+       },
+       {
+        "icon": "bolt",
+        "label": "Retrieval"
+       }
+      ]
+     }
+    },
+    {
+     "id": "s5",
+     "scene": "list_reveal",
+     "duration_s": 4.0,
+     "props": {
+      "seed": 21,
+      "bg_variant": 2,
+      "title": "method",
+      "heading": "Three ways to keep it",
+      "items": [
+       "Space the review across days",
+       "Retrieve before you re-read",
+       "Sleep between the two sessions"
+      ]
+     }
+    },
+    {
+     "id": "s6",
+     "scene": "lower_third",
+     "duration_s": 3.0,
+     "props": {
+      "seed": 33,
+      "bg_variant": 1,
+      "heading": "Hermann Ebbinghaus",
+      "label": "forgetting curve, 1885",
+      "watermark": "1885"
+     }
+    },
+    {
+     "id": "s7",
+     "scene": "quote",
+     "duration_s": 3.5,
+     "props": {
+      "seed": 4,
+      "bg_variant": 3,
+      "quote": "Forgetting is not a failure of memory. It is its filter.",
+      "author": "Robert Bjork",
+      "is_sponsor": true,
+      "disclosure": "Publicite"
+     }
+    },
+    {
+     "id": "s8",
+     "scene": "title_card",
+     "duration_s": 3.0,
+     "props": {
+      "seed": 44,
+      "bg_variant": 0,
+      "title": "turn",
+      "heading": "The curve is not a verdict",
+      "label": "it is a schedule"
+     }
+    },
+    {
+     "id": "s9",
+     "scene": "transition_stinger",
+     "duration_s": 2.0,
+     "props": {
+      "seed": 5,
+      "bg_variant": 2,
+      "on_screen_text": "But there is a catch"
+     }
+    }
+   ]
+  }
+ ]
+}

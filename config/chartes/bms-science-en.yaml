@@ -1,0 +1,34 @@
+schema_version: "1.0"
+# Charte de bms-science-en (étape 29), sortie de config/channels/bms-science-en.yaml.
+# charte_version suit le style d'IMAGE (préfixe, suffixe, palette) : elle entre dans la clé
+# de cache des images générées ; ajouter des gabarits ne la change pas.
+channel: bms-science-en
+charte_version: "2026.09.1"
+fonts: { title: "Inter SemiBold", body: "Inter Regular" }
+palette: { bg: "#0d1117", text: "#ffffff", text_outline: "#101010",
+           accent: "#1e5fd9", highlight: "#f2c94c" }
+transitions: [cut, fade, dip_black]   # le moteur ne peut en employer aucune autre
+subtitles: { align: bottom_center, margin_v_px: 96, size_px: 64,
+             max_chars_per_line: 38, max_lines: 2, karaoke: true, burn_in: false }
+framing: { person_shots: bust_only, prefer: [objet, lieu, schema, abstraction],
+           background: "uncluttered single-tone background that reaches every edge of the frame",
+           subject_scale: "single subject filling about two thirds of the frame, centered, no border" }
+# Style d'image de la chaîne — lu par `factory/assets/images.py`, jamais en dur dans un moteur.
+# Le préfixe est employé **mot pour mot** sur toutes les images : c'est lui qui tient la
+# cohérence, pas la graine (une graine fixe ne fige que le bruit initial). Le fond et l'échelle
+# du sujet sont écrits ici parce que, laissés au modèle, ils changent d'un plan à l'autre —
+# un plan sur huit encadré d'une marge quand les autres allaient au bord (étape 5.2 § 2.11).
+style_prefix: >-
+  flat vector editorial illustration, bold clean outlines, limited palette of electric blue #1e5fd9, warm gold #f2c94c and near-black #0d1117, soft paper grain, simple geometric shapes, even diffuse light
+style_suffix: >-
+  smooth matte surfaces, uniform colour fields, soft even shading, calm confident mood, 16:9 cinematic composition
+# Gabarits de mise en page en rotation (CONFORMITE § 5) : jamais deux fois de suite.
+layouts:
+  sci-a: { description: "texte centré en bas, avatar en bas à droite", text_anchor: bottom_center, accent_bar: true,
+           avatar_anchor: bottom_right, avatar_scale: 0.45 }
+  sci-b: { description: "texte en haut à gauche sans souligné, avatar en bas à gauche", text_anchor: top_left, accent_bar: false,
+           avatar_anchor: bottom_left, avatar_scale: 0.42 }
+  sci-c: { description: "texte en bas à gauche, avatar plus grand en bas à droite", text_anchor: bottom_left, accent_bar: true,
+           avatar_anchor: bottom_right, avatar_scale: 0.52 }
+intro: workspace/library/intros/bms-science-en_intro.mp4
+outro: workspace/library/intros/bms-science-en_outro.mp4

@@ -1,0 +1,57 @@
+schema_version: "1.0"
+# Déclinaison espagnole de la chaîne histoire : `derive_from` dit d'où viennent ses runs.
+# La parenté est d'un seul niveau — un enfant n'a jamais d'enfant (ARCHITECTURE § 3.1).
+id: bms-histoire-es
+name: "BMS Historia ES"
+lang: es
+niche: histoire_doc
+style: documentaire
+templates: [hist-a, hist-b, hist-c]
+charte:
+  version: "2026.09.1-hist-es"
+  fonts: { title: "Playfair Display SemiBold", body: "Source Serif 4" }
+  palette: { bg: "#161a22", text: "#f2f2f2", text_outline: "#07090d",
+             accent: "#c0533a", highlight: "#e8b04b" }
+  transitions: [cut, fade]
+  subtitles: { align: bottom_center, margin_v_px: 110, size_px: 60,
+               max_chars_per_line: 36, max_lines: 2, karaoke: false, burn_in: false }
+  framing: { person_shots: bust_only, prefer: [archive, lieu, carte, objet],
+             background: "uncluttered aged-paper background that reaches every edge of the frame",
+             subject_scale: "single subject filling about two thirds of the frame, centered, no border" }
+  # Style d'image de la chaîne — lu par `factory/assets/images.py`, jamais en dur dans un moteur.
+  # Le préfixe est employé **mot pour mot** sur toutes les images : c'est lui qui tient la
+  # cohérence, pas la graine (une graine fixe ne fige que le bruit initial). Le fond et l'échelle
+  # du sujet sont écrits ici parce que, laissés au modèle, ils changent d'un plan à l'autre —
+  # un plan sur huit encadré d'une marge quand les autres allaient au bord (étape 5.2 § 2.11).
+  style_prefix: >-
+    textured documentary illustration, muted palette of terracotta #c0533a, ochre #e8b04b and deep charcoal #161a22, engraved line work, soft directional light, visible paper fibre
+  style_suffix: >-
+    smooth matte surfaces, uniform colour fields, soft even shading, sober historical mood, 16:9 cinematic composition
+voice_id: serena_es
+cadence:
+  per_week_max: 2
+  days: [thursday, saturday]
+  hours_local: ["21:00"]
+  jitter_min: 90
+  timezone: "Europe/Madrid"
+google_account:
+  alias: bms-histoire-es
+  brand_account: "BMS Historia ES"
+  owner: BMS
+  gcp_project: bms-factory
+  token_ref: "secrets/tokens/bms-histoire-es.json"
+  two_fa_enabled: false
+  phone_verified: false
+products: []
+derive_from: null                 # étape 24 : suspendu — voix ES non évaluées (serena_es = même locutrice qu’EN/FR, Kokoro jamais écouté), STATE.md
+auto_approve: false
+youtube:
+  audit_passed: false
+  channel_id: null
+  playlist_id: null
+  captions_upload: true
+  category_id: "27"            # Educación — snippet.categoryId de videos.insert
+  notify_subscribers: true      # faux pour un rattrapage de retard : pas 4 notifications le même jour
+library:
+  cooldown_videos: 10
+  max_uses_per_channel: 3

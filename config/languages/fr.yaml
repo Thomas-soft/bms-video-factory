@@ -1,0 +1,86 @@
+schema_version: "1.0"
+code: fr
+name: "Français"
+# serena_fr : instabilité d'identification de langue mesurée sous ~3 s (étape 7, WER médian 20 %
+# sur 5 mots) ; propre à 11 s et au-delà. L'exigence « ≥ 2 voix par langue » n'est pas écoutée.
+voices:
+  - { id: serena_fr, engine: qwen3_tts, gender: f, native: false,
+      note_ecoute: "instable sous ~3 s (étape 7) ; propre à partir de ~11 s" }
+  - { id: kokoro_ff_siwis, engine: kokoro, gender: f, native: true, note_ecoute: null }
+typographie:
+  espace_avant_double_ponctuation: true
+  guillemets: ["«", "»"]
+  majuscules_titre: phrase_case
+nombres:
+  decimal: ","
+  milliers: " "
+  pourcent: "18 %"
+  date: "18 septembre 2026"
+  unites: metric
+disclosure:
+  # Phrase contractuelle d'Amazon Partenaires France : à revérifier sur le portail du programme
+  # avant la première publication affiliée.
+  amazon: "En tant que Partenaire Amazon, je réalise un bénéfice sur les achats remplissant les conditions requises."
+  impact: ["#ad", "#sponsored"]
+  awin: ["#Ad", "#PaidAd"]
+  # Loi française 2023-451 : la mention « Publicité » est incrustée pendant toute la promotion.
+  overlay_generic: "Publicité"
+  virtual_images: "Images virtuelles"
+  # CONFORMITE § 3 couche 1 : l'assistance de production (script, voix, illustrations)
+  # n'oblige PAS `containsSyntheticMedia` ; la dire en description est une décision de
+  # BMS, et c'est elle qui rend l'exception éditoriale du RIA art. 50 lisible.
+  ia_production: "Vidéo produite avec l'assistance d'outils d'intelligence artificielle : recherche, écriture, voix de synthèse et illustrations."
+  # Ajoutée à la ligne précédente seulement si un humain nommé a relu. Jamais sous auto-approve.
+  ia_controle_humain: "Script relu et validé par un humain avant publication."
+# Intitulés des blocs de description, dans la langue de la vidéo (étape 21).
+libelles:
+  sources: "Sources"
+  credits: "Crédits"
+  generated_locally: "Illustrations générées localement"
+titres:
+  # Question de repli du commentaire épinglé, employée seulement quand le script
+  # n'en pose aucune (étape 21). Vide = aucun commentaire épinglé.
+  question_engagement: "Lequel de ces points vous a le plus surpris ?"
+  # Heuristique de production (étape 13.2), pas une citation de la politique « spam,
+  # pratiques trompeuses et arnaques » : un titre qui porte un de ces mots est écarté
+  # du choix automatique, il n'est pas supprimé du manifeste.
+  mots_interdits:
+    - "choquant"
+    - "vous n'allez pas y croire"
+    - "vous ne croirez jamais"
+    - "cliquez ici"
+    - "abonnez-vous"
+    - "gratuit"
+    - "urgent"
+    - "incroyable"
+    - "la vérité qu'on vous cache"
+    - "secret interdit"
+    - "miracle"
+    - "100 % garanti"
+    - "arnaque totale"
+  # Même rôle que la liste anglaise (étape 21). Vide : la langue de production est l'anglais
+  # seulement (arbitrage d'Alek, 15/09/2026) et aucun titre n'est produit ici. À remplir si
+  # l'étape 24 est un jour relancée — sinon le terme de curiosité de la note vaut zéro.
+  mots_curiosite: {}
+tts:
+  # Qwen3-TTS n'expose aucun paramètre de vitesse : `speed` est appliquée après synthèse par
+  # `atempo` (ffmpeg), qui ne touche pas à la hauteur. 1,0 = débit natif du modèle.
+  speed: 1.0
+  # Respirations de la charte, en millisecondes.
+  pauses_ms: { entre_segments_ms: 350, apres_hook_ms: 600, avant_sponsor_ms: 250 }
+  # Sous 15 s, le WER de re-transcription décroche (étape 7) : `voice` fusionne avant de synthétiser.
+  min_segment_s: 15.0
+  silence_threshold_db: -45.0
+asr:
+  primary: parakeet
+  fallback: whisper
+  wer_thresholds: { "5": 0.20, "20": 0.15, "999": 0.08 }
+# Étape 24 — déclinaison : adapter, jamais traduire mot à mot. Consignes en anglais (lues par le LLM).
+localisation:
+  consignes:
+    - "Write for a native audience of this language: replace foreign cultural references with local equivalents, keeping the fact they illustrate."
+    - "Units: metric only; convert imperial values (miles, pounds, °F)."
+    - "Numbers and dates: follow the local conventions of this language; convert currency to euros as an order of magnitude."
+    - "Idioms: rewrite, never calque; watch false friends."
+    - "Do not invent facts or numbers that the source does not contain; do not drop a number the source gives."
+  rapport_longueur: { en: 1.2 }

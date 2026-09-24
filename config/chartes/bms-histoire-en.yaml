@@ -1,0 +1,34 @@
+schema_version: "1.0"
+# Charte de bms-histoire-en (étape 29), sortie de config/channels/bms-histoire-en.yaml.
+# charte_version suit le style d'IMAGE (préfixe, suffixe, palette) : elle entre dans la clé
+# de cache des images générées ; ajouter des gabarits ne la change pas.
+channel: bms-histoire-en
+charte_version: "2026.09.1-hist"
+fonts: { title: "Playfair Display SemiBold", body: "Source Serif 4" }
+palette: { bg: "#1b1410", text: "#f5efe6", text_outline: "#0c0906",
+           accent: "#b07d4a", highlight: "#e0c068" }
+transitions: [cut, fade, dip_black]
+# Marge basse plus haute que sur science : le bandeau bas du moteur documentaire se pose
+# au-dessus de cette réserve, et les deux ne doivent jamais se chevaucher.
+subtitles: { align: bottom_center, margin_v_px: 110, size_px: 60,
+             max_chars_per_line: 36, max_lines: 2, karaoke: false, burn_in: false }
+framing: { person_shots: bust_only, prefer: [archive, lieu, carte, objet],
+           background: "uncluttered aged-paper background that reaches every edge of the frame",
+           subject_scale: "single subject filling about two thirds of the frame, centered, no border" }
+# Style d'image de la chaîne. **Il ne sert qu'au repli** : le moteur documentaire ne génère
+# une image que lorsque les cinq banques n'ont rien rendu. Il est écrit pour se fondre dans du
+# métrage réel — matière, lumière directionnelle, palette sourde — et non pour s'en distinguer.
+style_prefix: >-
+  textured documentary illustration, muted warm palette of aged copper #b07d4a, pale gold #e0c068 and deep sepia #1b1410, engraved line work, soft directional light, visible paper fibre
+style_suffix: >-
+  smooth matte surfaces, uniform colour fields, soft even shading, sober historical mood, 16:9 cinematic composition
+# Gabarits de mise en page en rotation (CONFORMITE § 5) : jamais deux fois de suite.
+layouts:
+  hist-a: { description: "texte centré en bas, avatar en bas à droite", text_anchor: bottom_center, accent_bar: true,
+           avatar_anchor: bottom_right, avatar_scale: 0.42 }
+  hist-b: { description: "texte centré en haut, avatar en bas à gauche", text_anchor: top_center, accent_bar: true,
+           avatar_anchor: bottom_left, avatar_scale: 0.4 }
+  hist-c: { description: "texte en bas à gauche sans souligné, avatar en haut à droite", text_anchor: bottom_left, accent_bar: false,
+           avatar_anchor: top_right, avatar_scale: 0.38 }
+intro: workspace/library/intros/bms-histoire-en_intro.mp4
+outro: workspace/library/intros/bms-histoire-en_outro.mp4

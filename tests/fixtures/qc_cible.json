@@ -1,0 +1,354 @@
+{
+  "run": "fixture-qc-cible",
+  "niche": "science_pop",
+  "note": "Vidéo idéale : chaque valeur est la cible de la niche science_pop ou le seuil de config/qc.yaml. La fixture ne porte QUE des valeurs mesurées — seuils, poids et fonctions de score sont lus dans le barème déployé au moment du calcul, et « @seuil.champ » y renvoie explicitement. Elle calibre le barème, pas le rendu : elle répond à « une vidéo aux cibles obtient-elle bien 100 ? », pas à « le banc sait-il mesurer ? ». Les mesures non notées (cut_dispersion, n_scenes, cut_rhythm_by_minute, speech_rate_p90, speech_share) n'y figurent pas : elles ne pèsent rien.",
+  "familles": {
+    "coupes": {
+      "mesures": [
+        {
+          "nom": "cut_rhythm",
+          "valeur": 5.85,
+          "unite": "s/plan",
+          "cible": 5.85,
+          "poids": 3,
+          "forme": "cible",
+          "seuil": "cut_rhythm",
+          "origine_cible": "REFERENTIEL science_pop.rythme_coupe_s.cible_montage"
+        },
+        {
+          "nom": "cut_long_shots",
+          "valeur": 0.0,
+          "unite": "part de la durée",
+          "cible": 0.1,
+          "poids": 2,
+          "bloquant": true,
+          "forme": "max",
+          "params": {
+            "max": "@cut_rhythm.part_longue_max",
+            "zero": "@cut_rhythm.part_longue_zero"
+          },
+          "note": "aucun plan au-delà de 3× la cible"
+        },
+        {
+          "nom": "cut_rhythm_hook",
+          "valeur": 4.09,
+          "unite": "s/plan",
+          "cible": 4.095,
+          "poids": 2,
+          "forme": "max",
+          "params": {
+            "max": 4.095,
+            "zero": 10.24
+          },
+          "origine_cible": "cible_montage × facteur_hook 0,7"
+        }
+      ]
+    },
+    "hook": {
+      "mesures": [
+        {
+          "nom": "hook_visual_change",
+          "valeur": true,
+          "unite": "booléen",
+          "cible": true,
+          "poids": 3,
+          "bloquant": true,
+          "forme": "booleen"
+        },
+        {
+          "nom": "hook_text_present",
+          "valeur": true,
+          "unite": "booléen",
+          "cible": true,
+          "poids": 1,
+          "forme": "booleen"
+        },
+        {
+          "nom": "hook_first_word",
+          "valeur": 0.4,
+          "unite": "s",
+          "cible": 1.5,
+          "poids": 1,
+          "forme": "max",
+          "seuil": "hook_first_word"
+        },
+        {
+          "nom": "hook_length",
+          "valeur": 30,
+          "unite": "mots",
+          "cible": "22–36",
+          "poids": 2,
+          "forme": "intervalle",
+          "params": {
+            "min": 22.2,
+            "max": 36.0,
+            "marge": 36.0
+          },
+          "origine_cible": "REFERENTIEL science_pop.hooks.longueur_mots p25 à mediane"
+        },
+        {
+          "nom": "hook_type_rules",
+          "valeur": 1.0,
+          "unite": "part",
+          "cible": 1.0,
+          "poids": 2,
+          "forme": "part"
+        }
+      ]
+    },
+    "audio": {
+      "mesures": [
+        {
+          "nom": "loudness",
+          "valeur": -14.0,
+          "unite": "LUFS",
+          "cible": -14.0,
+          "poids": 3,
+          "bloquant": true,
+          "forme": "intervalle",
+          "params": {
+            "min": -15.0,
+            "max": -13.0,
+            "marge": 4.0
+          },
+          "origine_cible": "REFERENTIEL production.loudness_lufs"
+        },
+        {
+          "nom": "true_peak",
+          "valeur": -1.5,
+          "unite": "dBTP",
+          "cible": -1.0,
+          "poids": 1,
+          "forme": "max",
+          "params": {
+            "max": -1.0,
+            "zero": 1.0
+          }
+        },
+        {
+          "nom": "loudness_range",
+          "valeur": 8.0,
+          "unite": "LU",
+          "cible": 5.0,
+          "poids": 1,
+          "forme": "min",
+          "seuil": "loudness_range"
+        },
+        {
+          "nom": "silence_long",
+          "valeur": 1,
+          "unite": "silences ≥ 1,5 s",
+          "cible": 2.0,
+          "poids": 1,
+          "forme": "max",
+          "seuil": "silence"
+        },
+        {
+          "nom": "music_bed_attenuation",
+          "valeur": 16.0,
+          "unite": "dB",
+          "cible": "10–30",
+          "poids": 1,
+          "forme": "intervalle",
+          "seuil": "music_bed",
+          "params": {
+            "marge": 10.0
+          }
+        }
+      ]
+    },
+    "duree": {
+      "mesures": [
+        {
+          "nom": "duree_vs_run",
+          "valeur": 648.0,
+          "unite": "s",
+          "cible": 648.0,
+          "poids": 2,
+          "bloquant": true,
+          "forme": "cible",
+          "seuil": "duration",
+          "origine_cible": "spec.target_duration_s"
+        },
+        {
+          "nom": "duree_vs_niche",
+          "valeur": 648.0,
+          "unite": "s",
+          "cible": 648.0,
+          "poids": 1,
+          "forme": "cible",
+          "seuil": "duration",
+          "origine_cible": "REFERENTIEL science_pop.duree_s.cible"
+        }
+      ]
+    },
+    "lisibilite": {
+      "mesures": [
+        {
+          "nom": "text_size",
+          "valeur": 0.0593,
+          "unite": "part de la hauteur",
+          "cible": 0.035,
+          "poids": 1,
+          "forme": "min",
+          "seuil": "text_legibility"
+        },
+        {
+          "nom": "text_contrast",
+          "valeur": 12.0,
+          "unite": "ratio",
+          "cible": 4.5,
+          "poids": 2,
+          "forme": "min",
+          "seuil": "text_contrast"
+        },
+        {
+          "nom": "on_screen_words",
+          "valeur": 0.0,
+          "unite": "part des textes trop longs",
+          "cible": 6.0,
+          "poids": 1,
+          "forme": "max",
+          "params": {
+            "max": 0.0,
+            "zero": "@on_screen_words.zero_part"
+          }
+        }
+      ]
+    },
+    "variete": {
+      "mesures": [
+        {
+          "nom": "visual_variety",
+          "valeur": 27.0,
+          "unite": "distance de Hamming (0-64)",
+          "cible": 20.0,
+          "poids": 2,
+          "forme": "min",
+          "seuil": "visual_variety"
+        },
+        {
+          "nom": "visual_redundancy",
+          "valeur": 0.05,
+          "unite": "part des paires",
+          "cible": 0.15,
+          "poids": 2,
+          "forme": "max",
+          "seuil": "visual_redundancy"
+        },
+        {
+          "nom": "cut_redundancy",
+          "valeur": 0.0,
+          "unite": "part des coupes",
+          "cible": 0.1,
+          "poids": 1,
+          "forme": "max",
+          "seuil": "cut_redundancy"
+        },
+        {
+          "nom": "visual_distinct_ratio",
+          "valeur": 0.85,
+          "unite": "images distinctes / plans",
+          "cible": 0.6,
+          "poids": 3,
+          "forme": "min",
+          "seuil": "visual_distinct"
+        }
+      ]
+    },
+    "parole": {
+      "mesures": [
+        {
+          "nom": "speech_rate",
+          "valeur": 134.9,
+          "unite": "mots/min",
+          "cible": 134.9,
+          "poids": 1,
+          "forme": "cible",
+          "seuil": "speech_rate",
+          "origine_cible": "REFERENTIEL science_pop.mots_par_minute.mediane"
+        },
+        {
+          "nom": "respiration",
+          "valeur": 4.0,
+          "unite": "pauses ≥ 0,4 s / min",
+          "cible": 2.0,
+          "poids": 2,
+          "forme": "min",
+          "seuil": "respiration"
+        }
+      ]
+    },
+    "sous_titres": {
+      "mesures": [
+        {
+          "nom": "subtitle_track",
+          "valeur": true,
+          "unite": "booléen",
+          "cible": true,
+          "poids": 1,
+          "bloquant": true,
+          "forme": "booleen"
+        },
+        {
+          "nom": "subtitle_coverage",
+          "valeur": 1.0,
+          "unite": "part des secondes parlées",
+          "cible": 0.9,
+          "poids": 1,
+          "bloquant": true,
+          "forme": "min",
+          "seuil": "subtitle_coverage",
+          "origine_cible": "REFERENTIEL production.couverture_sous_titres"
+        },
+        {
+          "nom": "subtitle_line_length",
+          "valeur": 0.0,
+          "unite": "part des lignes trop longues",
+          "cible": 0,
+          "poids": 1,
+          "forme": "max",
+          "params": {
+            "max": 0.0,
+            "zero": "@subtitle_line_length.zero_part"
+          }
+        }
+      ]
+    },
+    "structure": {
+      "mesures": [
+        {
+          "nom": "sponsor_position",
+          "valeur": true,
+          "unite": "booléen",
+          "cible": 60.0,
+          "poids": 1,
+          "bloquant": true,
+          "forme": "booleen",
+          "note": "segment sponsor à 180 s, au-delà du plancher de 60 s"
+        },
+        {
+          "nom": "open_loops_paid",
+          "valeur": 1.0,
+          "unite": "part des boucles plantées",
+          "cible": 1.0,
+          "poids": 2,
+          "forme": "part"
+        },
+        {
+          "nom": "open_loop_position",
+          "valeur": 40.0,
+          "unite": "s",
+          "cible": 67.4,
+          "poids": 1,
+          "forme": "max",
+          "params": {
+            "max": 67.4,
+            "zero": 134.8
+          },
+          "origine_cible": "REFERENTIEL science_pop.hooks.boucle_ouverte.position_s_mediane"
+        }
+      ]
+    }
+  }
+}

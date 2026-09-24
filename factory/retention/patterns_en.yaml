@@ -1,0 +1,201 @@
+# Patrons de rétention — anglais (langue de production, décision d'Alek du 15/09/2026).
+# Le nommage `patterns_<lang>.yaml` reste prêt pour l'étape 24, différée.
+#
+# Origine : sous-agent A de l'étape 16, 18/09/2026. Corpus = `registre/data/*/transcripts`,
+# 299 vidéos de plus de 120 s transcrites, dont 263 en anglais ; patrons extraits des
+# **60 vidéos anglaises les plus vues**, fréquences de boucle comptées sur les 263.
+# Usage recherche uniquement (`docs/CONFORMITE.md` § 9) : ces patrons sont des **structures**,
+# aucune phrase du corpus n'est recopiée dans un script.
+#
+# ATTENTION, deux fenêtres de mesure cohabitent et ne se confondent pas :
+#   - `hooks.longueur_mots` de `registre/REFERENTIEL.json` = **15 premières secondes** ;
+#     c'est ce plafond-là que le code applique (36 mots sur `science_pop`).
+#   - `longueur_mots_mediane` ci-dessous = **30 premières secondes**, mesure du sous-agent A,
+#     conservée pour documenter le patron. Elle n'est jamais un plafond.
+schema_version: "1.0"
+langue: en
+mesure_le: "2026-09-18"
+source: "sous-agent A, étape 16 — 60 vidéos EN les plus vues du registre (263 pour les boucles)"
+
+# Type de hook → élément que son texte doit obligatoirement porter, vérifié par
+# `factory/retention/hooks.VERIFICATEURS`. `intro_chaine_neutre` n'y figure pas : il est
+# observé dans le corpus (23 occurrences sur 263) et **non productible** (référentiel).
+elements_cles:
+  in_medias_res: action
+  adresse_directe: adresse
+  statistique_choc: chiffre
+  question_contrarienne: question
+  enjeu_personnel: enjeu
+  negation_du_sens_commun: contradiction
+  mise_en_scene_narrative: scene
+  mystere_ouvert: mystere
+  autorite_citee: autorite
+  liste_annoncee: enumeration
+  promesse_chiffree: chiffre
+
+# Expressions qui attestent un élément clé. `chiffre`, `adresse` et `enjeu` n'en ont pas
+# besoin : leurs vérificateurs travaillent sur la forme (un chiffre, un pronom).
+lexiques:
+  question: ["what if", "what happens if", "what would happen", "have you ever",
+             "did you know", "why do", "why does", "how does", "how do", "what makes",
+             "ever wondered", "what if i told you"]
+  contradiction: ["contrary to", "but", "in fact", "actually", "most people think",
+                  "you were told", "it turns out", "isn't just", "is not what",
+                  "the opposite", "everything you know"]
+  enumeration: ["the number one", "first", "second", "third", "ways to", "reasons why",
+                "things that", "signs of", "steps to", "rules of"]
+  mystere: ["nobody knows", "no one knows", "we do not know", "we don't know", "still a mystery",
+            "unexplained", "forgotten", "hidden for", "never been solved", "remains unknown"]
+  autorite: ["professor", "i'm dr", "phd", "at the university of", "according to",
+             "researchers at", "a study", "published in", "nobel", "institute"]
+  scene: ["imagine", "picture this", "let's say", "hey brain", "picture a", "close your eyes"]
+  chiffre: []
+  adresse: []
+
+# Patrons à emplacements. `n_observe` = occurrences dans les 60 vidéos les plus vues ;
+# `n_corpus` = occurrences dans les 263 transcriptions anglaises.
+hook_patrons:
+  in_medias_res:
+    - patron: "On {date}, {subject} {action}."
+      element_cle: action
+      longueur_mots_mediane: 74
+      n_observe: 16
+      n_corpus: 64
+  adresse_directe:
+    - patron: "Whether you {situation_a} or {situation_b}, {consequence}."
+      element_cle: adresse
+      longueur_mots_mediane: 88
+      n_observe: 11
+      n_corpus: 59
+  statistique_choc:
+    - patron: "{number} {unit} of {subject}, and {claim}."
+      element_cle: chiffre
+      longueur_mots_mediane: 76
+      n_observe: 12
+      n_corpus: 49
+  question_contrarienne:
+    - patron: "What happens if you {action}?"
+      element_cle: question
+      longueur_mots_mediane: 80
+      n_observe: 2
+      n_corpus: 27
+  enjeu_personnel:
+    - patron: "I {past_event} {time_marker}."
+      element_cle: enjeu
+      longueur_mots_mediane: 90
+      n_observe: 2
+      n_corpus: 11
+  negation_du_sens_commun:
+    - patron: "Contrary to {belief}, {subject} is {opposite}."
+      element_cle: contradiction
+      longueur_mots_mediane: 68
+      n_observe: 1
+      n_corpus: 6
+  mise_en_scene_narrative:
+    - patron: "Imagine {scene}. Now {scale_shift}."
+      element_cle: scene
+      longueur_mots_mediane: 67
+      n_observe: 2
+      n_corpus: 4
+  mystere_ouvert:
+    - patron: "{subject} is {superlative}, and nobody knows {unknown}."
+      element_cle: mystere
+      longueur_mots_mediane: 59
+      n_observe: 1
+      n_corpus: 3
+  autorite_citee:
+    - patron: "{institution} measured {subject}: {finding}."
+      element_cle: autorite
+      longueur_mots_mediane: 73
+      n_observe: 2
+      n_corpus: 3
+  liste_annoncee:
+    - patron: "The number one {category} is not {obvious} — it is {surprise}."
+      element_cle: enumeration
+      longueur_mots_mediane: 92
+      n_observe: 2
+      n_corpus: 2
+  # `promesse_chiffree` est le seul des douze types de la taxonomie que le sous-agent A n'a
+  # **jamais** observé sur 263 transcriptions. Le patron ci-dessous est donc une construction,
+  # pas une mesure : il est marqué comme tel et le référentiel ne lui donne de part que sur
+  # les niches qui en portent une.
+  promesse_chiffree:
+    - patron: "In {duration}, {promise} — {figure}."
+      element_cle: chiffre
+      longueur_mots_mediane: 0
+      n_observe: 0
+      n_corpus: 0
+
+# Vingt formulations d'ouverture proscrites. Mesurées comme absentes des hooks les plus vus,
+# ou relevées dans les `intro_chaine_neutre` — le seul type que le référentiel déclare
+# non productible.
+formulations_proscrites:
+  - "in this video"
+  - "welcome back"
+  - "welcome back to the channel"
+  - "my name is"
+  - "hey guys"
+  - "what's up guys"
+  - "hey everyone"
+  - "this is a video about"
+  - "quick disclaimer"
+  - "if you're new here"
+  - "without further ado"
+  - "first of all"
+  - "let me tell you"
+  - "as you can see"
+  - "like and subscribe"
+  - "before we begin"
+  - "thanks for watching"
+  - "let's dive in"
+  - "leave a comment below"
+  - "don't forget to subscribe"
+
+boucle:
+  # Fréquences mesurées sur les 263 transcriptions anglaises. 62 d'entre elles (23,6 %) en
+  # ouvrent au moins une ; première occurrence à 569 s en médiane (p25 125 s, p75 1 593 s),
+  # et à 41 s en médiane pour les 19 qui en ouvrent une dans la première minute. Notre
+  # production en exige deux (`hooks.boucles_minimum`, décision de l'étape 10) : c'est
+  # davantage que l'usage observé, et c'est assumé.
+  marqueurs_plantation:            # occurrences dans le corpus
+    - "in a moment"                # 54
+    - "we'll see why"              # 21
+    - "stick around"               # 16
+    - "but first"                  # 16
+    - "i'll explain"               # 15
+    - "we'll come back to"         # 10
+    - "that's coming up"           # 6
+    - "stay tuned"                 # 5
+    - "we'll get to that"          # 5
+    - "by the end of this video"   # 4
+    - "i'll show you how"          # 4
+    - "wait until you"             # 4
+    - "keep watching"              # 3
+    - "you'll see why"             # 3
+    - "more on that in a moment"
+    - "i'll come back to"
+    - "hold that thought"
+  # Marqueurs de paiement retenus : ceux qui **renvoient explicitement à une promesse**.
+  # Deux expressions plus fréquentes ont été écartées à dessein — `that's why` (298
+  # occurrences) et `the reason is` (69) : ce sont des connecteurs de raisonnement ordinaires,
+  # présents dans n'importe quel segment explicatif. Les retenir aurait rendu le contrôle
+  # toujours vrai, donc inutile. Le juge sémantique tranche le reste.
+  marqueurs_paiement:
+    - "i told you"                 # 38
+    - "as i mentioned earlier"     # 16
+    - "which brings us back to"    # 4
+    - "now you know why"           # 4
+    - "as i promised"
+    - "remember when i said"
+    - "here is the answer"
+    - "here's the answer"
+    - "that brings us back to"
+    - "this is what i meant"
+    - "the promise i made"
+  # Phrases de paiement, à donner au modèle comme forme attendue — jamais recopiées telles
+  # quelles : les emplacements sont remplis par le contenu du segment.
+  phrases_paiement:
+    - "I told you {promise} — here it is: {answer}."
+    - "As I mentioned earlier, {promise}. {answer}."
+    - "Now you know why {question}: {answer}."
+    - "Which brings us back to {promise}. {answer}."

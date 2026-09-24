@@ -1,0 +1,206 @@
+{
+ "video_id": "demo3",
+ "fps": 30,
+ "width": 1920,
+ "height": 1080,
+ "resolution_scale": 1,
+ "workers": 1,
+ "out_dir": "out/demo3",
+ "charte": {
+  "bg": "#0d1117",
+  "text": "#ffffff",
+  "text_outline": "#101010",
+  "accent": "#1e5fd9",
+  "highlight": "#f2c94c",
+  "font_title": {
+   "family": "BMSInter",
+   "weight": 600
+  },
+  "font_body": {
+   "family": "BMSInter",
+   "weight": 400
+  },
+  "marge_px": 96
+ },
+ "lots": [
+  {
+   "name": "demo3",
+   "shots": [
+    {
+     "id": "f0",
+     "scene": "tete_parlante",
+     "duration_s": 6.0,
+     "props": {
+      "seed": 12,
+      "bg_variant": 0,
+      "who": "A star",
+      "words": [
+       {
+        "w": "I",
+        "t": 0.3,
+        "e": 0.5
+       },
+       {
+        "w": "have",
+        "t": 0.5,
+        "e": 0.8
+       },
+       {
+        "w": "been",
+        "t": 0.8,
+        "e": 1.1
+       },
+       {
+        "w": "burning",
+        "t": 1.1,
+        "e": 1.7
+       },
+       {
+        "w": "for",
+        "t": 1.7,
+        "e": 1.9
+       },
+       {
+        "w": "nine",
+        "t": 1.9,
+        "e": 2.3
+       },
+       {
+        "w": "billion",
+        "t": 2.3,
+        "e": 2.9
+       },
+       {
+        "w": "years.",
+        "t": 2.9,
+        "e": 3.5
+       },
+       {
+        "w": "And",
+        "t": 4.0,
+        "e": 4.2
+       },
+       {
+        "w": "I",
+        "t": 4.2,
+        "e": 4.4
+       },
+       {
+        "w": "am",
+        "t": 4.4,
+        "e": 4.7
+       },
+       {
+        "w": "only",
+        "t": 4.7,
+        "e": 5.1
+       },
+       {
+        "w": "halfway.",
+        "t": 5.1,
+        "e": 5.8
+       }
+      ]
+     }
+    },
+    {
+     "id": "f1",
+     "scene": "duo",
+     "duration_s": 6.5,
+     "props": {
+      "seed": 23,
+      "bg_variant": 1,
+      "label": "Wait, what?",
+      "words": [
+       {
+        "w": "Light",
+        "t": 0.2,
+        "e": 0.6
+       },
+       {
+        "w": "takes",
+        "t": 0.6,
+        "e": 1.0
+       },
+       {
+        "w": "time",
+        "t": 1.0,
+        "e": 1.4
+       },
+       {
+        "w": "to",
+        "t": 1.4,
+        "e": 1.6
+       },
+       {
+        "w": "reach",
+        "t": 1.6,
+        "e": 2.0
+       },
+       {
+        "w": "you.",
+        "t": 2.0,
+        "e": 2.6
+       },
+       {
+        "w": "So",
+        "t": 4.0,
+        "e": 4.3
+       },
+       {
+        "w": "the",
+        "t": 4.3,
+        "e": 4.5
+       },
+       {
+        "w": "sky",
+        "t": 4.5,
+        "e": 4.9
+       },
+       {
+        "w": "is",
+        "t": 4.9,
+        "e": 5.1
+       },
+       {
+        "w": "the",
+        "t": 5.1,
+        "e": 5.3
+       },
+       {
+        "w": "past?",
+        "t": 5.3,
+        "e": 6.0
+       }
+      ]
+     }
+    },
+    {
+     "id": "f2",
+     "scene": "groupe",
+     "duration_s": 7.5,
+     "props": {
+      "seed": 34,
+      "bg_variant": 2,
+      "parts": [
+       "Hydrogen",
+       "Helium",
+       "Carbon",
+       "Iron"
+      ]
+     }
+    },
+    {
+     "id": "f3",
+     "scene": "personnage",
+     "duration_s": 7.0,
+     "props": {
+      "seed": 45,
+      "bg_variant": 3,
+      "label": "That is not a star"
+     }
+    }
+   ]
+  }
+ ]
+}

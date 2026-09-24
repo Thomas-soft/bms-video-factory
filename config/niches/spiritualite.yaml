@@ -1,0 +1,65 @@
+schema_version: "1.0"
+# Cibles reprises de registre/REFERENTIEL.json (généré le 2026-09-15).
+# Le code lit le JSON ; ce fichier porte les surcharges assumées et le motif de chacune.
+id: spiritualite
+# Ambiance du lit musical (étape 13.1) — spiritualité : plans longs (13,2 s), lit qui ne presse pas.
+musique:
+  mood: calme
+rythme_coupe_s:
+  cible: 13.2
+  cible_montage: 11.4
+  min: 6.5
+  max: 16.75
+  facteur_hook: 0.7
+  n: 6
+  a_mesurer: false
+  fallback_provisoire_s: null
+duree_s:
+  cible: 1870
+  p25: 909
+  p75: 3181
+  tolerance: 0.15
+  distribution_large: false
+mots_par_minute: { mediane: 149.8, n: 64 }
+hooks:
+  parts:
+    negation_du_sens_commun: 0.318
+    question_contrarienne: 0.288
+    mystere_ouvert: 0.136
+    autorite_citee: 0.121
+    promesse_chiffree: 0.046
+    intro_chaine_neutre: 0.03
+    in_medias_res: 0.015
+    mise_en_scene_narrative: 0.015
+    enjeu_personnel: 0.015
+    adresse_directe: 0.015
+  boucles_minimum: 2
+  boucle_position_s_repli: 47.9
+titres:
+  longueur_car: { mediane: 70, p90: 91,
+                 plafond_recommande: 91, plafond_youtube: 100 }
+miniatures:
+  mots_texte_median: 4
+  part_visage: 0.93
+  contraste_ratio_cible: 4.5     # cible WCAG, décision de production, pas une mesure du registre
+cadence_par_semaine: { mediane: 1.63, cible: 2.04 }
+# Étape 16 — densité d'information et cadence des ruptures, mesurées sur les
+# transcriptions anglaises du registre. La cible de densité est un **garde-fou de rédaction**,
+# pas un prédicteur : la mesure ne sépare pas les vidéos les plus vues des autres.
+densite_faits_par_minute:
+  cible: 3.5
+  plancher: 2.1          # 60 % de la cible : sous ce seuil le run échoue
+  mediane_observee: 5.66   # moitié la MOINS vue de la niche, pas la cible ; voir docs/QC.md § 3.10
+  n_meilleures: 20
+  n_medianes: 21
+  n_faible: false
+  origine: "médiane de la moitié la plus vue des transcriptions EN de la niche (étape 16) ;
+    non validée comme prédicteur de vues"
+ruptures_s:
+  observee_s: 27.0
+  p25_s: 8.0
+  p75_s: 67.0
+  n: 34
+  origine: "cadence observée (sous-agent A, étape 16) ; la cadence appliquée reste
+    4 × rythme_coupe_s.cible_montage bornée à [20, 45] s"
+surcharges: []                   # {champ, valeur, motif, date, qui} — jamais une valeur sans motif

@@ -1,0 +1,23 @@
+schema_version: "1.0"
+# Hypothèses économiques de l'usine — JAMAIS dans le code (étape 27).
+# Chaque valeur porte son origine. `valeur` = mesurée ou décidée ; `defaut` = hypothèse de
+# travail employée tant que `valeur` est nulle : le rapport la marque « estimé ».
+tarif_kwh_eur: { valeur: 0.2516, source: "tarif réglementé FR", date: "2026-09-15" }
+puissance_moyenne_w: { valeur: null, a_mesurer: true, defaut: 30.0,
+                       note: "30 W = ordre de grandeur d'un M2 Air en charge soutenue, NON mesuré ; à mesurer au wattmètre pendant un run complet" }
+cout_horaire_relecture_eur: { valeur: null, a_mesurer: true, defaut: 15.0,
+                              note: "15 €/h = hypothèse de travail de l'étape 27, pas une décision ; taux à fixer par Alek" }
+# review_log ne porte que l'heure de la décision, pas celle de l'affichage : la durée réelle de
+# relecture n'est pas mesurable aujourd'hui. Forfait appliqué à toute vidéo livrée.
+relecture_forfait_min: { valeur: null, a_mesurer: true, defaut: 15.0,
+                         note: "15 min pour lire un script de ~10 min et regarder la vidéo en accéléré ; NON mesuré (aucun horodatage d'affichage)" }
+couts_fixes_mensuels_eur: { valeur: 0.0, source: "aucun abonnement ni serveur au 24/09/2026 ; serveur GPU ~50 €/mois approuvé pour plus tard (ROADMAP § 3.1)" }
+amortissement_materiel_mensuel_eur: { valeur: 0.0, source: "Mac existant, non affecté au projet : amortissement non imputé (décision de l'étape 27, à revoir si la machine devient dédiée)" }
+taux_eur:
+  EUR: { valeur: 1.0, source: "identité" }
+  USD: { valeur: null, a_mesurer: true, defaut: 0.86, note: "ordre de grandeur, non relevé ; à relever (BCE) au premier revenu réel" }
+  GBP: { valeur: null, a_mesurer: true, defaut: 1.16, note: "ordre de grandeur, non relevé ; à relever (BCE) au premier revenu réel" }
+# Scénario de la décision « serveur » : non imputé aux coûts actuels.
+serveur_gpu_mensuel_eur: { valeur: 50.0, source: "budget approuvé par Alek, ROADMAP § 3.1 (« 50€/mois approved »)" }
+# « Délai de retour » et décisions : revenu cumulé observé à cet horizon après publication.
+horizon_retour_jours: 30

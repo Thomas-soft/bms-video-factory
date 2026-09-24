@@ -1,0 +1,189 @@
+# Barème du banc de l'étape 15. Le code ne porte aucun seuil : tout se décide ici.
+# Trois familles d'origine, toujours distinguées (voir `origine_cible` dans qc.json) :
+#   registre/REFERENTIEL.json  — mesure du corpus (rythme, durée, débit, longueur de hook)
+#   config/qc.yaml             — décision de production (ce fichier), aucune mesure derrière
+#   charte / moteur de style   — paramètre de rendu, donc vérifiable sans regarder l'image
+schema_version: "1.0"
+
+# Poids des FAMILLES au barème global (et non plus des contrôles un à un : divergence avec
+# INTERFACES.md § config/qc.yaml, consignée au § 5 de ce fichier). Le score est une moyenne
+# pondérée des familles NOTÉES : une famille entièrement `skipped` quitte le dénominateur.
+# Les huit premiers poids sont ceux du prompt de l'étape 15 ; `parole` a été ajoutée — le prompt
+# impose le module et l'oublie au barème. La somme fait donc 105, ce qui est sans effet sur une
+# moyenne pondérée.
+poids:
+  coupes: 25
+  hook: 20
+  audio: 15
+  duree: 10
+  lisibilite: 10
+  variete: 10
+  parole: 5
+  sous_titres: 5
+  # Relevé de 5 à 10 à l'étape 16 : la famille portait deux mesures (sponsor, boucles) et en
+  # porte six — boucles vérifiées dans le texte, cadence des ruptures, densité d'information.
+  # Le poids suit ce que la famille mesure ; la somme des poids passe de 105 à 110, sans effet
+  # sur une moyenne pondérée.
+  structure: 10
+
+# Contrôles mesurés ailleurs dans le pipeline et non notés ici (`export`, `assemble`).
+hors_bareme: [magenta_holes, c2pa]
+
+score_minimal_pour_publier: 70
+# Checklist de pré-publication (étape 23.2, `factory precheck`, CONFORMITE § 11, 18-19).
+# Distances de Hamming sur 64 bits, comparées à toute vidéo publiée de même langue, toutes
+# chaînes BMS confondues. EN DESSOUS du minimum => même vidéo => bloquant.
+#   script : SimHash des trigrammes de mots de la narration. Deux textes indépendants sur un
+#            même sujet tombent vers 25-35 bits ; une reformulation légère sous 8.
+#   miniature : pHash (imagehash) de thumbnail.png. Même gabarit et même fond sous 10 ;
+#            même gabarit avec un autre fond au-dessus de 20.
+precheck:
+  script_simhash_distance_min: 12
+  thumbnail_phash_distance_min: 10
+  duree_min_s: 60
+# Aucune famille notée ne passe sous ce plancher, quel que soit le score global. Sans lui, une
+# moyenne pondérée rachète une famille effondrée : le run rtmk sortait à 73,9 avec `coupes` à
+# 9,8/100 (objection A1 du contradicteur).
+plancher_par_famille: 50
+
+# Seuils par mesure. `tolerance` et `plage` sont relatives à la cible ; `min`/`max`/`zero` sont
+# en unités de la mesure. `bloquant` est porté par le module, pas ici : il est structurel.
+seuils:
+  # -- coupes ------------------------------------------------------------------------------
+  # `dispersion_max` a été retiré : aucun p90/p10 n'existe au registre, le seuil ne reposait
+  # sur rien. La mesure est publiée sans note jusqu'à l'étape 26 (objection B3).
+  cut_rhythm:        { tolerance: 0.15, plage: 0.60, facteur_plan_long: 3.0, plage_hook: 2.5,
+                       part_longue_max: 0.10, part_longue_bloquante: 0.25, part_longue_zero: 0.40,
+                       source: "niche.rythme_coupe_s.cible_montage", verdict_fail: regenerate }
+  cut_redundancy:    { max: 0.10, zero: 0.50, verdict_fail: regenerate }
+  # -- durée -------------------------------------------------------------------------------
+  duration:          { tolerance: 0.15, plage: 0.50, min: 0.60, max: 1.50,
+                       source: "spec.target_duration_s", verdict_fail: regenerate }
+  # -- audio -------------------------------------------------------------------------------
+  loudness:          { tolerance: 1.0, min: -16.0, max: -12.0,
+                       source: "production.loudness_lufs", verdict_fail: blocked }
+  true_peak:         { cible: -1.0, source: "production.true_peak_dbtp", verdict_fail: regenerate }
+  loudness_range:    { min: 5.0, zero: 1.0, verdict_fail: warn }   # défaut n° 2 de l'étape 13.2
+  silence:           { max: 2, zero: 8, verdict_fail: warn }
+  music_bed:         { min: 10.0, max: 30.0, verdict_fail: warn }
+  # -- parole ------------------------------------------------------------------------------
+  speech_rate:       { tolerance: 0.15, plage: 0.45,
+                       source: "niche.mots_par_minute.mediane", verdict_fail: warn }
+  respiration:       { min: 2.0, zero: 0.0, verdict_fail: warn }
+  # -- hook --------------------------------------------------------------------------------
+  hook_length:       { source: "niche.hooks.longueur_mots p25 a mediane", verdict_fail: regenerate }
+  hook_first_word:   { max: 1.5, zero: 5.0, verdict_fail: warn }   # silence d'ouverture
+  # -- lisibilité --------------------------------------------------------------------------
+  text_legibility:   { min: 0.035, zero: 0.020, verdict_fail: regenerate }
+  text_contrast:     { min: 4.5, zero: 1.5,
+                       source: "miniatures.contraste_ratio_cible (WCAG AA)", verdict_fail: warn }
+  on_screen_words:   { max: 6, zero_part: 0.30, verdict_fail: warn }
+  # -- variété -----------------------------------------------------------------------------
+  visual_variety:    { min: 20.0, zero: 4.0, verdict_fail: regenerate }
+  visual_redundancy: { max: 0.15, zero: 0.60, verdict_fail: regenerate }
+  visual_distinct:   { min: 0.60, zero: 0.15, verdict_fail: regenerate }
+  # -- sous-titres -------------------------------------------------------------------------
+  subtitle_coverage: { min: 0.90, zero: 0.50,
+                       source: "production.couverture_sous_titres", verdict_fail: blocked }
+  subtitle_line_length: { max: 42, zero_part: 0.10, verdict_fail: warn }
+  # -- structure ---------------------------------------------------------------------------
+  sponsor_position:  { min: 60.0, verdict_fail: blocked }
+  open_loops:        { min: 2, plage_position: 2.0,
+                       source: "niche.hooks.boucle_ouverte.position_s", verdict_fail: regenerate }
+  # -- rétention (étape 16) ----------------------------------------------------------------
+  # Les cibles de ces trois mesures ne sont pas ici : elles viennent du manifeste du run, qui
+  # les tient de `config/niches/<niche>.yaml` et de `factory/retention/`. Seul le verdict
+  # d'échec se décide ici.
+  open_loops_verified: { verdict_fail: regenerate }
+  interrupt_gap:       { verdict_fail: regenerate }
+  density_vs_target:   { verdict_fail: regenerate }
+  hook_pattern_score:  { verdict_fail: regenerate }
+  hook_forbidden_wording: { verdict_fail: regenerate }
+
+# Paramètres d'outillage : ce qui règle les sondes, pas ce qui juge la vidéo.
+mesure:
+  coupes:
+    seuil_contentdetector: 27.0   # défaut de PySceneDetect ; fixe, donc comparable d'une vidéo à l'autre
+    min_scene_s: 0.5              # > transition_duration_s (0,32 s) : un fondu n'est pas deux plans
+    fenetre_hook_s: 15.0
+  audio:
+    seuil_silence_db: -35.0
+    silence_min_s: 0.4            # seuil de détection ; le silence *pénalisant* commence à 1,5 s
+    silence_long_s: 1.5
+    fenetre_musique_s: 0.8
+  parole:
+    pause_min_s: 0.4              # le seuil du défaut n° 2 mesuré à l'étape 13.2
+    fenetre_debit_s: 30.0         # fenêtre glissante du p90 de débit (mesure, non notée)
+  hook:
+    fenetre_s: 3.0
+    # YAVG de tblend=difference : plan strictement figé ≈ 0, Ken Burns lent ≈ 0,7 (mesuré sur
+    # le run rtmk), coupe franche plusieurs unités. Sous ce seuil, l'accroche ne bouge pas.
+    seuil_mouvement: 0.5
+  lisibilite:
+    plans_contraste: 5
+    bandeau_haut: 0.72            # le cartouche de texte du moteur illustré vit dans ce bandeau
+    bandeau_bas: 0.97
+    bandeau_gauche: 0.12
+    bandeau_droite: 0.88
+    part_texte_min: 0.005         # sous cette part, il n'y a pas de texte : mesure sautée
+  variete:
+    taille_hash: 8                # phash 64 bits
+    # Échelle mesurée à l'étape 15 : deux images franchement différentes rendent 22 à 36/64.
+    # « Quasi identique » commence donc à 8, pas à 32.
+    distance_quasi_identique: 8
+
+# Règles de hook vérifiables par script. La taxonomie du référentiel les écrit en prose ;
+# les traduire en code est une décision qui doit se relire — elle est donc ici.
+# Ce qui n'est pas listé n'est PAS vérifié, et jamais compté comme réussi.
+hooks:
+  fenetre_mots: 15
+  regles_par_type:
+    in_medias_res:              [sans_deuxieme_personne, sans_question, sans_salutation]
+    question_contrarienne:      [avec_question, sans_salutation]
+    negation_du_sens_commun:    [avec_negation, sans_salutation]
+    adresse_directe:            [avec_deuxieme_personne, sans_salutation]
+    enjeu_personnel:            [sans_salutation]
+    mystere_ouvert:             [sans_salutation]
+    statistique_choc:           [avec_chiffre, sans_salutation]
+    mise_en_scene_narrative:    [sans_deuxieme_personne, sans_salutation]
+    autorite_citee:             [sans_salutation]
+    promesse_chiffree:          [avec_chiffre, sans_salutation]
+    liste_annoncee:             [avec_chiffre, sans_salutation]
+  lexiques:
+    fr:
+      deuxieme_personne: [vous, votre, vos, tu, ton, ta, tes, toi]
+      salutations: ["bonjour à tous", "salut à tous", "bienvenue sur", "dans cette vidéo",
+                    "n'oubliez pas de vous abonner", "abonnez-vous"]
+      negation: [jamais, aucun, aucune, faux, fausse, contraire, "n'est pas", "ne sont pas",
+                 rien, personne]
+    en:
+      deuxieme_personne: [you, your, yours, "you're", "you've"]
+      salutations: ["hey guys", "hi everyone", "welcome to", "in this video",
+                    "don't forget to subscribe", "subscribe to"]
+      negation: [never, no, not, nothing, nobody, wrong, false, myth, opposite]
+
+# Ce que le banc ne couvre PAS, recopié dans chaque qc.json. Établi par la mesure de l'étape 5.2
+# (§ 2.12) : trois classes de défaut ne sont pas atteignables sans modèle vision-langage, qui ne
+# tient ni dans les 16 Go ni dans le 0 €. La relecture humaine reste prévue pour elles.
+non_couvert:
+  - "anatomie fausse d'un sujet généré (mains, visages) — exige un modèle vision-langage"
+  - "éléments détachés dans une image (contrôle écrit, exécuté et échoué par principe à
+     l'étape 5.2 : 3 séparations légitimes sur 13 partagent la signature de la fautive)"
+  - "dérive d'identité d'un plan à l'autre (même personnage, même objet)"
+  - "justesse du texte à l'écran par rapport à ce qui est dit (pas d'OCR dans le banc)"
+  - "qualité perçue de la voix, de la musique et du montage sonore"
+  - "véracité des faits énoncés — traitée par review.json, pas par le banc"
+
+# Surcharges par niche : fusionnées clé à clé sur le barème par défaut, jamais en remplacement.
+surcharges_par_niche:
+  true_crime:
+    # Rythme de plateau mesuré à 15,7 s/plan : plan fixe long + inserts courts. Les plans longs
+    # y occupent structurellement une plus grande part de la durée ; le seuil par défaut ferait
+    # échouer une vidéo correcte de cette niche.
+    seuils:
+      cut_rhythm: { part_longue_max: 0.20, part_longue_bloquante: 0.40, part_longue_zero: 0.60 }
+  histoire_doc:
+    # Débit de narration mesuré sur n = 18 seulement (REFERENTIEL.md § 2) : tolérance élargie
+    # tant que la mesure n'est pas consolidée, plutôt qu'une note fondée sur un petit n.
+    seuils:
+      speech_rate: { tolerance: 0.25, plage: 0.60 }

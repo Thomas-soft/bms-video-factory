@@ -1,0 +1,12 @@
+schema_version: "1.0"
+# Profil de voix (étape 29). Jamais écoutée par la session : note_ecoute reste nulle.
+id: kokoro_af_heart
+engine: kokoro
+speaker: af_heart
+lang: en
+gender: f
+speed: 1.0                 # multiplie languages/en.yaml → tts.speed
+pitch_semitones: 0.0
+reference_wav: null        # voix de catalogue : aucune référence, aucun droit tiers
+reference_rights: null
+note_ecoute: null

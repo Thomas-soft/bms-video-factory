@@ -1,0 +1,55 @@
+schema_version: "1.0"
+# Chaîne de test de l'étape 14 : elle ne sert qu'à ouvrir le canal officiel — consentement
+# OAuth en production, premier `videos.insert` privé, dossier d'audit. Rien n'y est publié.
+# Langue : anglais. Le prompt de l'étape 14 disait « lang fr » ; il a été écrit avant
+# l'arbitrage d'Alek du 15/09/2026 (anglais uniquement, ROADMAP § 3.1) et n'a pas été repris.
+# Publier un run FR sur la chaîne de test contredirait cet arbitrage : la chaîne est en `en`.
+id: bms-test
+name: "BMS Test"
+lang: en
+niche: science_pop
+style: illustre
+templates: [sci-a, sci-b, sci-c]
+charte:
+  version: "2026.09.1"
+  fonts: { title: "Inter SemiBold", body: "Inter Regular" }
+  palette: { bg: "#0d1117", text: "#ffffff", text_outline: "#101010",
+             accent: "#1e5fd9", highlight: "#f2c94c" }
+  transitions: [cut, fade, dip_black]
+  subtitles: { align: bottom_center, margin_v_px: 96, size_px: 64,
+               max_chars_per_line: 38, max_lines: 2, karaoke: true, burn_in: false }
+  framing: { person_shots: bust_only, prefer: [objet, lieu, schema, abstraction],
+             background: "uncluttered single-tone background that reaches every edge of the frame",
+             subject_scale: "single subject filling about two thirds of the frame, centered, no border" }
+  style_prefix: >-
+    flat vector editorial illustration, bold clean outlines, limited palette of electric blue #1e5fd9, warm gold #f2c94c and near-black #0d1117, soft paper grain, simple geometric shapes, even diffuse light
+  style_suffix: >-
+    smooth matte surfaces, uniform colour fields, soft even shading, calm confident mood, 16:9 cinematic composition
+voice_id: kokoro_am_michael    # distincte de bms-science-en : le validateur interdit le partage de voix (CONFORMITE § 5)
+cadence:
+  per_week_max: 2
+  days: [tuesday, saturday]
+  hours_local: ["17:00"]
+  jitter_min: 90
+  timezone: "America/New_York"
+google_account:
+  alias: bms-test
+  brand_account: "BMS Test"          # Brand Account détenu par BMS, jamais un compte personnel
+  owner: BMS
+  gcp_project: bms-factory
+  token_ref: "secrets/tokens/bms-test.json"
+  two_fa_enabled: false              # à passer à true une fois activé sur le compte
+  phone_verified: false              # sans vérification : ni miniature, ni vidéo > 15 min
+products: []
+derive_from: null
+auto_approve: false
+youtube:
+  audit_passed: false                # passe à true le jour où l'audit de l'API est accordé
+  channel_id: null                   # rempli par `factory publish auth --channel bms-test`
+  playlist_id: null
+  captions_upload: true
+  category_id: "28"
+  notify_subscribers: false          # chaîne de test : jamais de notification
+library:
+  cooldown_videos: 10
+  max_uses_per_channel: 3

@@ -1,0 +1,3 @@
+Transaction ID,Transaction Date,Advertiser Name,Click Ref,Commission Status,Sale Amount,Commission Amount,Currency
+FIXTURE-A1,21/09/2026 10:12,Example merchant,bms-science-en-20260920-s57f,approved,"25,00","2,50",GBP
+FIXTURE-A2,22/09/2026 16:44,Example merchant,bms-science-en-20260920-s57f,declined,"25,00","2,50",GBP

@@ -1,0 +1,199 @@
+# Dashboard texts — English.
+page_vue: Overview
+page_production: Production
+page_relecture: Review
+page_performances: Performance
+page_editorial: Editorial
+page_configuration: Settings
+page_journal: Log
+page_aide: Help
+oui: "yes"
+non: "no"
+aucune: none
+toutes: all
+statut_queued: Queued
+statut_running: Running
+statut_awaiting_review: To review
+statut_blocked: Blocked
+statut_failed: Failed
+statut_exported: Exported
+statut_published: Published
+col_job: Job
+col_chaine: Channel
+col_sujet: Topic
+col_etape: Stage
+col_statut: Status
+col_qc: QC score
+col_priorite: Priority
+col_date_prevue: Scheduled
+col_date: Date
+col_niveau: Level
+col_message: Message
+col_video: Video
+col_score: Score
+col_angle: Angle
+col_preuves: Evidence
+col_facteur: Factor
+col_niveau_f: Value
+col_multiplicateur: Multiplier
+col_niche: Niche
+col_reference: Reference (s/shot)
+col_ajuste: Adjusted (s/shot)
+col_source: Source
+tache_lancee: "Started: {commande}"
+tache_deja: This command is already running; wait for it to finish.
+tache_en_cours: Running… status refreshes every 5 seconds.
+tache_journal: Command output
+vue_jobs: Videos in the queue
+vue_machine: Machine
+vue_disque: Free disk
+vue_disque_bas: Less than 8 GB free — production stops by itself. Free some space.
+vue_memoire: Available memory
+vue_daemon: Auto production
+vue_daemon_aide: "Is the production daemon running? Process: {pid}"
+vue_quota: YouTube quota today
+vue_sauvegarde: Last backup
+vue_alertes: Recent alerts
+vue_aucune_alerte: No alerts.
+vue_digest: Today's digest
+prod_tous: Also show finished videos
+prod_vide: No video in the queue.
+prod_choisir: Video to act on
+prod_relancer: Retry
+prod_motif: Reason for blocking
+prod_bloquer: Block
+prod_priorite: Priority (higher goes first)
+prod_prioriser: Change priority
+prod_fait: "Job {job} → {statut}, stage {etape}, priority {priorite}."
+prod_miniature: Thumbnail
+prod_pas_miniature: No thumbnail yet.
+prod_video: Final video
+prod_ouvrir: Open the video
+prod_pas_video: No final video yet.
+rel_pas_equipe: No reviewer in config/team.yaml.
+rel_relecteur: Who is reviewing?
+rel_chaine: Channel
+rel_compte: "{n} script(s) awaiting review."
+rel_rien: Nothing to review.
+rel_hook: Hook
+rel_angle: Angle
+rel_duree: Estimated length
+rel_duree_aide: "Target: {cible:.1f} min"
+rel_densite: Facts per minute
+rel_rejets: Previous rejections
+rel_texte: "Full text ({mots} words, {n} segments)"
+rel_approuver: Approve
+rel_motif: Reason for rejection
+rel_rejeter: Reject
+rel_editer: Edit
+rel_valider_edition: Save, re-check and approve
+rel_fait: "Job {job} → {statut} (reviewer: {relecteur})."
+perf_chaine: Channel summary
+perf_aucune: No published video on this channel yet.
+perf_vues_7: Views 7 d
+perf_vues_30: Views 30 d
+perf_pct: Average % viewed
+perf_ctr: CTR 7 d
+perf_sans_reach: not measured
+perf_top: Top 5 (views 7 d)
+perf_flop: Bottom 5 (views 7 d)
+perf_retention: Retention curve
+perf_pas_courbe: No retention curve captured yet (D+2, D+7, D+30 after publishing).
+perf_video: Video
+perf_jour: "Curve at D+{j}; red lines mark drops, located in the script."
+perf_axe_temps: Time (s)
+perf_axe_part: Share of the video
+perf_axe_retention: Viewers remaining (%)
+perf_appris: What the system has learned
+perf_pas_poids: Nothing learned yet (learned/weights.json missing).
+perf_n_videos: Videos analysed
+perf_n_y: Videos with a 7-day result
+perf_n_min: Minimum per value
+perf_genere: "Last computed: {date} (UTC)"
+perf_rien_appris: "Nothing learned yet: at least {n} videos per tested value are needed. Defaults apply."
+perf_geles: "Frozen factors (not learned): {liste}"
+perf_rythme: Cut rhythm
+perf_regles: "{n} candidate retention rule(s)."
+perf_recalculer: Recompute (learn)
+edi_niches: Niche ranking
+edi_pas_niches: No niche ranking computed.
+edi_sujets: Topic queue
+edi_vide: No topic in this selection.
+edi_choisir: Topics to approve or ban
+edi_approuver: Approve
+edi_bannir: Ban
+edi_fait: "{n} topic(s) → {statut}."
+edi_rafraichir: Refresh topics
+cfg_onglet_regler: Channel settings
+cfg_onglet_ajouter: Add a channel
+cfg_cadence: Publishing cadence
+cfg_par_semaine: Videos per week (maximum)
+cfg_par_semaine_aide: Capped at 2 during the first 90 days (compliance rules).
+cfg_jitter: Variation around the hour (minutes)
+cfg_jours: Publishing days
+cfg_heures: Local hours (comma-separated)
+cfg_heures_aide: "HH:MM format, time zone {tz}"
+cfg_style_voix: Style, voice and templates
+cfg_style: Visual style
+cfg_voix: Voice
+cfg_voix_aide: "Two channels in the same language cannot share a voice (compliance); validation checks it."
+cfg_templates: Thumbnail templates (at least 3)
+cfg_templates_aide: Comma-separated identifiers.
+cfg_produits: Affiliate products
+cfg_derive: Derived from channel
+cfg_auto: Automatic approval
+cfg_auto_avertissement: "WARNING: automatic approval publishes scripts nobody has read. The editorial exception of the EU AI Act (art. 50) no longer applies to these videos. Only enable it with Alek's written consent."
+cfg_auto_case: Enable automatic approval
+cfg_auto_confirme: I confirm I read the warning and hold the written consent
+cfg_auto_non_confirme: "Nothing saved: tick the confirmation to enable automatic approval."
+cfg_valider: Validate and save
+cfg_refuse: "Nothing saved: {n} error(s). Fix them and try again."
+cfg_enregistre: "{id} saved; the previous version is kept as .yaml.bak. Changes:"
+cfg_ajout_intro: "The new channel copies an existing channel's settings, then is validated like the others. The Google account is linked afterwards with a command you run yourself."
+cfg_id: Identifier (e.g. bms-cooking-en)
+cfg_nom: Display name
+cfg_compte: Google account (alias)
+cfg_compte_aide: A label, never a password.
+cfg_langue: Language
+cfg_niche: Niche
+cfg_modele: Copy settings from
+cfg_modele_aide: Brand kit, cadence and templates are copied, then editable in the "Settings" tab.
+cfg_creer: Validate and create
+cfg_id_invalide: Identifier empty or already used.
+cfg_cle_absente: "Nothing saved: key {cle} is not on a single line of the file; edit it by hand."
+cfg_jeton: Link the YouTube account
+cfg_jeton_aide: "Run it in Terminal: a Google page opens, you sign in, the token is stored in secrets/ and never displayed."
+jour_monday: Monday
+jour_tuesday: Tuesday
+jour_wednesday: Wednesday
+jour_thursday: Thursday
+jour_friday: Friday
+jour_saturday: Saturday
+jour_sunday: Sunday
+jou_blocages: Waiting for someone
+jou_aucun_blocage: Nothing is blocked.
+jou_sans_raison: (no reason recorded)
+jou_remede_relecture: "Remedy: review the script (Review page)."
+jou_remede_qc: "Remedy: the quality bench refused the video — see Help, EXPLOITATION § 8; once fixed, \"Retry\" job {job} (Production page)."
+jou_remede_echec: "Remedy: attempts exhausted — read the events below, fix, then \"Retry\" job {job}."
+jou_remede_garde: "Remedy: a safeguard stopped the job (disk, memory, window, review, accounts) — see Help, EXPLOITATION § 3; then \"Retry\" job {job}."
+jou_log: Log (factory.log)
+jou_filtre: Filter (text)
+jou_lignes: Lines
+jou_pas_log: "Log missing: {chemin}"
+jou_rien: Nothing to show.
+jou_evenements: Events of a video
+aide_commandes: Useful commands (Terminal)
+aide_col_cmd: Command
+aide_col_effet: What it does
+aide_cmd_dashboard: Opens this dashboard (http://localhost:8501)
+aide_cmd_status: Production queue status
+aide_cmd_review: Script review in the Terminal
+aide_cmd_daemon: Is automatic production running?
+aide_cmd_digest: Today's summary
+aide_cmd_validate: Checks the whole configuration
+aide_cmd_manual: Videos to publish by hand in YouTube Studio
+aide_cmd_backup: List of backups
+aide_cmd_doctor: Quick machine check
+aide_exploitation: Operating guide (EXPLOITATION.md, in French)
+aide_pas_doc: The operating guide docs/EXPLOITATION.md does not exist yet.
